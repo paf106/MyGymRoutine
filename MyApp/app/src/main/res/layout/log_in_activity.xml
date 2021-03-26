@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LogInActivity"
     android:orientation="vertical"
     android:gravity="center"
@@ -13,84 +14,110 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.35">
+        android:layout_weight="0.55">
 
         <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center|bottom"
-            android:layout_width="0dip"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="0.15">
+            android:layout_weight="0.075">
         </LinearLayout>
 
         <LinearLayout
             android:orientation="vertical"
-
-            android:gravity="center|bottom"
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="0.7">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.3">
+                android:layout_weight="0.4">
             </LinearLayout>
-            <LinearLayout
 
+            <LinearLayout
                 android:padding="10dp"
                 android:orientation="vertical"
                 android:background="@drawable/rounded_corners"
                 android:gravity="center|bottom"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.7">
+                android:layout_weight="0.6">
 
-                <EditText
-                    android:id="@+id/etUser"
+                <!-- USUARIO -->
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Usuario"></EditText>
+                    android:hint="Usuario"
+                    app:hintTextColor="#0149AD"
+                    app:boxStrokeColor="#004AAD"
+                    app:endIconMode="clear_text"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:startIconDrawable="@drawable/ic_user">
 
-                <EditText
-                    android:id="@+id/etPassword"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- CONTRASEÑA -->
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Contraseña"></EditText>
+                    app:hintTextColor="#0149AD"
+                    app:boxStrokeColor="#004AAD"
+                    android:hint="Contraseña"
+                    app:endIconMode="password_toggle"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:startIconDrawable="@drawable/ic_lock">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
+
                     android:id="@+id/btnLogIn"
-                    android:text="Entrar"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"></Button>
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#9058D1"
+                    android:text="Entrar"
+                    android:textSize="20dp"></Button>
+                <TextView
+                    android:id="@+id/tvCreateAccount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="@string/createAccountText"
+                    android:textSize="15dp"
+                    android:clickable="true"></TextView>
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
-            android:gravity="center|bottom"
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="0.15">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.075">
         </LinearLayout>
 
-        <!---->
     </LinearLayout>
+
 
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.65">
+        android:layout_weight="0.45">
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/backgound_image"></ImageView>
-
-
     </LinearLayout>
-
-
-
 </LinearLayout>
