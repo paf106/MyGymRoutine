@@ -1,3 +1,6 @@
 MyApp/.gradle/
 MyApp/app/build
 MyApp/.idea/
+MyApp/app/build.gradle
+MyApp/build.gradle
+
