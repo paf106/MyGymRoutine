@@ -19,7 +19,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_weight="0.075">
+            android:layout_weight="0.05">
         </LinearLayout>
 
         <LinearLayout
@@ -42,10 +42,11 @@
                 android:gravity="center|bottom"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="0.7">
+                android:layout_weight="0.9">
 
                 <!-- USUARIO -->
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Usuario"
@@ -64,6 +65,7 @@
 
                 <!-- CONTRASEÑA -->
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:hintTextColor="#0149AD"
@@ -86,12 +88,13 @@
                     android:id="@+id/btnLogIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#0281D6"
+                    android:backgroundTint="#407FD4"
                     android:text="Entrar"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:textSize="20dp"></Button>
-                <TextView
+
+                 <TextView
                     android:id="@+id/tvCreateAccount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,7 +108,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.075">
+            android:layout_weight="0.05">
         </LinearLayout>
 
     </LinearLayout>
