@@ -53,6 +53,7 @@
                     app:hintTextColor="#0149AD"
                     app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
+                    android:layout_marginBottom="2dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:startIconDrawable="@drawable/ic_user">
 
@@ -84,11 +85,11 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-
                     android:id="@+id/btnLogIn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#407FD4"
+                    app:backgroundTint="@null"
+                    android:background="@drawable/custom_button"
                     android:text="Entrar"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
@@ -100,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:text="@string/createAccountText"
-                    android:textSize="15dp"
+                    android:textSize="16dp"
                     android:clickable="true"></TextView>
             </LinearLayout>
         </LinearLayout>
