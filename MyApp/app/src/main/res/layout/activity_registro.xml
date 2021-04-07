@@ -5,11 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".Registro">
 
-    <fragment
+    <LinearLayout
+        android:id="@+id/llFragments"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:name="com.MyGymRoutine.myapp.PersonalData"
-        tools:layout="@layout/fragment_personal_data"
-        ></fragment>
+        android:layout_height="match_parent">
+
+    </LinearLayout>
 
 </LinearLayout>
