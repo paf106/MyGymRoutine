@@ -36,9 +36,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Datos personales"
+                    android:text="Datos Personales"
                     android:gravity="center"
-                    android:textSize="35dp"
+                    android:textSize="39dp"
                     android:textStyle="bold"
                     android:textColor="@color/white"></TextView>
             </LinearLayout>
@@ -65,7 +65,8 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:inputType="text">
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -78,12 +79,15 @@
                     app:hintTextColor="#0149AD"
                     app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:startIconDrawable="@drawable/ic_user">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:inputType="text">
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -106,7 +110,8 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:inputType="text">
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -118,13 +123,14 @@
                     android:hint="Contraseña"
                     app:hintTextColor="#0149AD"
                     app:boxStrokeColor="#004AAD"
-                    app:endIconMode="clear_text"
+                    app:endIconMode="password_toggle"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:startIconDrawable="@drawable/ic_lock">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword">
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -136,13 +142,16 @@
                     android:hint="Repite contraseña"
                     app:hintTextColor="#0149AD"
                     app:boxStrokeColor="#004AAD"
-                    app:endIconMode="clear_text"
+                    app:endIconMode="password_toggle"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:startIconDrawable="@drawable/ic_lock">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword">
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -156,11 +165,13 @@
                     app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_marginBottom="2dp"
                     app:startIconDrawable="@drawable/ic_email">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress">
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -178,7 +189,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:inputType="phone"
+                        >
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -189,26 +202,14 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:gravity="center_vertical|end"
+                android:gravity="center|end"
                 android:layout_weight="0.1">
-
-                <!-- <Button
-                    android:id="@+id/btnAtras"
-                    android:gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Atras"
-                    android:textSize="17dp"
-                    android:textColor="@color/white"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    ></Button> -->
 
                 <Button
                     android:id="@+id/btnSiguiente"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:text="Siguiente"
                     android:textColor="@color/white"
                     android:textSize="17dp"></Button>
