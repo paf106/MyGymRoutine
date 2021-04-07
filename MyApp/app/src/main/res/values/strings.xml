@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">MyGymRoutine</string>
     <string name="createAccountText"><u>¿No tienes cuenta? Create una</u></string>
+
+    <string-array name="frecuenciasDeportes">
+        <item>1 día a la semana</item>
+        <item>3 días a la semana</item>
+        <item>5 días a la semana</item>
+        <item>Solo el fín de semana</item>
+        <item>Nunca</item>
+    </string-array>
 </resources>
