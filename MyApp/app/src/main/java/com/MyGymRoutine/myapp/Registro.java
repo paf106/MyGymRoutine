@@ -11,5 +11,11 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
         getSupportActionBar().hide();
+
+        // Primer fragment que se va a mostrar (Es el que pide los datos personales)
+        PersonalData personalData = new PersonalData();
+        getSupportFragmentManager().beginTransaction().add(R.id.llFragments,personalData).commit();
+
+
     }
 }
