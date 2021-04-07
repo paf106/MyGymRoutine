@@ -11,7 +11,7 @@
 
     <!-- Aquí indicamos el radio a aplicar a las esquinas -->
     <corners
-        android:radius="13dp"   >
+        android:radius="8dp"   >
     </corners>
 
 </shape>
