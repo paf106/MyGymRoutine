@@ -67,7 +67,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="date">
+                        android:inputType="date"
+                        android:digits="0123456789/">
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -121,7 +122,9 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     app:startIconDrawable="@drawable/ic_weight"
                     android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp">
+                    android:layout_marginTop="2dp"
+                    app:hintTextColor="#0149AD"
+                    app:boxStrokeColor="#004AAD">
 
                     <AutoCompleteTextView
                         android:id="@+id/frecuenciaDeporte"
