@@ -12,7 +12,7 @@
         android:theme="@style/Theme.MyApp">
         <activity
             android:name=".MainScreen"
-            android:label="@string/title_activity_main_screen"></activity>
+            android:label="@string/title_activity_main_screen" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registro" />
-        <activity android:name=".LogInActivity"></activity>
+        <activity android:name=".LogInActivity" />
     </application>
 
 </manifest>
