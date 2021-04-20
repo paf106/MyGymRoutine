@@ -4,9 +4,13 @@
 
     <string-array name="frecuenciasDeportes">
         <item>1 día a la semana</item>
-        <item>3 días a la semana</item>
-        <item>5 días a la semana</item>
+        <item>3 dias a la semana</item>
+        <item>5 dias a la semana</item>
         <item>Solo el fín de semana</item>
         <item>Nunca</item>
     </string-array>
+    <string name="title_activity_main_screen">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
