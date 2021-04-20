@@ -20,8 +20,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         tvCreateAccount = findViewById(R.id.tvCreateAccount);
 
         tvCreateAccount.setOnClickListener(this);
-
-
     }
 
     @Override
