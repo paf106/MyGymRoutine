@@ -35,12 +35,13 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Datos del Gimnasio"
                     android:gravity="center"
                     android:textSize="39dp"
                     android:textStyle="bold"
-                    android:textColor="@color/white"></TextView>
+                    android:textColor="@color/white">
+                </TextView>
             </LinearLayout>
 
             <!-- CONTAINER DE INPUTS -->
@@ -55,20 +56,20 @@
 
                 <!-- CUMPLEAÑOS -->
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ilBirthday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Cumpleaños"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
-                    app:endIconMode="clear_text"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_cake">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etBirthday"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="date"
-                        android:digits="0123456789/">
+                        android:focusable="false"
+                        android:clickable="true">
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -78,19 +79,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Altura"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
                     android:layout_marginBottom="2dp"
                     android:layout_marginTop="2dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_height">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUserHeight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:digits="0123456789,">
+                        android:digits="0123456789.">
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -100,17 +100,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Peso"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_bascula">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUserWeight"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:digits="0123456789,">
+                        android:digits="0123456789.">
 
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -119,36 +118,33 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     app:startIconDrawable="@drawable/ic_weight"
                     android:layout_marginBottom="2dp"
-                    android:layout_marginTop="2dp"
                     app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD">
+                    app:boxStrokeColor="#004AAD"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_marginTop="2dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/frecuenciaDeporte"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="none"
-                        android:hint="Frecuencia deporte"
-                        >
-
+                        android:hint="Frecuencia deporte">
                     </AutoCompleteTextView>
+
                 </com.google.android.material.textfield.TextInputLayout>
                 <!-- PATOLOGÍAS -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Patologías"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
-
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_heart">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPathology"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textMultiLine">
@@ -170,6 +166,7 @@
                     android:layout_height="wrap_content"
                     app:backgroundTint="@null"
                     android:background="@drawable/finish_button"
+                    android:textAllCaps="false"
                     android:text="Finalizar"
                     android:textColor="@color/white"
                     android:textSize="17dp"></Button>
