@@ -35,7 +35,7 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:text="Datos Personales"
                     android:gravity="center"
                     android:textSize="39dp"
@@ -57,13 +57,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombre"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_user">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text">
@@ -76,15 +75,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Apellidos"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_user">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etSurname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text">
@@ -100,15 +98,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Usuario"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
                     app:counterEnabled="true"
                     app:counterMaxLength="16"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_user">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUsername"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text">
@@ -121,13 +118,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Contraseña"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
                     app:endIconMode="password_toggle"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_lock">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword">
@@ -140,15 +136,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Repite contraseña"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
                     app:endIconMode="password_toggle"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="2dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_lock">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRepeatPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword">
@@ -161,14 +156,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     android:layout_marginBottom="2dp"
                     app:startIconDrawable="@drawable/ic_email">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress">
@@ -181,19 +175,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Telefono"
-                    app:hintTextColor="#0149AD"
-                    app:boxStrokeColor="#004AAD"
                     app:endIconMode="clear_text"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_phone">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <EditText
+                        android:id="@+id/etPhone"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:inputType="phone"
-                        >
+                        android:digits="0123456789 ">
 
-                    </com.google.android.material.textfield.TextInputEditText>
+                    </EditText>
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
@@ -211,9 +204,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Siguiente"
+                    android:textAllCaps="false"
                     android:padding="0dp"
                     android:textColor="@color/white"
-                    android:textSize="17dp"></Button>
+                    android:textSize="17sp"
+                    android:digits="0123456789"></Button>
             </LinearLayout>
         </LinearLayout>
 
