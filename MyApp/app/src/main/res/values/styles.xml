@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="InputFields" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="hintTextColor">#0149AD</item>
-        <item name="boxStrokeColor">#004AAD</item>
+        <item name="hintTextColor">@color/hintTextInput</item>
+        <item name="boxStrokeColor">@color/boxStrokeInput</item>
     </style>
 
 </resources>
