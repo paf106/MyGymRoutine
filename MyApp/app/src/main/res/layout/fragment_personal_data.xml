@@ -78,8 +78,8 @@
                     android:hint="Apellidos"
                     android:id="@+id/ilSurname"
                     app:endIconMode="clear_text"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginBottom="2dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_user">
 
