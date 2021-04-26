@@ -17,11 +17,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.MyGymRoutine.myapp.databinding.FragmentPersonalDataBinding;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 
-public class PersonalData extends Fragment {
+public class PersonalData extends Fragment{
 
     private FragmentPersonalDataBinding binding;
 
@@ -50,7 +51,8 @@ public class PersonalData extends Fragment {
         // Saves the form data and forward to GymData
         binding.btnSiguiente.setOnClickListener(v -> {
 
-           // saveData(); Que guarde los datos en un bundle
+           saveData();
+           //Que guarde los datos en un bundle
 
             GymData gymData = new GymData();
             getActivity().getSupportFragmentManager().beginTransaction()
@@ -121,34 +123,42 @@ public class PersonalData extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                validateInput(binding.etPassword, binding.ilPassword);
+                validateInput(binding.etPassword, binding.ilRepeatPassword);
             }
         });
     }
 
     private void validateInput(TextInputEditText editText,TextInputLayout inputLayout) {
-        Toast.makeText(getActivity(), editText.getInputType()+"", Toast.LENGTH_SHORT).show();
         if (editText.getInputType() == InputType.TYPE_CLASS_TEXT){
 
             // Si son de tipo texto
             if(editText.length() != 0){
                 // Tiene texto escrito
-                inputLayout.setBoxStrokeColor(Color.parseColor("#004AAD"));
+                inputLayout.setErrorEnabled(false);
             }else{
                 // Está vacío
-                editText.setError("Campo incompleto");
-                inputLayout.setBoxStrokeColor(Color.RED);
+                inputLayout.setError("Campo incompleto");
+                //inputLayout.setBoxStrokeColor(Color.RED);
             }
-        }else if(editText.getInputType() == 129){
+            // Si son el campo contraseña
+        }else if(editText.getId()==binding.etPassword.getId()){
 
+            // Comprobamos que las contraseñas sean iguales
             if (binding.etPassword.getText().toString().equals(binding.etRepeatPassword.getText().toString())){
                 // Contraseñas iguales
-                inputLayout.setBoxStrokeColor(Color.parseColor("#004AAD"));
+                inputLayout.setErrorEnabled(false);
+                // Si contraseña menor de 8 cifras
+                if(binding.etPassword.getText().length()<8){
+                    inputLayout.setError("Contraseña más de 8 caracteres");
+                }
             }else{
                 // Contraseñas diferentes
-                editText.setError("Contraseñas diferentes");
-                inputLayout.setBoxStrokeColor(Color.RED);
+                inputLayout.setError("Contraseñas diferentes");
             }
+        }else if(editText.getInputType() == InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS){
+            //code
+        }else if(editText.getInputType() == InputType.TYPE_CLASS_PHONE){
+            //code
         }
 
 
@@ -156,7 +166,8 @@ public class PersonalData extends Fragment {
 
     private void saveData() {
     String text = binding.etPhone.getText().toString();
-        Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+        Snackbar.make(getView(),"Hola",Snackbar.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
     }
 
     @Override
