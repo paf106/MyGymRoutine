@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.Objects;
+
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvCreateAccount;
@@ -15,7 +17,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.log_in_activity);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         tvCreateAccount = findViewById(R.id.tvCreateAccount);
 
