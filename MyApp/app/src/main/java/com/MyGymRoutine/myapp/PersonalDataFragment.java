@@ -166,7 +166,7 @@ public class PersonalData extends Fragment{
 
     private void saveData() {
     String text = binding.etPhone.getText().toString();
-        Snackbar.make(getView(),"Hola",Snackbar.LENGTH_SHORT).show();
+        //Snackbar.make(getView(),"Hola",Snackbar.LENGTH_SHORT).show();
         //Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
     }
 
