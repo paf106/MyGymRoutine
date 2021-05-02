@@ -1,11 +1,11 @@
-package com.MyGymRoutine.myapp.view;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.MyGymRoutine.myapp.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.MyGymRoutine.myapp.R;
 

@@ -1,11 +1,6 @@
-package com.MyGymRoutine.myapp.view;
+package com.MyGymRoutine.myapp.view.activity;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -13,9 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.databinding.FragmentGymDataBinding;
-import com.MyGymRoutine.myapp.utils.ValidateInput;
+import com.MyGymRoutine.myapp.view.components.utils.ValidateInput;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
 import org.jetbrains.annotations.NotNull;

@@ -1,30 +1,39 @@
-package com.MyGymRoutine.myapp.view;
+package com.MyGymRoutine.myapp.view.activity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.databinding.ActivityRegistroBinding;
+import com.MyGymRoutine.myapp.view.components.utils.ValidateInput;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.util.Objects;
 
 public class Registro extends AppCompatActivity {
-    ActivityRegistroBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registro);
-        Objects.requireNonNull(getSupportActionBar()).hide();
         ActivityRegistroBinding binding = ActivityRegistroBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
-//        String[] options = getResources().getStringArray(R.array.frecuenciasDeportes);
-//        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_item, options);
-//        binding.frecuenciaDeporte.setAdapter(arrayAdapter);
+        // Arrow back (Back to login page)
+        binding.ivBacktoLogin.setOnClickListener(v -> {
+
+            startActivity(new Intent(this,LogInActivity.class));
+        });
+
+        //Dropdown menu
+        String[] options = getResources().getStringArray(R.array.frecuenciasDeportes);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_item, options);
+        binding.frecuenciaDeporte.setAdapter(arrayAdapter);
 
         // Build datepicker
         MaterialDatePicker datePicker =
@@ -34,12 +43,7 @@ public class Registro extends AppCompatActivity {
                         .build();
 
         //When you click on the Birthday input
-        binding.etBirthday.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                datePicker.show(getSupportFragmentManager(),"tag");
-            }
-        });
+        binding.etBirthday.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(),"tag"));
 
         // When the user clicks OK in the dialog
         datePicker.addOnPositiveButtonClickListener(selection -> {
@@ -47,18 +51,106 @@ public class Registro extends AppCompatActivity {
             binding.etBirthday.setText(datePicker.getHeaderText());
         });
 
+        binding.etPhone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        // Primer fragment que se va a mostrar (Es el que pide los datos personales)
-//        PersonalDataFragment personalDataFragment = new PersonalDataFragment();
-//        getSupportFragmentManager().beginTransaction().add(R.id.llFragments, personalDataFragment).commit();
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
+            }
 
-        // Para el dropdown menu
-        String[] options = getResources().getStringArray(R.array.frecuenciasDeportes);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_item, options);
-        binding.frecuenciaDeporte.setAdapter(arrayAdapter);
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ValidateInput.typePhoneNumber(binding.ilPhone);
+            }
+        });
+
+        binding.etName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ValidateInput.typeText(binding.ilName);
+            }
+        });
+
+        binding.etSurname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ValidateInput.typeText(binding.ilSurname);
+            }
+        });
+
+        binding.etRepeatPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ValidateInput.typePassword(binding.ilPassword, binding.ilRepeatPassword);
+            }
+        });
+
+        binding.etEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ValidateInput.typeEmail(binding.ilEmail);
+            }
+        });
+
+        binding.etUserHeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ValidateInput.typeUserHeight(binding.ilUserHeight);
+            }
+        });
     }
 }

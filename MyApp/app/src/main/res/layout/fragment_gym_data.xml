@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#004aad"
-    tools:context=".Registro">
+    tools:context=".view.activity.Registro">
 
     <LinearLayout
         android:gravity="center"
@@ -76,6 +76,7 @@
 
                 <!-- ALTURA -->
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ilUserHeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Altura"

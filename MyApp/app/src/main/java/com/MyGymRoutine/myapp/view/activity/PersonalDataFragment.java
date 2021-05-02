@@ -1,20 +1,18 @@
-package com.MyGymRoutine.myapp.view;
+package com.MyGymRoutine.myapp.view.activity;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.MyGymRoutine.myapp.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.MyGymRoutine.myapp.databinding.FragmentPersonalDataBinding;
-import com.MyGymRoutine.myapp.utils.ValidateInput;
+import com.MyGymRoutine.myapp.view.components.utils.ValidateInput;
 
 
 public class PersonalDataFragment extends Fragment{
@@ -42,18 +40,6 @@ public class PersonalDataFragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        // Saves the form data and forward to GymDataFragment
-        binding.btnSiguiente.setOnClickListener(v -> {
-
-           saveData();
-           //Que guarde los datos en un bundle
-
-            GymDataFragment gymDataFragment = new GymDataFragment();
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.llFragments, gymDataFragment).commit();
-        });
 
         binding.etPhone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -139,18 +125,5 @@ public class PersonalDataFragment extends Fragment{
                 ValidateInput.typeEmail(binding.ilEmail);
             }
         });
-    }
-
-    private void saveData() {
-    String text = binding.etPhone.getText().toString();
-        //Snackbar.make(getView(),"Hola",Snackbar.LENGTH_SHORT).show();
-        //Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-       // Toast.makeText(getActivity(), "He empezado", Toast.LENGTH_SHORT).show();
-
     }
 }

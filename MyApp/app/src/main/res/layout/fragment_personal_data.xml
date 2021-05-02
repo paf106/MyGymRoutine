@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#004aad"
-    tools:context=".Registro">
+    tools:context=".view.activity.Registro">
 
     <LinearLayout
         android:gravity="center"
@@ -185,14 +185,14 @@
                     style="@style/InputFields"
                     app:startIconDrawable="@drawable/ic_phone">
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPhone"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="phone"
                         android:digits="0123456789 ">
 
-                    </EditText>
+                    </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
