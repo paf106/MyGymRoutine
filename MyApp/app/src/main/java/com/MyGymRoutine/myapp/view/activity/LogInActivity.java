@@ -1,12 +1,13 @@
-package com.MyGymRoutine.myapp;
+package com.MyGymRoutine.myapp.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+
+import com.MyGymRoutine.myapp.R;
 
 import java.util.Objects;
 

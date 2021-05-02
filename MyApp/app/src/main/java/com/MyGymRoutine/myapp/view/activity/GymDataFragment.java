@@ -1,27 +1,31 @@
-package com.MyGymRoutine.myapp;
+package com.MyGymRoutine.myapp.view;
 
-import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.databinding.FragmentGymDataBinding;
+import com.MyGymRoutine.myapp.utils.ValidateInput;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
+import org.jetbrains.annotations.NotNull;
 
-public class GymData extends Fragment {
+
+public class GymDataFragment extends Fragment {
 
     private FragmentGymDataBinding binding;
 
-    public GymData() {
+    public GymDataFragment() {
         // Required empty public constructor
     }
 
@@ -31,7 +35,7 @@ public class GymData extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         binding = FragmentGymDataBinding.inflate(inflater, container, false);
@@ -53,7 +57,7 @@ public class GymData extends Fragment {
         binding.etBirthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datePicker.show(getFragmentManager(),"tag");
+                datePicker.show(getParentFragmentManager(),"tag");
             }
         });
 
@@ -63,10 +67,27 @@ public class GymData extends Fragment {
             binding.etBirthday.setText(datePicker.getHeaderText());
         });
 
-        binding.btnFinalizar.setOnClickListener(new View.OnClickListener() {
+//        binding.btnFinalizar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getActivity(),MainScreen.class));
+//            }
+//        });
+
+        binding.etUserHeight.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(),MainScreen.class));
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                ValidateInput.typeUserHeight(binding.ilUserHeight);
             }
         });
     }

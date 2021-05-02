@@ -1,4 +1,4 @@
-package com.MyGymRoutine.myapp;
+package com.MyGymRoutine.myapp.view.activity;
 
 import java.util.Date;
 
