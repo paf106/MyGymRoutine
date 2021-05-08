@@ -2,36 +2,19 @@ package com.MyGymRoutine.myapp.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
+import com.MyGymRoutine.myapp.databinding.LogInActivityBinding;
 
-import com.MyGymRoutine.myapp.R;
+public class LogInActivity extends AppCompatActivity{
 
-import java.util.Objects;
-
-public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
-
-    TextView tvCreateAccount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.log_in_activity);
-        Objects.requireNonNull(getSupportActionBar()).hide();
+        LogInActivityBinding binding = LogInActivityBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        tvCreateAccount = findViewById(R.id.tvCreateAccount);
-
-        tvCreateAccount.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.tvCreateAccount:
-                Intent i = new Intent(getApplicationContext(),Registro.class);
-                startActivity(i);
-                break;
-        }
+        binding.tvCreateAccount.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(),Registro.class));
+        });
     }
 }
