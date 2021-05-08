@@ -2,6 +2,12 @@
     <string name="app_name">MyGymRoutine</string>
     <string name="createAccountText"><u>¿No tienes cuenta? Create una</u></string>
 
+    <!--  Bottom navigation items  -->
+    <string name="bottom_navigation_item_home">Inicio</string>
+    <string name="bottom_navigation_item_routines">Rutinas</string>
+    <string name="bottom_navigation_item_settings">Ajustes</string>
+    <string name="bottom_navigation_item_profile">Perfil</string>
+
     <string-array name="frecuenciasDeportes">
         <item>1 día a la semana</item>
         <item>3 dias a la semana</item>
