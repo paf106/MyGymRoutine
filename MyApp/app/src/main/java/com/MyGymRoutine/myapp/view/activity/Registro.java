@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,11 +23,9 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         ActivityRegistroBinding binding = ActivityRegistroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Objects.requireNonNull(getSupportActionBar()).hide();
 
         // Arrow back (Back to login page)
         binding.ivBacktoLogin.setOnClickListener(v -> {
-
             startActivity(new Intent(this,LogInActivity.class));
         });
 
@@ -35,7 +34,7 @@ public class Registro extends AppCompatActivity {
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_item, options);
         binding.frecuenciaDeporte.setAdapter(arrayAdapter);
 
-        // Build datepicker
+        // Build Date picker
         MaterialDatePicker datePicker =
                 MaterialDatePicker.Builder.datePicker()
                         .setTitleText("Selecciona la fecha")
@@ -48,7 +47,13 @@ public class Registro extends AppCompatActivity {
         // When the user clicks OK in the dialog
         datePicker.addOnPositiveButtonClickListener(selection -> {
             //  String date = String.format(Locale.getDefault(), "%02d-%02d-%02d", day, month+1, year);
+            Toast.makeText(this, selection.toString(), Toast.LENGTH_SHORT).show();
             binding.etBirthday.setText(datePicker.getHeaderText());
+        });
+
+        // PROVISIONAL go to main app
+        binding.btnRegistrar.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(),NavigationActivity.class));
         });
 
         binding.etPhone.addTextChangedListener(new TextWatcher() {
