@@ -9,4 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="boxStrokeInput">#004AAD</color>
     <color name="hintTextInput">#004AAD</color>
+
+    <color name="dark_blue">#022AA5</color>
+    <color name="blue">#144CF6</color>
+    <color name="light_blue">#A4B8F6</color>
 </resources>
