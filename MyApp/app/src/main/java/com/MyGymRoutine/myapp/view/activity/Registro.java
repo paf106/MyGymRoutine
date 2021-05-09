@@ -7,16 +7,30 @@ import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.databinding.ActivityRegistroBinding;
 import com.MyGymRoutine.myapp.view.components.utils.ValidateInput;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class Registro extends AppCompatActivity {
+
+    RequestQueue requestQueue;
+
+     private final String URL = "http://servergym.ddns.net:8080/save.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +38,7 @@ public class Registro extends AppCompatActivity {
         ActivityRegistroBinding binding = ActivityRegistroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        requestQueue = Volley.newRequestQueue(this);
         // Arrow back (Back to login page)
         binding.ivBacktoLogin.setOnClickListener(v -> {
             startActivity(new Intent(this,LogInActivity.class));
@@ -53,8 +68,23 @@ public class Registro extends AppCompatActivity {
 
         // PROVISIONAL go to main app
         binding.btnRegistrar.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(),NavigationActivity.class));
+//            startActivity(new Intent(getApplicationContext(),NavigationActivity.class));
+            createUser(
+                    binding.etName.getText().toString(),
+                    binding.etSurname.getText().toString(),
+                    binding.etUsername.getText().toString(),
+                    binding.etRepeatPassword.getText().toString(),
+                    binding.etEmail.getText().toString(),
+                    binding.etPhone.getText().toString(),
+                    binding.etBirthday.getText().toString(),
+                    binding.etUserHeight.getText().toString(),
+                    binding.etUserWeight.getText().toString(),
+                    binding.frecuenciaDeporte.getText().toString(),
+                    binding.etPathology.getText().toString());
+
         });
+
+
 
         binding.etPhone.addTextChangedListener(new TextWatcher() {
             @Override
@@ -157,5 +187,49 @@ public class Registro extends AppCompatActivity {
                 ValidateInput.typeUserHeight(binding.ilUserHeight);
             }
         });
+    }
+    private void createUser(
+            String nombre,
+            String apellidos,
+            String usuario,
+            String password,
+            String email,
+            String telefono,
+            String birthday,
+            String altura,
+            String peso,
+            String frecuenciaDeporte,
+            String patologias){
+
+        StringRequest stringRequest = new StringRequest(
+                Request.Method.POST,
+                URL,
+                response -> {
+                    Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show();
+
+                },
+                error -> {
+                    Toast.makeText(this, "ALGO SALIO MAL", Toast.LENGTH_SHORT).show();                }
+        ){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap();
+                params.put("nombre",nombre);
+                params.put("apellidos",apellidos);
+                params.put("usuario",usuario);
+                params.put("contrasena",password);
+                params.put("correoElectronico",email);
+                params.put("fechaNacimiento",birthday);
+                params.put("telefono",telefono);
+                params.put("peso",peso);
+                params.put("altura",altura);
+                params.put("frecuenciaDeporte",nombre);
+                params.put("imagenRuta",nombre);
+                params.put("patologias",nombre);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 }
