@@ -1,5 +1,7 @@
 package com.MyGymRoutine.myapp.data.model;
 
+import com.MyGymRoutine.myapp.view.components.utils.Constantes;
+
 import java.util.Date;
 
 public class Client {

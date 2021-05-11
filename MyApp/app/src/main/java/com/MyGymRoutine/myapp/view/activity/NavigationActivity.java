@@ -1,26 +1,21 @@
 package com.MyGymRoutine.myapp.view.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.databinding.ActivityNavigationBinding;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import android.os.Bundle;
-import android.view.MenuItem;
-
-import java.util.Objects;
 
 public class NavigationActivity extends AppCompatActivity {
 
     HomeFragment homeFragment = new HomeFragment();
     RoutineFragment routineFragment = new RoutineFragment();
     ProfileFragment profileFragment = new ProfileFragment();
-    SettingsFragment settingsFragment = new SettingsFragment();
+    ExerciseFragment exerciseFragment = new ExerciseFragment();
 
 
     @Override
@@ -41,7 +36,7 @@ public class NavigationActivity extends AppCompatActivity {
                     loadFragment(routineFragment);
                     return true;
                 case R.id.settingsFragment:
-                    loadFragment(settingsFragment);
+                    loadFragment(exerciseFragment);
                     return true;
                 case R.id.profileFragment:
                     loadFragment(profileFragment);

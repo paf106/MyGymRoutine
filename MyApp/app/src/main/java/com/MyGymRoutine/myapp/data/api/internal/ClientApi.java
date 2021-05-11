@@ -24,6 +24,4 @@ public interface ClientApi {
             @Field("patologias") String patologias,
             @Field("idPersonal") String idPersonal
     );
-
-    @
 }

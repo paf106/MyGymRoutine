@@ -74,7 +74,6 @@ public class ResponseRegister {
      * @param correoElectronico
      */
     public ResponseRegister(int idCliente, String nombre, String apellidos, String usuario, String contrasena, String correoElectronico, String fechaNacimiento, String telefono, double peso, double altura, String frecuenciaDeporte, String imagenRuta, String patologias, int idPersonal) {
-        super();
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidos = apellidos;
