@@ -7,6 +7,7 @@
     <string name="bottom_navigation_item_routines">Rutinas</string>
     <string name="bottom_navigation_item_settings">Ajustes</string>
     <string name="bottom_navigation_item_profile">Perfil</string>
+    <string name="register_title_create_account">Crear cuenta</string>
 
     <string-array name="frecuenciasDeportes">
         <item>1 día a la semana</item>
