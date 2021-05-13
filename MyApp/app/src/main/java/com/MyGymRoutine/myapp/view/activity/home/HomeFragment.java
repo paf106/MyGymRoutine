@@ -1,4 +1,4 @@
-package com.MyGymRoutine.myapp.view.activity;
+package com.MyGymRoutine.myapp.view.activity.home;
 
 import android.os.Bundle;
 
@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.MyGymRoutine.myapp.data.api.internal.EjercicioApi;
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
+import com.MyGymRoutine.myapp.data.model.Novedad;
 import com.MyGymRoutine.myapp.databinding.FragmentHomeBinding;
 
 import java.net.HttpURLConnection;
@@ -28,6 +29,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    private List<Novedad> listaNovedades;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -57,7 +59,7 @@ public class HomeFragment extends Fragment {
 
         EjercicioApi service = retrofit.create(EjercicioApi.class);
 
-        Call<List<Ejercicio>> listado = service.getEjercicios();
+       /* Call<List<Ejercicio>> listado = service.getEjercicios();
 
         listado.enqueue(new Callback<List<Ejercicio>>() {
             @Override
@@ -65,7 +67,7 @@ public class HomeFragment extends Fragment {
                 if (response.code() == HttpURLConnection.HTTP_OK){
                     List<Ejercicio> ejercicios = response.body();
                     for (Ejercicio e: ejercicios) {
-                        binding.tvEjercicios.append(e.getNombre()+e.getDescripcion()+"\n");
+                        //binding.tvEjercicios.append(e.getNombre()+e.getDescripcion()+"\n");
                     }
                 }
             }
@@ -75,6 +77,6 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                 Log.i("errorResponse",t.getMessage());
             }
-        });
+        });*/
     }
 }

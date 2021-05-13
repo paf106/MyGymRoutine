@@ -6,6 +6,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.databinding.ActivityNavigationBinding;
+import com.MyGymRoutine.myapp.view.activity.exercise.ExerciseFragment;
+import com.MyGymRoutine.myapp.view.activity.home.HomeFragment;
+import com.MyGymRoutine.myapp.view.activity.profile.ProfileFragment;
+import com.MyGymRoutine.myapp.view.activity.routine.RoutineFragment;
 
 
 import android.os.Bundle;
@@ -35,7 +39,7 @@ public class NavigationActivity extends AppCompatActivity {
                 case R.id.routinesFragment:
                     loadFragment(routineFragment);
                     return true;
-                case R.id.settingsFragment:
+                case R.id.exerciseFragment:
                     loadFragment(exerciseFragment);
                     return true;
                 case R.id.profileFragment:

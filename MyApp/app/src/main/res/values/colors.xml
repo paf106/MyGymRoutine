@@ -9,8 +9,18 @@
     <color name="white">#FFFFFFFF</color>
     <color name="boxStrokeInput">#004AAD</color>
     <color name="hintTextInput">#004AAD</color>
+    <color name="bottom_navigation_icon">#717171</color>
 
     <color name="dark_blue">#022AA5</color>
     <color name="blue">#144CF6</color>
     <color name="light_blue">#A4B8F6</color>
+
+    <color name="home_novedad_info">#0B1CF1</color>
+    <color name="home_novedad_warning">#CDB727</color>
+
+    <color name="home_novedad_info_background">#B0B5F4</color>
+    <color name="home_novedad_warning_backgound">#C6C19C</color>
+    <color name="home_novedad_new_background">#E3ADAB</color>
+
+
 </resources>

@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.routine.RoutineFragment">
-
+    tools:context=".view.activity.exercise.ExerciseFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,7 +26,7 @@
                 android:textSize="25sp"
                 android:textStyle="bold"
                 android:textColor="@color/blue"
-                android:text="Rutinas Personalizadas"
+                android:text="Antebrazo"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -85,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Rutinas Brazo"
+                android:text="Biceps"
                 android:textColor="@color/blue"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -146,7 +145,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Rutinas Pierna"
+                android:text="Cuadriceps"
                 android:textColor="@color/blue"
                 android:textSize="25sp"
                 android:textStyle="bold"
@@ -207,7 +206,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Rutinas Espalda"
+                android:text="Fondos"
                 android:textColor="@color/blue"
                 android:textSize="25sp"
                 android:textStyle="bold"

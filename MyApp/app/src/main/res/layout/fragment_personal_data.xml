@@ -60,7 +60,7 @@
                     android:id="@+id/ilName"
                     app:endIconMode="clear_text"
                     style="@style/InputFields"
-                    app:startIconDrawable="@drawable/ic_user">
+                    app:startIconDrawable="@drawable/round_person_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etName"
@@ -81,7 +81,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="16dp"
                     style="@style/InputFields"
-                    app:startIconDrawable="@drawable/ic_user">
+                    app:startIconDrawable="@drawable/round_person_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etSurname"
@@ -104,7 +104,7 @@
                     app:counterEnabled="true"
                     app:counterMaxLength="16"
                     style="@style/InputFields"
-                    app:startIconDrawable="@drawable/ic_user">
+                    app:startIconDrawable="@drawable/round_person_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etUsername"

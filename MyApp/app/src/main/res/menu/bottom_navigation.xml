@@ -3,15 +3,15 @@
     <item
         android:id="@+id/homeFragment"
         android:title="@string/bottom_navigation_item_home"
-        android:icon="@drawable/ic_home_black_24dp"/>
+        android:icon="@drawable/round_home_24"/>
     <item
         android:id="@+id/routinesFragment"
         android:title="@string/bottom_navigation_item_routines"
-        android:icon="@drawable/ic_baseline_format_list_bulleted_24"/>
+        android:icon="@drawable/round_description_24"/>
     <item
-        android:id="@+id/settingsFragment"
-        android:title="@string/bottom_navigation_item_settings"
-        android:icon="@drawable/ic_baseline_settings_24"/>
+        android:id="@+id/exerciseFragment"
+        android:title="@string/bottom_navigation_item_exercise"
+        android:icon="@drawable/round_format_list_bulleted_24"/>
     <item
         android:id="@+id/profileFragment"
         android:title="@string/bottom_navigation_item_profile"
