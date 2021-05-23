@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="@string/home_welcome_user"
         android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,11 +20,10 @@
 
     </TextView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSuggestions"
-        android:layout_width="409dp"
+    <ListView
+        android:id="@+id/lvNovedades"
+        android:layout_width="match_parent"
         android:layout_height="594dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

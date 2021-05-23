@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.MyGymRoutine.myapp.R;
+import com.MyGymRoutine.myapp.view.activity.login.LogInActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -21,7 +22,7 @@ public class SplashScreen extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(),LogInActivity.class);
+                Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
                 startActivity(intent);
                 finish();
             }

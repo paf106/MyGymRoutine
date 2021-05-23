@@ -7,11 +7,11 @@
     <item
         android:id="@+id/routinesFragment"
         android:title="@string/bottom_navigation_item_routines"
-        android:icon="@drawable/round_description_24"/>
+        android:icon="@drawable/round_format_list_bulleted_24"/>
     <item
         android:id="@+id/exerciseFragment"
         android:title="@string/bottom_navigation_item_exercise"
-        android:icon="@drawable/round_format_list_bulleted_24"/>
+        android:icon="@drawable/ic_pesa"/>
     <item
         android:id="@+id/profileFragment"
         android:title="@string/bottom_navigation_item_profile"

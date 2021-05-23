@@ -1,27 +1,46 @@
 package com.MyGymRoutine.myapp.data.api.internal;
 
 
-import com.MyGymRoutine.myapp.data.model.responses.ResponseRegister;
+import com.MyGymRoutine.myapp.data.model.Client;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface ClientApi {
-    @POST("save.php")
-    Call<ResponseRegister> doRegister(
-            @Field("nombre") String nombre,
-            @Field("apellidos") String apellidos,
-            @Field("usuario") String usuario,
-            @Field("contrasena") String contrasena,
-            @Field("correoElectronico") String correoElectronico,
-            @Field("fechaNacimiento") String fechaNacimiento,
-            @Field("telefono") String telefono,
-            @Field("peso") String peso,
-            @Field("altura") String altura,
-            @Field("frecuencaDeporte") String frecuencaDeporte,
-            @Field("imagenRuta") String imagenRuta,
-            @Field("patologias") String patologias,
-            @Field("idPersonal") String idPersonal
+
+    @POST("/register")
+    Call<Void> doRegister(
+            @Body String nombre,
+            @Body String apellidos,
+            @Body String usuario,
+            @Body String contrasena,
+            @Body String correoElectronico,
+            @Body String fechaNacimiento,
+            @Body String telefono,
+            @Body double peso,
+            @Body double altura,
+            @Body String patologias
     );
+
+    @FormUrlEncoded
+    @POST("/login")
+    Call<Client> doLogin(
+            @Field("usuario") String usuario,
+            @Field("contrasena") String contrasena
+    );
+
+    @POST("/update/password")
+    Call<Void> updatePassword(
+            @Body String contrasena,
+            @Body int idCliente
+    );
+
+
+
+
+
+
 }

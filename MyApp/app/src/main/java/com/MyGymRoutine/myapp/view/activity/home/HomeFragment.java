@@ -12,12 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.api.internal.EjercicioApi;
+import com.MyGymRoutine.myapp.data.api.internal.NovedadApi;
+import com.MyGymRoutine.myapp.data.model.Client;
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.data.model.Novedad;
 import com.MyGymRoutine.myapp.databinding.FragmentHomeBinding;
+import com.MyGymRoutine.myapp.view.components.common.NovedadesListAdapter;
+import com.MyGymRoutine.myapp.view.components.utils.Preferences;
 
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,7 +35,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private List<Novedad> listaNovedades;
+    private List<Novedad> novedades;
+    private Preferences preferences;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -41,9 +48,7 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -51,32 +56,35 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        preferences = new Preferences(getContext());
+        Client sharedCLient = preferences.getClient();
+        binding.tvWelcomeUser.setText("¡Hola "+ sharedCLient.getNombre() + "!");
+        novedades = new ArrayList<>();
+        NovedadesListAdapter adapter = new NovedadesListAdapter(getContext(),novedades);
+        binding.lvNovedades.setAdapter(adapter);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.1.20:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        EjercicioApi service = retrofit.create(EjercicioApi.class);
+        NovedadApi service = retrofit.create(NovedadApi.class);
 
-       /* Call<List<Ejercicio>> listado = service.getEjercicios();
+        Call<List<Novedad>> listado = service.getNovedades();
 
-        listado.enqueue(new Callback<List<Ejercicio>>() {
+        listado.enqueue(new Callback<List<Novedad>>() {
             @Override
-            public void onResponse(Call<List<Ejercicio>> call, Response<List<Ejercicio>> response) {
+            public void onResponse(Call<List<Novedad>> call, Response<List<Novedad>> response) {
                 if (response.code() == HttpURLConnection.HTTP_OK){
-                    List<Ejercicio> ejercicios = response.body();
-                    for (Ejercicio e: ejercicios) {
-                        //binding.tvEjercicios.append(e.getNombre()+e.getDescripcion()+"\n");
-                    }
+                    List<Novedad> list = response.body();
+                    novedades = list;
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Ejercicio>> call, Throwable t) {
-                Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
-                Log.i("errorResponse",t.getMessage());
+            public void onFailure(Call<List<Novedad>> call, Throwable t) {
+
             }
-        });*/
+        });
+
     }
 }

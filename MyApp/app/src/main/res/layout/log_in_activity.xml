@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".view.activity.LogInActivity"
+    tools:context=".view.activity.login.LogInActivity"
     android:orientation="vertical"
     android:gravity="center"
     android:background="#004aad">
@@ -46,7 +46,7 @@
 
                 <!-- USUARIO -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/etUser"
+                    android:id="@+id/ilUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Usuario"
@@ -55,9 +55,10 @@
                     app:endIconMode="clear_text"
                     android:layout_marginBottom="2dp"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:startIconDrawable="@drawable/round_person_24">
+                    app:startIconDrawable="@drawable/ic_person">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etUser"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -66,7 +67,7 @@
 
                 <!-- CONTRASEÑA -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/etPassword"
+                    android:id="@+id/ilPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:hintTextColor="#0149AD"
@@ -77,6 +78,7 @@
                     app:startIconDrawable="@drawable/ic_lock">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword">
@@ -86,15 +88,15 @@
 
                 <Button
                     android:id="@+id/btnLogIn"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    app:backgroundTint="@null"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/custom_button"
                     android:text="Entrar"
                     android:textAllCaps="false"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    app:backgroundTint="@null" />
 
                 <TextView
                     android:id="@+id/tvCreateAccount"

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llFragments"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.profile.ProfileDataActivity">
+
+    <include
+        android:id="@+id/common_header"
+        layout="@layout/layout_header"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/scrollView2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="409dp"
+        android:layout_height="534dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegistrar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/common_header">
+
+        <LinearLayout
+            android:id="@+id/llElementos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="10dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ilCurrentPassword"
+                style="@style/InputFields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:hint="Nombre"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_person">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:id="@+id/ilSurname"
+                style="@style/InputFields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="Apellidos"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_person">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etSurname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- EMAIL -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ilEmail"
+                style="@style/InputFields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:hint="Email"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress">
+
+                </com.google.android.material.textfield.TextInputEditText>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- TELÉFONO -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ilPhone"
+                style="@style/InputFields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="Telefono"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_phone">
+
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:digits="0123456789 "
+                    android:inputType="phone">
+
+                </EditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- ALTURA -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ilUserHeight"
+                style="@style/InputFields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:hint="Altura"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_height">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUserHeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- PESO -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ilWeight"
+                style="@style/InputFields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="Peso"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_weight">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etUserWeight"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- FRECUENCIA EJERCICIO -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ilFrecuenciaDeporte"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="#004AAD"
+                app:hintTextColor="#0149AD"
+                app:startIconDrawable="@drawable/ic_pesa">
+
+                <AutoCompleteTextView
+                    android:id="@+id/frecuenciaDeporte"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Frecuencia deporte"
+                    android:inputType="none" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- PATOLOGÍAS -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ilPathology"
+                style="@style/InputFields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:hint="Patologías"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_heart">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPathology"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textMultiLine">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnRegistrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#004aad"
+        android:text="@string/profile_save_myProfile"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

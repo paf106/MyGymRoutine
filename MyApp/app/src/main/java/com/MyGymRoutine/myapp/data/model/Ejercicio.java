@@ -17,9 +17,9 @@ public class Ejercicio {
     @SerializedName("series")
     @Expose
     private int series;
-    @SerializedName("musculos")
+    @SerializedName("grupoMuscular")
     @Expose
-    private String musculos;
+    private String grupoMuscular;
     @SerializedName("descripcion")
     @Expose
     private String descripcion;
@@ -34,16 +34,16 @@ public class Ejercicio {
     /**
      * 
      * @param descripcion
-     * @param musculos
+     * @param grupoMuscular
      * @param series
      * @param repeticiones
      * @param nombre
      */
-    public Ejercicio(String nombre, String repeticiones, int series, String musculos, String descripcion) {
+    public Ejercicio(String nombre, String repeticiones, int series, String grupoMuscular, String descripcion) {
         this.nombre = nombre;
         this.repeticiones = repeticiones;
         this.series = series;
-        this.musculos = musculos;
+        this.grupoMuscular = grupoMuscular;
         this.descripcion = descripcion;
     }
 
@@ -86,16 +86,16 @@ public class Ejercicio {
         return this;
     }
 
-    public String getMusculos() {
-        return musculos;
+    public String getgrupoMuscular() {
+        return grupoMuscular;
     }
 
-    public void setMusculos(String musculos) {
-        this.musculos = musculos;
+    public void setgrupoMuscular(String grupoMuscular) {
+        this.grupoMuscular = grupoMuscular;
     }
 
-    public Ejercicio withMusculos(String musculos) {
-        this.musculos = musculos;
+    public Ejercicio withgrupoMuscular(String grupoMuscular) {
+        this.grupoMuscular = grupoMuscular;
         return this;
     }
 

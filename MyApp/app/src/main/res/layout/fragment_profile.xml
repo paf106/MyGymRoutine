@@ -1,25 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.activity.profile.ProfileFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl1"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="wrap_content"
+        android:background="@color/blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivPhotoProfile"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_user_default_profile"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvFullnameProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivPhotoProfile"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvEmailProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@+id/tvFullnameProfile"
+            app:layout_constraintTop_toBottomOf="@+id/tvFullnameProfile" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ScrollView
+        android:id="@+id/svControles"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/logout_button"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cl1">
+        app:layout_constraintTop_toBottomOf="@+id/cl1"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,11 +73,11 @@
 
                 <ImageView
                     android:id="@+id/personal_image"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="22dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/light_blue"
+                    android:background="@drawable/circle_blue"
                     android:scaleType="center"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +91,7 @@
                     android:layout_marginEnd="12dp"
                     android:text="@string/profile_my_profile"
                     android:textColor="#525252"
-                    android:textSize="16sp"
+                    android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@id/personal_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/personal_image"
@@ -77,33 +116,79 @@
                 android:layout_height="match_parent"
                 android:clickable="true">
 
-
                 <ImageView
-                    android:id="@+id/password_image"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="22dp"
+                    android:id="@+id/paswword_image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="18dp"
-                    android:background="@color/light_blue"
+                    android:background="@drawable/circle_blue"
                     android:scaleType="center"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_key" />
 
                 <TextView
-                    android:id="@+id/password_text"
+                    android:id="@+id/pasword_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:text="@string/profile_password"
                     android:textColor="#525252"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/password_image"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/paswword_image"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/paswword_image"
+                    app:layout_constraintTop_toTopOf="@id/paswword_image" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="#818181"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/pasword_text"
+                    app:layout_constraintTop_toBottomOf="@id/paswword_image" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/about_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                tools:layout_editor_absoluteY="527dp">
+
+
+                <ImageView
+                    android:id="@+id/about_image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/circle_blue"
+                    android:scaleType="center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_info_white" />
+
+                <TextView
+                    android:id="@+id/about_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:text="@string/profile_about"
+                    android:textColor="#525252"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@id/about_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@id/password_image"
-                    app:layout_constraintTop_toTopOf="@id/password_image"
+                    app:layout_constraintStart_toEndOf="@id/about_image"
+                    app:layout_constraintTop_toTopOf="@id/about_image"
                     app:layout_constraintVertical_bias="0.428" />
 
                 <View
@@ -113,19 +198,22 @@
                     android:layout_marginEnd="14dp"
                     android:background="#818181"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/password_text"
-                    app:layout_constraintTop_toBottomOf="@id/password_image" />
+                    app:layout_constraintStart_toStartOf="@id/about_text"
+                    app:layout_constraintTop_toBottomOf="@id/about_image" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
+
     </ScrollView>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/logout_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -134,11 +222,11 @@
 
         <ImageView
             android:id="@+id/logout_image"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="22dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="18dp"
-            android:background="@color/light_blue"
+            android:background="@drawable/circle_blue"
             android:scaleType="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -152,7 +240,7 @@
             android:layout_marginEnd="12dp"
             android:text="@string/profile_logout"
             android:textColor="#525252"
-            android:textSize="16sp"
+            android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@id/logout_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/logout_image"
@@ -170,6 +258,8 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

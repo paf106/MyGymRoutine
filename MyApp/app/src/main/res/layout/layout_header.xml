@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.MyGymRoutine.myapp.view.components.common.Header xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="#3061F6">
+
+    <ImageView
+        android:id="@+id/common_header_back_button"
+        android:layout_width="50dp"
+        android:layout_height="37dp"
+        android:src="@drawable/arrow_back_ios_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.515"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/common_header_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:lines="1"
+        android:padding="5dp"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/common_header_back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.361"
+        app:layout_constraintStart_toEndOf="@+id/common_header_back_button"
+        app:layout_constraintTop_toTopOf="@+id/common_header_back_button"
+        app:layout_constraintVertical_bias="0.571"
+        tools:text="Acciona" />
+
+</com.MyGymRoutine.myapp.view.components.common.Header>
