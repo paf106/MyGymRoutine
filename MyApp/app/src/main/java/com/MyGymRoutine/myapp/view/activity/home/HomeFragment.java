@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,12 +57,15 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         Preferences preferences = new Preferences(getContext());
         Client sharedCLient = preferences.getClient();
         binding.tvWelcomeUser.setText("¡Hola "+ sharedCLient.getNombre() + "!");
         novedades = new ArrayList<>();
-        NovedadesListAdapter adapter = new NovedadesListAdapter(getContext(),novedades);
-        binding.lvNovedades.setAdapter(adapter);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        binding.rvNovedades.setLayoutManager(manager);
+
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constantes.BASE_API)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -74,15 +78,16 @@ public class HomeFragment extends Fragment {
         listado.enqueue(new Callback<List<Novedad>>() {
             @Override
             public void onResponse(Call<List<Novedad>> call, Response<List<Novedad>> response) {
-                if (response.code() == HttpURLConnection.HTTP_OK){
-                    List<Novedad> list = response.body();
-                    novedades = list;
+                if (response.isSuccessful()){
+                    novedades = response.body();
+                    NovedadesListAdapter adapter = new NovedadesListAdapter(novedades);
+                    binding.rvNovedades.setAdapter(adapter);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Novedad>> call, Throwable t) {
-
+                Toast.makeText(getActivity().getApplicationContext(), "Fallo", Toast.LENGTH_SHORT).show();
             }
         });
 

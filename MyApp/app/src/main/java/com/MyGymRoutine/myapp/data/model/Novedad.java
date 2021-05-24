@@ -4,13 +4,13 @@ public class Novedad {
 
     private String titulo;
     private String descripcion;
-    private String tipo;
+    private int tipo;
 
     public static final int INFO = 0;
     public static final int WARNING = 1;
     public static final int NEW = 2;
 
-    public Novedad(String titulo, String descripcion, String tipo) {
+    public Novedad(String titulo, String descripcion, int tipo) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.tipo = tipo;
@@ -32,11 +32,11 @@ public class Novedad {
         this.descripcion = descripcion;
     }
 
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(int tipo) {
         this.tipo = tipo;
     }
 }

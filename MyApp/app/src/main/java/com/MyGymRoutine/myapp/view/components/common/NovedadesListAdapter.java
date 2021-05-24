@@ -1,70 +1,55 @@
 package com.MyGymRoutine.myapp.view.components.common;
 
-import android.content.Context;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
+
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.model.Novedad;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
-public class NovedadesListAdapter extends BaseAdapter {
+public class NovedadesListAdapter extends RecyclerView.Adapter<NovedadesListAdapter.RecyclerHolder> {
     private List<Novedad> listaNovedades;
-    private Context context;
 
-    public NovedadesListAdapter(Context context, List<Novedad> novedadList){
-        this.context = context;
-        this.listaNovedades = novedadList;
+    public NovedadesListAdapter(List<Novedad> listaNovedades) {
+        this.listaNovedades = listaNovedades;
+    }
+
+    @NotNull
+    @Override
+    public RecyclerHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.novedad_element, parent, false);
+        return new RecyclerHolder(view);
     }
 
     @Override
-    public int getCount() {
+    public void onBindViewHolder(@NonNull @NotNull RecyclerHolder holder, int position) {
+
+        final Novedad novedad = listaNovedades.get(position);
+        //holder.ivStatus.setImageResource(novedad.getImgResource());
+        holder.tvHomeTitle.setText(novedad.getTitulo());
+        holder.tvHomeDescription.setText(novedad.getDescripcion());
+    }
+
+    @Override
+    public int getItemCount() {
         return listaNovedades.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return position;
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View view, ViewGroup parent) {
-        TextView tvHomeTitle, tvHomeDescription;
-        LinearLayout llNovedadElement;
-        ImageView ivStatus;
-
-        Novedad novedad = listaNovedades.get(position);
-
-        if (view == null) {
-           view = LayoutInflater.from(context).inflate(R.layout.novedad_element,parent,false);
-        }
-
-        tvHomeTitle = view.findViewById(R.id.tvHomeTitle);
-        tvHomeDescription = view.findViewById(R.id.tvHomeDescription);
-        ivStatus = view.findViewById(R.id.ivStatus);
-        llNovedadElement = view.findViewById(R.id.llNovedadElement);
-
-        tvHomeTitle.setText(novedad.getTitulo());
-        tvHomeDescription.setText(novedad.getDescripcion());
-
-        switch(novedad.getTipo()){
+        /*switch(novedad.getTipo()){
             case "info":
                 ivStatus.setImageResource(R.drawable.ic_info);
                 llNovedadElement.setBackgroundResource(R.color.home_novedad_info_background);
@@ -77,9 +62,9 @@ public class NovedadesListAdapter extends BaseAdapter {
                 ivStatus.setImageResource(R.drawable.round_warning_24);
                 llNovedadElement.setBackgroundResource(R.color.home_novedad_warning_backgound);
                 break;
-        }
-        return view;
-    }
+        }*/
+
+
 
     /*@NonNull
     @Override
@@ -116,5 +101,18 @@ public class NovedadesListAdapter extends BaseAdapter {
                 break;
         }
         return v;*/
+    public static class RecyclerHolder extends RecyclerView.ViewHolder {
+        private ImageView ivStatus;
+        private TextView tvHomeTitle;
+        private TextView tvHomeDescription;
+
+        public RecyclerHolder(@NonNull View itemView) {
+            super(itemView);
+            ivStatus = itemView.findViewById(R.id.ivStatus);
+            tvHomeTitle = itemView.findViewById(R.id.tvHomeTitle);
+            tvHomeDescription = itemView.findViewById(R.id.tvHomeDescription);
+        }
     }
+    }
+
 
