@@ -32,10 +32,25 @@ public interface ClientApi {
             @Field("contrasena") String contrasena
     );
 
+    @FormUrlEncoded
     @POST("/update/password")
     Call<Void> updatePassword(
-            @Body String contrasena,
-            @Body int idCliente
+            @Field("contrasena") String contrasena,
+            @Field("idCliente") int idCliente
+    );
+
+    @FormUrlEncoded
+    @POST("/update/user")
+    Call<Void> updateUser(
+            @Field("nombre") String nombre,
+            @Field("apellidos") String apellidos,
+            @Field("correoElectronico") String correoElectronico,
+            @Field("telefono") String telefono,
+            @Field("peso") double peso,
+            @Field("altura") double altura,
+            @Field("patologias") String patologias,
+            @Field("frecuenciaDeporte") String frecuenciaDeporte,
+            @Field("idCliente") int idCliente
     );
 
 

@@ -7,20 +7,35 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.MyGymRoutine.myapp.R;
+import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
+import com.MyGymRoutine.myapp.data.api.internal.NovedadApi;
 import com.MyGymRoutine.myapp.data.model.Client;
+import com.MyGymRoutine.myapp.data.model.Novedad;
 import com.MyGymRoutine.myapp.databinding.ActivityProfileDataBinding;
 import com.MyGymRoutine.myapp.view.components.utils.Preferences;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProfileDataActivity extends AppCompatActivity {
 
     private ActivityProfileDataBinding binding;
     private Preferences preferences;
+    private Client sharedClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileDataBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         preferences = new Preferences(getApplicationContext());
+        sharedClient = preferences.getClient();
 
         binding.commonHeader.commonHeaderTitleText.setText("Mi perfil");
         binding.commonHeader.commonHeaderBackButton.setOnClickListener( (v) -> finish());
@@ -31,10 +46,41 @@ public class ProfileDataActivity extends AppCompatActivity {
         binding.frecuenciaDeporte.setAdapter(arrayAdapter);
 
         initData();
+
+        binding.btnGuardar.setOnClickListener(v -> {
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://192.168.1.73:3000")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+
+            ClientApi service = retrofit.create(ClientApi.class);
+
+            Call<Void> listado = service.updateUser(
+                    binding.etName.getText().toString(),
+                    binding.etSurname.getText().toString(),
+                    binding.etEmail.getText().toString(),
+                    binding.etPhone.getText().toString(),
+                    Double.parseDouble(binding.etUserWeight.getText().toString()),
+                    Double.parseDouble(binding.etUserHeight.getText().toString()),
+                    binding.etPathology.getText().toString(),
+                    binding.frecuenciaDeporte.getText().toString(),
+                    sharedClient.getIdCliente()
+            );
+            listado.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    Snackbar.make(v, "Cambios guardados", Snackbar.LENGTH_LONG).show();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Snackbar.make(v, "Ha habido un problema", Snackbar.LENGTH_LONG).show();
+                }
+            });
+        });
     }
 
     private void initData(){
-        Client sharedClient = preferences.getClient();
         binding.etName.setText(sharedClient.getNombre());
         binding.etSurname.setText(sharedClient.getApellidos());
         binding.etEmail.setText(sharedClient.getCorreoElectronico());

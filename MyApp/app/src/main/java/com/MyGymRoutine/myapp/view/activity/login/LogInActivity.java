@@ -1,25 +1,19 @@
 package com.MyGymRoutine.myapp.view.activity.login;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
-import com.MyGymRoutine.myapp.data.api.internal.NovedadApi;
 import com.MyGymRoutine.myapp.data.model.Client;
-import com.MyGymRoutine.myapp.data.model.Novedad;
 import com.MyGymRoutine.myapp.databinding.LogInActivityBinding;
 import com.MyGymRoutine.myapp.view.activity.NavigationActivity;
 import com.MyGymRoutine.myapp.view.activity.register.RegisterActivity;
 import com.MyGymRoutine.myapp.view.components.utils.Preferences;
-import com.google.gson.Gson;
 
-import java.util.List;
+import java.net.HttpURLConnection;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,9 +43,10 @@ public class LogInActivity extends AppCompatActivity{
     }
 
     private void login() {
-
+        Log.i("credentials","Entro al metodo login");
         String user = binding.etUser.getText().toString();
         String password = binding.etPassword.getText().toString();
+        Log.i("credentials",user + " "+ password);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.1.74:3000")
@@ -64,18 +59,21 @@ public class LogInActivity extends AppCompatActivity{
         client.enqueue(new Callback<Client>() {
             @Override
             public void onResponse(Call<Client> call, Response<Client> response) {
-                Client sharedCLient = response.body();
-                // Credenciales incorrectas
-                if (sharedCLient != null){
-                    // Credenciales correctas, guardamos al usuario y redirigimos a pantalla principal
-                    preferences.saveCredentials(sharedCLient);
-                    startActivity(new Intent(getApplicationContext(), NavigationActivity.class));
-                    finish();
+                if(response.code() == HttpURLConnection.HTTP_OK){
+                    Client sharedCLient = response.body();
+                    // Credenciales correctas
+                    if (sharedCLient != null){
+                        Log.i("credentials","login correcto");
+                        // Credenciales correctas, guardamos al usuario y redirigimos a pantalla principal
+                        preferences.saveCredentials(sharedCLient);
+                        startActivity(new Intent(getApplicationContext(), NavigationActivity.class));
+                        finish();
 
-                }else{
-                    binding.etPassword.setError("Usuario o contraseña inválida");
+                    }else{
+                        Log.i("credentials","login INCORRECTO");
+                        binding.etPassword.setError("Usuario o contraseña inválida");
+                    }
                 }
-
             }
 
             @Override
@@ -83,7 +81,5 @@ public class LogInActivity extends AppCompatActivity{
 
             }
         });
-
-
     }
 }

@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
         NovedadesListAdapter adapter = new NovedadesListAdapter(getContext(),novedades);
         binding.lvNovedades.setAdapter(adapter);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.20:3000")
+                .baseUrl("http://192.168.1.73:3000")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
