@@ -20,6 +20,7 @@ import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.data.model.Novedad;
 import com.MyGymRoutine.myapp.databinding.FragmentHomeBinding;
 import com.MyGymRoutine.myapp.view.components.common.NovedadesListAdapter;
+import com.MyGymRoutine.myapp.view.components.utils.Constantes;
 import com.MyGymRoutine.myapp.view.components.utils.Preferences;
 
 import java.net.HttpURLConnection;
@@ -36,7 +37,6 @@ public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
     private List<Novedad> novedades;
-    private Preferences preferences;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -56,14 +56,14 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        preferences = new Preferences(getContext());
+        Preferences preferences = new Preferences(getContext());
         Client sharedCLient = preferences.getClient();
         binding.tvWelcomeUser.setText("¡Hola "+ sharedCLient.getNombre() + "!");
         novedades = new ArrayList<>();
         NovedadesListAdapter adapter = new NovedadesListAdapter(getContext(),novedades);
         binding.lvNovedades.setAdapter(adapter);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.1.73:3000")
+                .baseUrl(Constantes.BASE_API)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

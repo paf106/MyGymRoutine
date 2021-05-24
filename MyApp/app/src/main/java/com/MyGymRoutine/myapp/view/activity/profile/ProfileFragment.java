@@ -21,6 +21,7 @@ public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
     private Preferences preferences;
+    private Client sharedCLient;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -44,8 +45,9 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         preferences = new Preferences(getContext());
+        sharedCLient = preferences.getClient();
+        preferences.refreshCurrentUser(sharedCLient.getIdCliente());
 
-        Client sharedCLient = preferences.getClient();
         binding.tvFullnameProfile.setText(sharedCLient.getNombre());
         binding.tvEmailProfile.setText(sharedCLient.getCorreoElectronico());
 
@@ -56,5 +58,15 @@ public class ProfileFragment extends Fragment {
             getActivity().finish();
             startActivity(new Intent(getContext(), LogInActivity.class));
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        preferences.refreshCurrentUser(sharedCLient.getIdCliente());
+        sharedCLient = preferences.getClient();
+
+        binding.tvFullnameProfile.setText(sharedCLient.getNombre());
+        binding.tvEmailProfile.setText(sharedCLient.getCorreoElectronico());
     }
 }

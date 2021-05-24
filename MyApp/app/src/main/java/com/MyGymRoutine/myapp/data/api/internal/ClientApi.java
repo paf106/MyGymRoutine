@@ -7,7 +7,9 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ClientApi {
 
@@ -23,6 +25,11 @@ public interface ClientApi {
             @Body double peso,
             @Body double altura,
             @Body String patologias
+    );
+    @FormUrlEncoded
+    @POST("/fetch/cliente")
+    Call<Client> fetchClient(
+            @Field("idCliente") int idCliente
     );
 
     @FormUrlEncoded

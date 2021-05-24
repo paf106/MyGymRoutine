@@ -12,6 +12,7 @@ import com.MyGymRoutine.myapp.data.api.internal.NovedadApi;
 import com.MyGymRoutine.myapp.data.model.Client;
 import com.MyGymRoutine.myapp.data.model.Novedad;
 import com.MyGymRoutine.myapp.databinding.ActivityProfileDataBinding;
+import com.MyGymRoutine.myapp.view.components.utils.Constantes;
 import com.MyGymRoutine.myapp.view.components.utils.Preferences;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -26,7 +27,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProfileDataActivity extends AppCompatActivity {
 
     private ActivityProfileDataBinding binding;
-    private Preferences preferences;
     private Client sharedClient;
 
     @Override
@@ -34,22 +34,18 @@ public class ProfileDataActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityProfileDataBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        preferences = new Preferences(getApplicationContext());
+
+        Preferences preferences = new Preferences(getApplicationContext());
         sharedClient = preferences.getClient();
 
         binding.commonHeader.commonHeaderTitleText.setText("Mi perfil");
         binding.commonHeader.commonHeaderBackButton.setOnClickListener( (v) -> finish());
 
-        //Dropdown menu
-        String[] options = getResources().getStringArray(R.array.frecuenciasDeportes);
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_item, options);
-        binding.frecuenciaDeporte.setAdapter(arrayAdapter);
-
         initData();
 
         binding.btnGuardar.setOnClickListener(v -> {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.73:3000")
+                    .baseUrl(Constantes.BASE_API)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
@@ -69,15 +65,26 @@ public class ProfileDataActivity extends AppCompatActivity {
             listado.enqueue(new Callback<Void>() {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
+                    preferences.refreshCurrentUser(sharedClient.getIdCliente());
                     Snackbar.make(v, "Cambios guardados", Snackbar.LENGTH_LONG).show();
                 }
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Snackbar.make(v, "Ha habido un problema", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(v, "Ha ocurrido un error", Snackbar.LENGTH_LONG).show();
                 }
             });
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //Dropdown menu
+        String[] options = getResources().getStringArray(R.array.frecuenciasDeportes);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.dropdown_item, options);
+        binding.frecuenciaDeporte.setAdapter(arrayAdapter);
     }
 
     private void initData(){

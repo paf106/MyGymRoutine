@@ -4,9 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.widget.Toast;
 
+import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
 import com.MyGymRoutine.myapp.data.model.Client;
 import com.google.gson.Gson;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -23,6 +31,28 @@ public class Preferences {
         String json = new Gson().toJson(client);
         edit.putString(CLIENT_KEY,json);
         edit.apply();
+    }
+    public void refreshCurrentUser(int clientId){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constantes.BASE_API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ClientApi service = retrofit.create(ClientApi.class);
+
+        Call<Client> client = service.fetchClient(clientId);
+
+        client.enqueue(new Callback<Client>() {
+            @Override
+            public void onResponse(Call<Client> call, Response<Client> response) {
+                saveCredentials(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Client> call, Throwable t) {
+
+            }
+        });
     }
 
     public Client getClient() {
