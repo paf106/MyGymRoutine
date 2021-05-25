@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.view.activity.login.LogInActivity;
+import com.MyGymRoutine.myapp.view.components.utils.Preferences;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -15,17 +16,19 @@ public class SplashScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
+        setTheme(R.style.SplashTheme);
 
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(getApplicationContext(), LogInActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        },1000);
+        Preferences preferences = new Preferences(getApplicationContext());
+
+        if (preferences.hasCredentials()) {
+            startActivity(new Intent(getApplicationContext(), NavigationActivity.class));
+        } else {
+            startActivity(new Intent(getApplicationContext(), LogInActivity.class));
+        }
+        finish();
+        super.onCreate(savedInstanceState);
+
+
+
     }
 }

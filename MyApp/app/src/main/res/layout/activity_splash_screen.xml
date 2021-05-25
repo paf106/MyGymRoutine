@@ -12,7 +12,7 @@
         android:layout_marginTop="115dp"
         android:layout_marginBottom="116dp"
         android:scaleType="centerInside"
-        android:src="@drawable/background_image"
+        android:src="@drawable/background_image_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
