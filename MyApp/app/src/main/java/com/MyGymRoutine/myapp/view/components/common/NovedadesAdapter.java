@@ -21,10 +21,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class NovedadesListAdapter extends RecyclerView.Adapter<NovedadesListAdapter.RecyclerHolder> {
+public class NovedadesAdapter extends RecyclerView.Adapter<NovedadesAdapter.RecyclerHolder> {
     private List<Novedad> listaNovedades;
 
-    public NovedadesListAdapter(List<Novedad> listaNovedades) {
+    public NovedadesAdapter(List<Novedad> listaNovedades) {
         this.listaNovedades = listaNovedades;
     }
 
@@ -38,10 +38,25 @@ public class NovedadesListAdapter extends RecyclerView.Adapter<NovedadesListAdap
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerHolder holder, int position) {
 
-        final Novedad novedad = listaNovedades.get(position);
+        Novedad novedad = listaNovedades.get(position);
         //holder.ivStatus.setImageResource(novedad.getImgResource());
         holder.tvHomeTitle.setText(novedad.getTitulo());
         holder.tvHomeDescription.setText(novedad.getDescripcion());
+
+        switch(novedad.getTipo()){
+            case Novedad.INFO:
+                holder.ivStatus.setImageResource(R.drawable.ic_info);
+                holder.llNovedadElement.setBackgroundResource(R.color.home_novedad_info_background);
+                break;
+            case Novedad.NEW:
+                holder.ivStatus.setImageResource(R.drawable.ic_new);
+                holder.llNovedadElement.setBackgroundResource(R.color.home_novedad_new_background);
+                break;
+            case Novedad.WARNING:
+                holder.ivStatus.setImageResource(R.drawable.round_warning_24);
+                holder.llNovedadElement.setBackgroundResource(R.color.home_novedad_warning_backgound);
+                break;
+        }
     }
 
     @Override
@@ -49,19 +64,7 @@ public class NovedadesListAdapter extends RecyclerView.Adapter<NovedadesListAdap
         return listaNovedades.size();
     }
 
-        /*switch(novedad.getTipo()){
-            case "info":
-                ivStatus.setImageResource(R.drawable.ic_info);
-                llNovedadElement.setBackgroundResource(R.color.home_novedad_info_background);
-                break;
-            case "new":
-                ivStatus.setImageResource(R.drawable.ic_new);
-                llNovedadElement.setBackgroundResource(R.color.home_novedad_new_background);
-                break;
-            case "warning":
-                ivStatus.setImageResource(R.drawable.round_warning_24);
-                llNovedadElement.setBackgroundResource(R.color.home_novedad_warning_backgound);
-                break;
+        /*
         }*/
 
 
@@ -105,12 +108,14 @@ public class NovedadesListAdapter extends RecyclerView.Adapter<NovedadesListAdap
         private ImageView ivStatus;
         private TextView tvHomeTitle;
         private TextView tvHomeDescription;
+        private LinearLayout llNovedadElement;
 
         public RecyclerHolder(@NonNull View itemView) {
             super(itemView);
             ivStatus = itemView.findViewById(R.id.ivStatus);
             tvHomeTitle = itemView.findViewById(R.id.tvHomeTitle);
             tvHomeDescription = itemView.findViewById(R.id.tvHomeDescription);
+            llNovedadElement = itemView.findViewById(R.id.llNovedadElement);
         }
     }
     }

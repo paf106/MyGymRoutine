@@ -7,24 +7,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.MyGymRoutine.myapp.R;
-import com.MyGymRoutine.myapp.data.api.internal.EjercicioApi;
 import com.MyGymRoutine.myapp.data.api.internal.NovedadApi;
 import com.MyGymRoutine.myapp.data.model.Client;
-import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.data.model.Novedad;
 import com.MyGymRoutine.myapp.databinding.FragmentHomeBinding;
-import com.MyGymRoutine.myapp.view.components.common.NovedadesListAdapter;
+import com.MyGymRoutine.myapp.view.components.common.NovedadesAdapter;
 import com.MyGymRoutine.myapp.view.components.utils.Constantes;
 import com.MyGymRoutine.myapp.view.components.utils.Preferences;
 
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,9 +56,12 @@ public class HomeFragment extends Fragment {
         Preferences preferences = new Preferences(getContext());
         Client sharedCLient = preferences.getClient();
         binding.tvWelcomeUser.setText("¡Hola "+ sharedCLient.getNombre() + "!");
-        novedades = new ArrayList<>();
+
+        NovedadesAdapter adapter = new NovedadesAdapter(novedades);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         binding.rvNovedades.setLayoutManager(manager);
+        binding.rvNovedades.setHasFixedSize(true);
+        novedades = new ArrayList<>();
 
 
         Retrofit retrofit = new Retrofit.Builder()
@@ -80,7 +78,7 @@ public class HomeFragment extends Fragment {
             public void onResponse(Call<List<Novedad>> call, Response<List<Novedad>> response) {
                 if (response.isSuccessful()){
                     novedades = response.body();
-                    NovedadesListAdapter adapter = new NovedadesListAdapter(novedades);
+                    NovedadesAdapter adapter = new NovedadesAdapter(novedades);
                     binding.rvNovedades.setAdapter(adapter);
                 }
             }
