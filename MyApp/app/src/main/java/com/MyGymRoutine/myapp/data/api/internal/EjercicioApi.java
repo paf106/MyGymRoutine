@@ -15,7 +15,7 @@ public interface EjercicioApi {
     Call<List<Ejercicio>> getEjercicios();
 
     @GET("/ejercicio/grupoMuscular/lista")
-    Call<String[]> getGruposMusculares();
+    Call<List<String>> getGruposMusculares();
 
 
 }

@@ -2,6 +2,8 @@ package com.MyGymRoutine.myapp.view.activity.exercise;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -19,6 +21,8 @@ import com.MyGymRoutine.myapp.data.model.Novedad;
 import com.MyGymRoutine.myapp.databinding.FragmentExerciseBinding;
 import com.MyGymRoutine.myapp.view.components.utils.Constantes;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +35,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ExerciseFragment extends Fragment {
 
     private FragmentExerciseBinding binding;
-    private String[] gruposMuscularesString;
+    private List<String> gruposMuscularesString;
     private List<Ejercicio> ejercicios;
     private List<GrupoMuscular> gruposMusculares;
 
@@ -40,20 +44,20 @@ public class ExerciseFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentExerciseBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentExerciseBinding.inflate(inflater, container, false);
-
-
-        ejercicios = new ArrayList<>();
+    public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         gruposMusculares = new ArrayList<>();
+        gruposMuscularesString = new ArrayList<>();
+        ejercicios = new ArrayList<>();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constantes.BASE_API)
@@ -62,23 +66,18 @@ public class ExerciseFragment extends Fragment {
 
         EjercicioApi service = retrofit.create(EjercicioApi.class);
 
-        Call<String[]> listado = service.getGruposMusculares();
-        listado.enqueue(new Callback<String[]>() {
+        Call<List<String>> listado = service.getGruposMusculares();
+        listado.enqueue(new Callback<List<String>>() {
             @Override
-            public void onResponse(Call<String[]> call, Response<String[]> response) {
-                gruposMuscularesString = new String[2];
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 gruposMuscularesString = response.body();
             }
 
             @Override
-            public void onFailure(Call<String[]> call, Throwable t) {
+            public void onFailure(Call<List<String>> call, Throwable t) {
 
             }
         });
-        for (String a: gruposMuscularesString
-             ) {
-            Toast.makeText(getContext(), a, Toast.LENGTH_SHORT).show();
-        }
 
         Call<List<Ejercicio>> listado2 = service.getEjercicios();
 
@@ -94,25 +93,32 @@ public class ExerciseFragment extends Fragment {
             }
         });
 
-        sortArrays();
 
-        return binding.getRoot();
+        sortArrays();
+        if (gruposMusculares != null){
+            for (GrupoMuscular a: gruposMusculares) {
+                Toast.makeText(getContext(), a.getNombre(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void sortArrays() {
-        for (String grupoMuscular: gruposMuscularesString) {
+        List<Ejercicio> ejerciciosTemp = new ArrayList<>();
 
-            List<Ejercicio> ejerciciosTemp = new ArrayList<>();
-            GrupoMuscular grupoMuscularTemp = new GrupoMuscular();
-            grupoMuscularTemp.setNombre(grupoMuscular);
-            grupoMuscularTemp.setEjercicios(ejerciciosTemp);
+        if (gruposMusculares != null && gruposMuscularesString != null){
+            for (String s: gruposMuscularesString) {
+                GrupoMuscular grupoMuscularTemp = new GrupoMuscular();
+                grupoMuscularTemp.setNombre(s);
 
-            for (Ejercicio e:ejercicios) {
-                if (e.getGrupoMuscular().equals(grupoMuscular)){
-                    ejerciciosTemp.add(e);
+                for (Ejercicio e:ejercicios) {
+                    if (e.getGrupoMuscular().equals(s)){
+                        ejerciciosTemp.add(e);
+                    }
                 }
+                grupoMuscularTemp.setEjercicios(ejerciciosTemp);
+                gruposMusculares.add(grupoMuscularTemp);
             }
-            gruposMusculares.add(grupoMuscularTemp);
         }
+
     }
 }

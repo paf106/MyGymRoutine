@@ -57,7 +57,6 @@ public class HomeFragment extends Fragment {
         Client sharedCLient = preferences.getClient();
         binding.tvWelcomeUser.setText("¡Hola "+ sharedCLient.getNombre() + "!");
 
-        NovedadesAdapter adapter = new NovedadesAdapter(novedades);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         binding.rvNovedades.setLayoutManager(manager);
         binding.rvNovedades.setHasFixedSize(true);

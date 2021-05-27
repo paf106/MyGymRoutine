@@ -18,9 +18,9 @@
     <color name="home_novedad_info">#0B1CF1</color>
     <color name="home_novedad_warning">#CDB727</color>
 
-    <color name="home_novedad_info_background">#B0B5F4</color>
-    <color name="home_novedad_warning_backgound">#C6C19C</color>
-    <color name="home_novedad_new_background">#E3ADAB</color>
+    <color name="home_novedad_info_background">#DDDFF4</color>
+    <color name="home_novedad_warning_backgound">#F4F2DF</color>
+    <color name="home_novedad_new_background">#F3DDDC</color>
 
 
 </resources>
