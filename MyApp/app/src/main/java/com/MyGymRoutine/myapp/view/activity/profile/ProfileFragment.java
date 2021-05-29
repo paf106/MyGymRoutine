@@ -33,6 +33,10 @@ public class ProfileFragment extends Fragment {
     private Preferences preferences;
     private Client sharedCLient;
 
+    private static final int REQUEST_PERMISSION_CODE = 100;
+    private static final int REQUEST_IMAGE_GALLERY = 101;
+
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -72,9 +76,9 @@ public class ProfileFragment extends Fragment {
             //Check permission
             if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-
+                    openGallery();
                 }else{
-                    ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},100);
+                    ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_PERMISSION_CODE);
                 }
             }else{
                 openGallery();
@@ -85,7 +89,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
 
-        if (requestCode == 100){
+        if (requestCode == REQUEST_PERMISSION_CODE){
             if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 openGallery();
             }else{
@@ -97,21 +101,19 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
-        if(requestCode == 100){
+        if(requestCode == REQUEST_IMAGE_GALLERY){
             if (resultCode == Activity.RESULT_OK && data != null){
                 Uri photo = data.getData();
                 binding.ivPhotoProfile.setImageURI(photo);
             }
         }
-
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void openGallery(){
         Intent i = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         i.setType("image/*");
-        startActivityForResult(i,101);
+        startActivityForResult(i,REQUEST_IMAGE_GALLERY);
     }
 
     @Override
