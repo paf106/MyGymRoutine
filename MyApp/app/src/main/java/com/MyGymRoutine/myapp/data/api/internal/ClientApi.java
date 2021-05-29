@@ -13,18 +13,20 @@ import retrofit2.http.Query;
 
 public interface ClientApi {
 
+    @FormUrlEncoded
     @POST("/register")
     Call<Void> doRegister(
-            @Body String nombre,
-            @Body String apellidos,
-            @Body String usuario,
-            @Body String contrasena,
-            @Body String correoElectronico,
-            @Body String fechaNacimiento,
-            @Body String telefono,
-            @Body double peso,
-            @Body double altura,
-            @Body String patologias
+            @Field("nombre") String nombre,
+            @Field("apellidos") String apellidos,
+            @Field("usuario") String usuario,
+            @Field("contrasena") String contrasena,
+            @Field("correoElectronico") String correoElectronico,
+            @Field("fechaNacimiento") String fechaNacimiento,
+            @Field("telefono") String telefono,
+            @Field("peso") double peso,
+            @Field("altura") double altura,
+            @Field("frecuenciaDeporte") String frecuenciaDeporte,
+            @Field("patologias") String patologias
     );
     @FormUrlEncoded
     @POST("/fetch/cliente")
@@ -58,6 +60,12 @@ public interface ClientApi {
             @Field("patologias") String patologias,
             @Field("frecuenciaDeporte") String frecuenciaDeporte,
             @Field("idCliente") int idCliente
+    );
+
+    @FormUrlEncoded
+    @POST("/checkUsername")
+    Call<String> checkUsername(
+            @Field("usuario") String usuario
     );
 
 

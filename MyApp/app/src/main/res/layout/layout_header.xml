@@ -31,6 +31,6 @@
         app:layout_constraintStart_toEndOf="@+id/common_header_back_button"
         app:layout_constraintTop_toTopOf="@+id/common_header_back_button"
         app:layout_constraintVertical_bias="0.571"
-        tools:text="Acciona" />
+        tools:text="Titulo" />
 
 </com.MyGymRoutine.myapp.view.components.common.Header>

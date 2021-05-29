@@ -39,7 +39,6 @@ public class NovedadesAdapter extends RecyclerView.Adapter<NovedadesAdapter.Recy
     public void onBindViewHolder(@NonNull @NotNull RecyclerHolder holder, int position) {
 
         Novedad novedad = listaNovedades.get(position);
-        //holder.ivStatus.setImageResource(novedad.getImgResource());
         holder.tvHomeTitle.setText(novedad.getTitulo());
         holder.tvHomeDescription.setText(novedad.getDescripcion());
 
@@ -64,46 +63,6 @@ public class NovedadesAdapter extends RecyclerView.Adapter<NovedadesAdapter.Recy
         return listaNovedades.size();
     }
 
-        /*
-        }*/
-
-
-
-    /*@NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
-        View v = LayoutInflater.from(context).inflate(resource,parent,false);
-
-        Novedad novedad = listaNovedades.get(position);
-
-        TextView tvHomeTitle, tvHomeDescription;
-        LinearLayout llNovedadElement;
-        ImageView ivStatus;
-
-        tvHomeTitle = v.findViewById(R.id.tvHomeTitle);
-        tvHomeDescription = v.findViewById(R.id.tvHomeDescription);
-        ivStatus = v.findViewById(R.id.ivStatus);
-        llNovedadElement = v.findViewById(R.id.llNovedadElement);
-
-        tvHomeTitle.setText(novedad.getTitulo());
-        tvHomeDescription.setText(novedad.getDescripcion());
-
-        switch(novedad.getTipo()){
-            case "info":
-                ivStatus.setImageResource(R.drawable.ic_info);
-                llNovedadElement.setBackgroundResource(R.color.home_novedad_info_background);
-                break;
-            case "new":
-                ivStatus.setImageResource(R.drawable.ic_new);
-                llNovedadElement.setBackgroundResource(R.color.home_novedad_new_background);
-                break;
-            case "warning":
-                ivStatus.setImageResource(R.drawable.round_warning_24);
-                llNovedadElement.setBackgroundResource(R.color.home_novedad_warning_backgound);
-                break;
-        }
-        return v;*/
     public static class RecyclerHolder extends RecyclerView.ViewHolder {
         private ImageView ivStatus;
         private TextView tvHomeTitle;

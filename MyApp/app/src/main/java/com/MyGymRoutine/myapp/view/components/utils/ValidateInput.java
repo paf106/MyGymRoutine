@@ -73,7 +73,7 @@ public class ValidateInput {
     }
 
     public static boolean typeEmail(TextInputLayout inputLayout){
-        if(checkPattern(inputLayout,REGEX_PHONENUMBER,"Email incorrecto")){
+        if(checkPattern(inputLayout,REGEX_EMAIL,"Email incorrecto")){
             return true;
         }else{
             return false;
@@ -101,8 +101,4 @@ public class ValidateInput {
             return true;
         }
     }
-
-//    public static boolean typeUser(TextInputLayout inputLayout){
-//
-//    }
 }

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,6 +58,11 @@ public class ProfileFragment extends Fragment {
             preferences.forgetCredentials();
             getActivity().finish();
             startActivity(new Intent(getContext(), LogInActivity.class));
+        });
+        binding.ivPhotoProfile.setOnClickListener(v -> {
+            Intent i = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            i.setType("image/*");
+            startActivityForResult(i,101);
         });
     }
 

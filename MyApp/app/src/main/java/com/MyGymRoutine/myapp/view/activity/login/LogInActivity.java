@@ -61,15 +61,20 @@ public class LogInActivity extends AppCompatActivity{
             @Override
             public void onResponse(Call<Client> call, Response<Client> response) {
                 if(response.code() == HttpURLConnection.HTTP_OK){
-                    Client sharedClient = response.body();
-                    // Credenciales correctas
-                    if (sharedClient != null){
-                        // Credenciales correctas, guardamos al usuario y redirigimos a pantalla principal
-                        preferences.saveCredentials(sharedClient);
-                        startActivity(new Intent(getApplicationContext(), NavigationActivity.class));
-                        finish();
+                    if (binding.etUser.getText().toString().equals("") || binding.etPassword.getText().toString().equals("")){
+                        binding.ilPassword.setError("Debes rellenar los 2 campos");
+                        binding.ilUser.setError("");
                     }else{
-                        binding.ilPassword.setError("Usuario o contraseña inválida");
+                        Client sharedClient = response.body();
+                        // Credenciales correctas
+                        if (sharedClient != null){
+                            // Credenciales correctas, guardamos al usuario y redirigimos a pantalla principal
+                            preferences.saveCredentials(sharedClient);
+                            startActivity(new Intent(getApplicationContext(), NavigationActivity.class));
+                            finish();
+                        }else{
+                            binding.ilPassword.setError("Usuario o contraseña inválida");
+                        }
                     }
                 }
             }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.data.model.GrupoMuscular;
 import com.MyGymRoutine.myapp.data.model.Novedad;
 import com.MyGymRoutine.myapp.databinding.FragmentExerciseBinding;
+import com.MyGymRoutine.myapp.view.components.common.EjerciciosAdapter;
 import com.MyGymRoutine.myapp.view.components.utils.Constantes;
 
 import org.jetbrains.annotations.NotNull;
@@ -79,7 +81,7 @@ public class ExerciseFragment extends Fragment {
             }
         });
 
-        Call<List<Ejercicio>> listado2 = service.getEjercicios();
+       /* Call<List<Ejercicio>> listado2 = service.getEjercicios();
 
         listado2.enqueue(new Callback<List<Ejercicio>>() {
             @Override
@@ -91,15 +93,19 @@ public class ExerciseFragment extends Fragment {
             public void onFailure(Call<List<Ejercicio>> call, Throwable t) {
 
             }
-        });
+        });*/
 
 
         sortArrays();
-        if (gruposMusculares != null){
+        /*if (gruposMusculares != null){
             for (GrupoMuscular a: gruposMusculares) {
                 Toast.makeText(getContext(), a.getNombre(), Toast.LENGTH_SHORT).show();
             }
-        }
+        }*/
+        EjerciciosAdapter ejerciciosAdapter = new EjerciciosAdapter(gruposMusculares);
+        LinearLayoutManager manager = new LinearLayoutManager(getContext());
+        binding.rvEjercicios.setLayoutManager(manager);
+        binding.rvEjercicios.setAdapter(ejerciciosAdapter);
     }
 
     private void sortArrays() {

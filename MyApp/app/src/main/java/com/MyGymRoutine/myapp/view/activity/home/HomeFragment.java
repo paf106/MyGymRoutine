@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Novedad>> call, Throwable t) {
-                Toast.makeText(getActivity().getApplicationContext(), "Fallo", Toast.LENGTH_SHORT).show();
+
             }
         });
 
