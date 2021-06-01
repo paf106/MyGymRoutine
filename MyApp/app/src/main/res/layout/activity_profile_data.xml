@@ -6,24 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.activity.profile.ProfileDataActivity">
+    tools:context=".view.activity.register.RegisterActivity">
 
     <include
         android:id="@+id/common_header"
         layout="@layout/layout_header"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="510dp"
+        android:layout_width="409dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/common_header"
+        app:layout_constraintBottom_toTopOf="@+id/btnGuardar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/common_header">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:id="@+id/llElementos"
@@ -34,7 +35,7 @@
             android:paddingHorizontal="10dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ilCurrentPassword"
+                android:id="@+id/ilName"
                 style="@style/InputFields"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,13 +75,21 @@
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- USUARIO
+            - Poner que compruebe si el nombre de usuario está disponible contra la
+                base de datos
+            -->
+
+            <!-- CONTRASEÑA -->
+
+            <!-- REPITE CONTRASEÑA -->
+
             <!-- EMAIL -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ilEmail"
                 style="@style/InputFields"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:hint="Email"
                 app:endIconMode="clear_text"
                 app:startIconDrawable="@drawable/ic_email">
@@ -117,14 +126,15 @@
                 </EditText>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- CUMPLEAÑOS -->
+
             <!-- ALTURA -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ilUserHeight"
                 style="@style/InputFields"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
+
                 android:hint="Altura"
                 app:endIconMode="clear_text"
                 app:startIconDrawable="@drawable/ic_height">
@@ -209,16 +219,15 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="6dp"
         android:backgroundTint="#004aad"
-        android:text="@string/profile_save_myProfile"
+        android:text="Guardar"
         android:textAllCaps="false"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
