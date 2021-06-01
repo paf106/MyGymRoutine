@@ -2,8 +2,10 @@ package com.MyGymRoutine.myapp.view.activity.profile;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,12 +29,17 @@ import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
+import static com.MyGymRoutine.myapp.view.components.utils.FileInformation.getName;
+import static com.MyGymRoutine.myapp.view.components.utils.FileInformation.getPath;
+
 
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
     private Preferences preferences;
     private Client sharedCLient;
+    private String photoName;
+    private String photoPath;
 
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALLERY = 101;
@@ -103,7 +111,12 @@ public class ProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         if(requestCode == REQUEST_IMAGE_GALLERY){
             if (resultCode == Activity.RESULT_OK && data != null){
+               // Snackbar.make(getView(), data.getDataString(), Snackbar.LENGTH_LONG).show();
                 Uri photo = data.getData();
+                photoName = getName(getContext(),photo);
+                //photoPath = getPath(getContext(),photo);
+                //Snackbar.make(getView(), photoPath, Snackbar.LENGTH_LONG).show();
+
                 binding.ivPhotoProfile.setImageURI(photo);
             }
         }
@@ -114,6 +127,9 @@ public class ProfileFragment extends Fragment {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         i.setType("image/*");
         startActivityForResult(i,REQUEST_IMAGE_GALLERY);
+    }
+    private void uploadImage(){
+
     }
 
     @Override

@@ -2,37 +2,24 @@ package com.MyGymRoutine.myapp.view.activity.exercise;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.MyGymRoutine.myapp.R;
-import com.MyGymRoutine.myapp.data.api.internal.EjercicioApi;
-import com.MyGymRoutine.myapp.data.api.internal.NovedadApi;
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.data.model.GrupoMuscular;
-import com.MyGymRoutine.myapp.data.model.Novedad;
 import com.MyGymRoutine.myapp.databinding.FragmentExerciseBinding;
-import com.MyGymRoutine.myapp.view.components.common.EjerciciosAdapter;
-import com.MyGymRoutine.myapp.view.components.utils.Constantes;
+import com.MyGymRoutine.myapp.view.activity.exercise.adapters.GrupoMuscularAdapter;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ExerciseFragment extends Fragment {
 
@@ -61,7 +48,34 @@ public class ExerciseFragment extends Fragment {
         gruposMuscularesString = new ArrayList<>();
         ejercicios = new ArrayList<>();
 
-        Retrofit retrofit = new Retrofit.Builder()
+        List<Ejercicio> lista1 = new ArrayList<>();
+        lista1.add(new Ejercicio("Mancuerna"));
+        lista1.add(new Ejercicio("Cosa rara"));
+        lista1.add(new Ejercicio("Otro ejercicio más"));
+
+        List<Ejercicio> lista2 = new ArrayList<>();
+        lista2.add(new Ejercicio("Peso muerto"));
+        lista2.add(new Ejercicio("Curl biceps"));
+        lista2.add(new Ejercicio("Abdominales oblcuos"));
+
+        List<Ejercicio> lista3 = new ArrayList<>();
+        lista3.add(new Ejercicio("Press de banca"));
+        lista3.add(new Ejercicio("Pájaros"));
+        lista3.add(new Ejercicio("Ejercicio++"));
+
+        List<Ejercicio> lista4 = new ArrayList<>();
+        lista4.add(new Ejercicio("Press de banca"));
+        lista4.add(new Ejercicio("Pájaros"));
+        lista4.add(new Ejercicio("Ejercicio++"));
+
+        gruposMusculares.add( new GrupoMuscular("Brazaco",lista1));
+        gruposMusculares.add( new GrupoMuscular("Abdominales",lista2));
+        gruposMusculares.add( new GrupoMuscular("Pierna",lista3));
+        gruposMusculares.add( new GrupoMuscular("Patadas",lista4));
+
+        setMainCategoryRecycler(gruposMusculares);
+
+        /*Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constantes.BASE_API)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -79,7 +93,7 @@ public class ExerciseFragment extends Fragment {
             public void onFailure(Call<List<String>> call, Throwable t) {
 
             }
-        });
+        });*/
 
        /* Call<List<Ejercicio>> listado2 = service.getEjercicios();
 
@@ -96,16 +110,24 @@ public class ExerciseFragment extends Fragment {
         });*/
 
 
-        sortArrays();
+        //sortArrays();
         /*if (gruposMusculares != null){
             for (GrupoMuscular a: gruposMusculares) {
                 Toast.makeText(getContext(), a.getNombre(), Toast.LENGTH_SHORT).show();
             }
         }*/
-        EjerciciosAdapter ejerciciosAdapter = new EjerciciosAdapter(gruposMusculares);
+       /* EjerciciosAdapter ejerciciosAdapter = new EjerciciosAdapter(gruposMusculares);
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         binding.rvEjercicios.setLayoutManager(manager);
-        binding.rvEjercicios.setAdapter(ejerciciosAdapter);
+        binding.rvEjercicios.setAdapter(ejerciciosAdapter);*/
+    }
+    private void setMainCategoryRecycler(List<GrupoMuscular> list){
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        binding.rvEjercicios.setLayoutManager(layoutManager);
+        GrupoMuscularAdapter grupoMuscularAdapter = new GrupoMuscularAdapter(getContext(), list);
+        binding.rvEjercicios.setAdapter(grupoMuscularAdapter);
+
     }
 
     private void sortArrays() {

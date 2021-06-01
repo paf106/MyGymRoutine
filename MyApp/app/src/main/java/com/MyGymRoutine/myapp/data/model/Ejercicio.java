@@ -11,30 +11,42 @@ public class Ejercicio {
     @SerializedName("nombre")
     @Expose
     private String nombre;
+
     @SerializedName("repeticiones")
     @Expose
     private String repeticiones;
+
     @SerializedName("series")
     @Expose
     private int series;
+
     @SerializedName("grupoMuscular")
     @Expose
     private String grupoMuscular;
+
     @SerializedName("descripcion")
     @Expose
     private String descripcion;
+
     @SerializedName("descanso")
     @Expose
     private String descanso;
+
     @SerializedName("musculo")
     @Expose
     private String musculo;
 
+    @SerializedName("musculo")
+    @Expose
+    private String imagenRuta;
 
     public Ejercicio() {
     }
 
-    public Ejercicio(String nombre, String repeticiones, int series, String grupoMuscular, String descripcion, String descanso, String musculo) {
+    public Ejercicio(String nombre) {
+        this.nombre = nombre;
+    }
+    public Ejercicio(String nombre, String repeticiones, int series, String grupoMuscular, String descripcion, String descanso, String musculo, String imagenRuta) {
         this.nombre = nombre;
         this.repeticiones = repeticiones;
         this.series = series;
@@ -42,6 +54,15 @@ public class Ejercicio {
         this.descripcion = descripcion;
         this.descanso = descanso;
         this.musculo = musculo;
+        this.imagenRuta = imagenRuta;
+    }
+
+    public String getImagenRuta() {
+        return imagenRuta;
+    }
+
+    public void setImagenRuta(String imagenRuta) {
+        this.imagenRuta = imagenRuta;
     }
 
     public String getNombre() {

@@ -7,11 +7,14 @@ public class GrupoMuscular {
     private String nombre;
     private List<Ejercicio> ejercicios;
 
-    public  GrupoMuscular(){}
+    public GrupoMuscular(){}
 
     public GrupoMuscular(String nombre, List<Ejercicio> ejercicios) {
         this.nombre = nombre;
         this.ejercicios = ejercicios;
+    }
+    public GrupoMuscular(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getNombre() {

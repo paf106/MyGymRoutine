@@ -12,14 +12,12 @@
     <string name="home_welcome_user">¡Hola Andrés!</string>
 
     <string-array name="frecuenciasDeportes">
-        <item>1 día a la semana</item>
-        <item>3 dias a la semana</item>
-        <item>5 dias a la semana</item>
-        <item>Solo el fín de semana</item>
+        <item>Menos de 2 días</item>
+        <item>Entre 2 y 5 días</item>
+        <item>Más de 5 días</item>
         <item>Nunca</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="profile_password">Modificar contraseña</string>
     <string name="profile_my_profile">Mi perfil</string>
     <string name="profile_logout">Cerrar sesión</string>
