@@ -1,6 +1,7 @@
 package com.MyGymRoutine.myapp.view.activity.exercise.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
+import com.MyGymRoutine.myapp.view.components.common.DetailActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -37,6 +39,11 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.Recy
     public void onBindViewHolder(@NonNull @NotNull RecyclerHolder holder, int position) {
 
         holder.tvTituloEjercicio.setText(ejercicios.get(position).getNombre());
+        holder.itemView.setOnClickListener(v ->{
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("ejercicioDetail",ejercicios.get(position));
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 
     @Override

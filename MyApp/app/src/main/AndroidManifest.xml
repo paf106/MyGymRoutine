@@ -12,12 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.components.common.DetailActivity"></activity>
         <activity android:name=".view.activity.profile.ModifyPasswordActivity" />
         <activity android:name=".view.activity.profile.ProfileDataActivity" />
         <activity android:name=".view.activity.NavigationActivity" />
-        <activity android:name=".view.activity.SplashScreen"
+        <activity
+            android:name=".view.activity.SplashScreen"
             android:theme="@style/SplashTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
