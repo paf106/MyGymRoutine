@@ -12,4 +12,54 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/ivFotoEjercicio"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="130dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginEnd="131dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/common_header"
+        app:srcCompat="@drawable/ic_pesa" />
+
+    <TextView
+        android:id="@+id/tvRepeticionesSeries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="12 x 3"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/ivFotoEjercicio"
+        app:layout_constraintStart_toStartOf="@+id/ivFotoEjercicio"
+        app:layout_constraintTop_toBottomOf="@+id/ivFotoEjercicio" />
+
+    <TextView
+        android:id="@+id/tvDescanso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Descanso: 10s por serie"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/tvRepeticionesSeries"
+        app:layout_constraintStart_toStartOf="@+id/tvRepeticionesSeries"
+        app:layout_constraintTop_toBottomOf="@+id/tvRepeticionesSeries" />
+
+    <TextView
+        android:id="@+id/tvDescripcionEjercicio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:text="Consiste en hacer noseque a la vez que flexionas los brazons"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDescanso" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
