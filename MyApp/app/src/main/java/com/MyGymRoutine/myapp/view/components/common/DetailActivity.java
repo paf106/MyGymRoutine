@@ -23,8 +23,19 @@ public class DetailActivity extends AppCompatActivity {
 
         // Nombre del ejercicio
         binding.commonHeader.commonHeaderTitleText.setText(ejercicioTemp.getNombre());
+
         binding.commonHeader.commonHeaderBackButton.setOnClickListener( v -> finish());
 
+        // Foto del ejercicio
+
+        // Repeticiones y series del ejercicio
+        binding.tvRepeticionesSeries.setText(ejercicioTemp.getRepeticiones() + " x " +ejercicioTemp.getSeries());
+
+        // Descanso del ejercicio
+        binding.tvDescanso.setText("Descanso: " + ejercicioTemp.getDescanso());
+
+        // Descripcion del ejercicio
+        binding.tvDescripcionEjercicio.setText(ejercicioTemp.getDescripcion());
 
     }
 }

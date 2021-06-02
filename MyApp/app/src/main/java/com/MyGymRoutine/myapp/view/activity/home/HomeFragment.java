@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.MyGymRoutine.myapp.data.api.internal.NovedadApi;
 import com.MyGymRoutine.myapp.data.model.Client;

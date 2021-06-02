@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
+
 
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.api.internal.ClientApi;

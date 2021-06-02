@@ -38,15 +38,20 @@ public class Ejercicio implements Serializable {
     @Expose
     private String musculo;
 
-    @SerializedName("musculo")
+    @SerializedName("imagenRuta")
     @Expose
     private String imagenRuta;
 
     public Ejercicio() {
     }
 
-    public Ejercicio(String nombre) {
+    public Ejercicio(String nombre, String repeticiones, int series, String descripcion, String descanso, String imagenRuta) {
         this.nombre = nombre;
+        this.repeticiones = repeticiones;
+        this.series = series;
+        this.descripcion = descripcion;
+        this.descanso = descanso;
+        this.imagenRuta = imagenRuta;
     }
     public Ejercicio(String nombre, String repeticiones, int series, String grupoMuscular, String descripcion, String descanso, String musculo, String imagenRuta) {
         this.nombre = nombre;

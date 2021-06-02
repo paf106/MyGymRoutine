@@ -27,52 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTituloGrupoMuscular" />
 
-    <!-- <HorizontalScrollView
-        android:id="@+id/hsvGruposMusculares"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTituloGrupoMuscular">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cvGrupoMuscular"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    app:cardCornerRadius="7dp"
-                    app:cardElevation="10dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:id="@+id/ivGrupoMuscularImagen"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/background_splash" />
-                </androidx.cardview.widget.CardView>
-
-                <TextView
-                    android:id="@+id/tvNombreEjercicio"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Holaa"
-                    android:paddingTop="3dp"
-                    app:layout_constraintStart_toStartOf="@id/cvGrupoMuscular"
-                    app:layout_constraintTop_toBottomOf="@id/cvGrupoMuscular"/>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-    </HorizontalScrollView>-->
-
 
 
 
