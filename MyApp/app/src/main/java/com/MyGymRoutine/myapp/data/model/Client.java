@@ -21,7 +21,8 @@ public class Client {
     private String patologias;
     private String imagenRuta; // Path of the image
 
-    public Client(){ }
+    public Client() {
+    }
 
     public int getIdCliente() {
         return idCliente;

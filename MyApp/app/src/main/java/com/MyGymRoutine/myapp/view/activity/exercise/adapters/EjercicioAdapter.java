@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
-import com.MyGymRoutine.myapp.view.components.common.DetailActivity;
+import com.MyGymRoutine.myapp.view.activity.exercise.DetailExerciseActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -42,7 +42,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.Recy
         holder.tvTituloEjercicio.setText(ejercicios.get(position).getNombre());
 
         holder.itemView.setOnClickListener(v ->{
-            Intent intent = new Intent(context, DetailActivity.class);
+            Intent intent = new Intent(context, DetailExerciseActivity.class);
             intent.putExtra("ejercicioDetail",ejercicios.get(position));
             holder.itemView.getContext().startActivity(intent);
         });

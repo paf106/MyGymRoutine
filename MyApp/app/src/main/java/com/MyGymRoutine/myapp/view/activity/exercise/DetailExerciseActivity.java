@@ -1,21 +1,22 @@
-package com.MyGymRoutine.myapp.view.components.common;
+package com.MyGymRoutine.myapp.view.activity.exercise;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
-import com.MyGymRoutine.myapp.databinding.ActivityDetailActivityBinding;
-import com.MyGymRoutine.myapp.databinding.ActivityModifyPasswordBinding;
 
-public class DetailActivity extends AppCompatActivity {
+import com.MyGymRoutine.myapp.databinding.ActivityDetailExerciseBinding;
 
-    private ActivityDetailActivityBinding binding;
+
+public class DetailExerciseActivity extends AppCompatActivity {
+
+    private ActivityDetailExerciseBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityDetailActivityBinding.inflate(getLayoutInflater());
+        binding = ActivityDetailExerciseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         // Ejercicio temporal recuperado del adaptador EjercicioAdapter

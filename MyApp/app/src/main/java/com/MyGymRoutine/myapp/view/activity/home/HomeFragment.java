@@ -18,6 +18,7 @@ import com.MyGymRoutine.myapp.databinding.FragmentHomeBinding;
 import com.MyGymRoutine.myapp.view.components.common.NovedadesAdapter;
 import com.MyGymRoutine.myapp.view.components.utils.Constantes;
 import com.MyGymRoutine.myapp.view.components.utils.Preferences;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +84,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Novedad>> call, Throwable t) {
-
+                Snackbar.make(requireView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
             }
         });
 

@@ -1,7 +1,6 @@
 package com.MyGymRoutine.myapp.view.activity.routine.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.MyGymRoutine.myapp.R;
-import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.data.model.Rutina;
-import com.MyGymRoutine.myapp.view.components.common.DetailActivity;
 
 import org.jetbrains.annotations.NotNull;
 

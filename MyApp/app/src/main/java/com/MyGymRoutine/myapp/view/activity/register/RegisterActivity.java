@@ -80,7 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
             binding.etBirthday.setText(simpleFormat.format(date));
         });
 
-        // PROVISIONAL go to main app
         binding.btnRegistrar.setOnClickListener(v -> {
 
             Call<Void> registro = service.doRegister(
@@ -124,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-
+                    Snackbar.make(v, "Comprueba la conexión", Snackbar.LENGTH_SHORT).show();
                 }
             });
 
