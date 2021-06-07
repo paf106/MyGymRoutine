@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApp"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.activity.routine.DetailDiaRutinaActivity"></activity>
+        <activity android:name=".view.activity.routine.RoutineDetailActivity" />
         <activity android:name=".view.activity.exercise.DetailExerciseActivity" />
         <activity android:name=".view.activity.profile.ModifyPasswordActivity" />
         <activity android:name=".view.activity.profile.ProfileDataActivity" />

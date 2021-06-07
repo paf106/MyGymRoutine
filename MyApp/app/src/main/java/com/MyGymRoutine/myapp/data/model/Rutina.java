@@ -1,9 +1,11 @@
 package com.MyGymRoutine.myapp.data.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Rutina {
+public class Rutina implements Serializable {
 
+    private int idRutina;
     private String nombre;
     private String descripcion;
     private String tipoRutina;
@@ -15,6 +17,14 @@ public class Rutina {
     public Rutina(String nombre, List<Ejercicio> ejercicios) {
         this.nombre = nombre;
         this.ejercicios = ejercicios;
+    }
+
+    public int getIdRutina() {
+        return idRutina;
+    }
+
+    public void setIdRutina(int idRutina) {
+        this.idRutina = idRutina;
     }
 
     public String getNombre() {

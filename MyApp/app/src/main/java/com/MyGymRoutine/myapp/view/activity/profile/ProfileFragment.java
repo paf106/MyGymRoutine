@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,7 +55,7 @@ public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
     private Preferences preferences;
-    private Client sharedCLient;
+    private Client sharedClient;
     private String photoName;
     private String photoPath;
 
@@ -84,15 +85,15 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         preferences = new Preferences(getContext());
-        sharedCLient = preferences.getClient();
-        preferences.refreshCurrentUser(sharedCLient.getIdCliente());
+        sharedClient = preferences.getClient();
+        preferences.refreshCurrentUser(sharedClient.getIdCliente());
 
-        binding.tvFullnameProfile.setText(sharedCLient.getNombre());
-        binding.tvEmailProfile.setText(sharedCLient.getCorreoElectronico());
+        binding.tvFullnameProfile.setText(sharedClient.getNombre());
+        binding.tvEmailProfile.setText(sharedClient.getCorreoElectronico());
 
         // Poner imagen de perfil
         Glide.with(this)
-                .load(sharedCLient.getImagenRuta())
+                .load(sharedClient.getImagenRuta())
                 .placeholder(R.drawable.ic_baseline_account_circle_24)
                 .error(R.drawable.ic_baseline_account_circle_24)
                 .circleCrop()
@@ -136,25 +137,36 @@ public class ProfileFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == REQUEST_IMAGE_GALLERY) {
             if (resultCode == Activity.RESULT_OK && data != null) {
-                // Snackbar.make(getView(), data.getDataString(), Snackbar.LENGTH_LONG).show();
+
                 Uri photo = data.getData();
 
-                Uri filePathFromActivity = (Uri) photo.get(Intent.EXTRA_STREAM);
-                filePathFromActivity = Uri.parse(getRealPathFromURI( filePathFromActivity));
-                File imageFile = new File(filePathFromActivity.getPath());
+                String path = photo.getPath().substring(0, photo.getPath().lastIndexOf("/")) + "/" + photo.getPath().split(":")[1];
+                //Snackbar.make(getView(), photo.getPath(), Snackbar.LENGTH_LONG).show();
+                // Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                //String path = FileUtils.getPath(getContext(),photo);
+                //String pathReal = path.substring(0,path.lastIndexOf("/"))+ path.substring(path.lastIndexOf(":")+1);
+
+                Log.i(TAG, "Path: " + path);
+
+
+                //Uri filePathFromActivity = (Uri) photo.get(Intent.EXTRA_STREAM);
+                //filePathFromActivity = Uri.parse(getRealPathFromURI( filePathFromActivity));
+                //File imageFile = new File(bitmap.get);
                 //Log.i(TAG, getRealPathFromURI(photo));
                 //uploadImage(photo);
                 //String nombreArchivo = getName(photo);
                 //String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
-               // Log.i(TAG, "extension: " + extension);
+                // Log.i(TAG, "extension: " + extension);
 
                 //    Toast.makeText(getContext(), FileUtils.getPath(getContext(), photo), Toast.LENGTH_SHORT).show();
 
                 //photoName = getName(getContext(),photo);
                 //photoPath = getPath(getContext(),photo);
                 //Snackbar.make(getView(), photoPath, Snackbar.LENGTH_LONG).show();
+                uploadImage(photo, path);
 
                 binding.ivPhotoProfile.setImageURI(photo);
+
 
             }
         }
@@ -174,6 +186,7 @@ public class ProfileFragment extends Fragment {
         }
         return result;
     }
+
     private void openGallery() {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         i.setType("image/*");
@@ -200,7 +213,7 @@ public class ProfileFragment extends Fragment {
         return displayName;
     }
 
-    private void uploadImage(Uri uri) {
+    private void uploadImage(Uri uri, String rutaFichero) {
         String nombreArchivo = getName(uri);
         String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
         Retrofit retrofit = new Retrofit.Builder()
@@ -209,27 +222,28 @@ public class ProfileFragment extends Fragment {
                 .build();
 
         FileApi service = retrofit.create(FileApi.class);
-        File file = new File(FileUtils.getPath(getContext(), uri));
+        //String path = FileUtils.getPath(getContext(),uri);
+        // String pathReal = path.substring(0,path.lastIndexOf("/"))+ path.substring(path.lastIndexOf(":")+1);
+        File file = new File(rutaFichero);
 
-        RequestBody requestFile =
-                RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
 
         // MultipartBody.Part is used to send also the actual file name
         MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", sharedCLient.getIdCliente()+extension, requestFile);
+                MultipartBody.Part.createFormData("image", sharedClient.getIdCliente() + extension, requestBody);
 
-        service.uploadImage(body).enqueue(new Callback<ResponseBody>() {
+        Call call = service.uploadImage(body);
+        call.enqueue(new Callback() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.i(TAG, "Subido");
+            public void onResponse(Call call, Response response) {
+                Log.i(TAG,"Funciona");
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.i(TAG, "Error con la imagen");
+            public void onFailure(Call call, Throwable t) {
+                Log.i(TAG,"failll");
             }
         });
-        //Toast.makeText(getContext(), file.getPath(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -239,14 +253,14 @@ public class ProfileFragment extends Fragment {
     }
 
     private void refreshUser() {
-        preferences.refreshCurrentUser(sharedCLient.getIdCliente());
-        sharedCLient = preferences.getClient();
+        preferences.refreshCurrentUser(sharedClient.getIdCliente());
+        sharedClient = preferences.getClient();
 
-        binding.tvFullnameProfile.setText(sharedCLient.getNombre());
-        binding.tvEmailProfile.setText(sharedCLient.getCorreoElectronico());
+        binding.tvFullnameProfile.setText(sharedClient.getNombre());
+        binding.tvEmailProfile.setText(sharedClient.getCorreoElectronico());
 
         Glide.with(this)
-                .load(sharedCLient.getImagenRuta())
+                .load(sharedClient.getImagenRuta())
                 .placeholder(R.drawable.ic_baseline_account_circle_24)
                 .error(R.drawable.ic_baseline_account_circle_24)
                 .circleCrop()

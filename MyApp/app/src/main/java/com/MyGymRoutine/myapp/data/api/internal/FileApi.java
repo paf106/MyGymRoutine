@@ -13,7 +13,7 @@ public interface FileApi {
 
     @Multipart
     @POST("/upload/image")
-    Call<ResponseBody> uploadImage(
+    Call<RequestBody> uploadImage(
             @Part MultipartBody.Part image
     );
 }

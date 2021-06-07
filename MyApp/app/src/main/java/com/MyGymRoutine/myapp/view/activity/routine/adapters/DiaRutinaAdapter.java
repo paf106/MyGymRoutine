@@ -12,44 +12,47 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.MyGymRoutine.myapp.R;
-import com.MyGymRoutine.myapp.data.model.Rutina;
-import com.MyGymRoutine.myapp.view.activity.routine.RoutineDetailActivity;
+import com.MyGymRoutine.myapp.data.model.DiaRutina;
+import com.MyGymRoutine.myapp.view.activity.exercise.DetailExerciseActivity;
+import com.MyGymRoutine.myapp.view.activity.routine.DetailDiaRutinaActivity;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.RecyclerHolder> {
+public class DiaRutinaAdapter extends RecyclerView.Adapter<DiaRutinaAdapter.RecyclerHolder> {
 
     private Context context;
-    private List<Rutina> rutinas;
+    private List<DiaRutina> diaRutinasList;
 
-    public RutinaAdapter(Context context, List<Rutina> rutinas) {
+    public DiaRutinaAdapter(Context context, List<DiaRutina> diaRutinasList) {
         this.context = context;
-        this.rutinas = rutinas;
+        this.diaRutinasList = diaRutinasList;
     }
 
     @NonNull
+    @NotNull
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new RecyclerHolder(LayoutInflater.from(context).inflate(R.layout.exercise_element,parent,false));
+        return new DiaRutinaAdapter.RecyclerHolder(LayoutInflater.from(context).inflate(R.layout.exercise_element,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerHolder holder, int position) {
 
-        holder.tvTituloEjercicio.setText(rutinas.get(position).getNombre());
+        holder.tvTituloEjercicio.setText(diaRutinasList.get(position).getNombre());
 
         holder.itemView.setOnClickListener(v ->{
-            Intent intent = new Intent(context, RoutineDetailActivity.class);
-            intent.putExtra("rutinaDetail",rutinas.get(position));
+            Intent intent = new Intent(context, DetailDiaRutinaActivity.class);
+            intent.putExtra("diaRutinaDetail",diaRutinasList.get(position));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             holder.itemView.getContext().startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return rutinas.size();
+        return diaRutinasList.size();
     }
 
     public static class RecyclerHolder extends RecyclerView.ViewHolder {

@@ -12,15 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.MyGymRoutine.myapp.R;
-import com.MyGymRoutine.myapp.data.api.internal.EjercicioApi;
 import com.MyGymRoutine.myapp.data.api.internal.RoutineApi;
-import com.MyGymRoutine.myapp.data.model.Ejercicio;
 
-import com.MyGymRoutine.myapp.data.model.GrupoMuscular;
 import com.MyGymRoutine.myapp.data.model.GrupoRutina;
 import com.MyGymRoutine.myapp.data.model.Rutina;
-
 
 import com.MyGymRoutine.myapp.databinding.FragmentRoutineBinding;
 import com.MyGymRoutine.myapp.view.activity.routine.adapters.GrupoRutinaAdapter;
@@ -67,7 +62,6 @@ public class RoutineFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //List<GrupoRutina> grupoRutinas = new ArrayList<>();
         gruposRutinaString = new ArrayList<>();
         rutinas = new ArrayList<>();
         gruposRutina = new ArrayList<>();
@@ -108,33 +102,6 @@ public class RoutineFragment extends Fragment {
 
             }
         });
-
-        /*Ejercicio e = new Ejercicio("Cosa rara","10",2,"Descripcion","5 segundos","");
-        Ejercicio e2 = new Ejercicio("Cosa rara","10",2,"Descripcion","5 segundos","");
-        Ejercicio e3 = new Ejercicio("Cosa rara","10",2,"Descripcion","5 segundos","");
-        Ejercicio e4 = new Ejercicio("Cosa rara","10",2,"Descripcion","5 segundos","");
-        Ejercicio e5 = new Ejercicio("Cosa rara","10",2,"Descripcion","5 segundos","");
-        Ejercicio e6 = new Ejercicio("Cosa rara","10",2,"Descripcion","5 segundos","");
-
-        List<Ejercicio> ejercicios1 = new ArrayList<>();
-        List<Ejercicio> ejercicios2 = new ArrayList<>();
-        ejercicios1.add(e);
-        ejercicios1.add(e2);
-        ejercicios1.add(e3);
-        ejercicios2.add(e4);
-        ejercicios2.add(e5);
-        ejercicios2.add(e6);
-
-        List<Rutina> lista1 = new ArrayList<>();
-        lista1.add(new Rutina("Perder peso",ejercicios1));
-
-        List<Rutina> lista2 = new ArrayList<>();
-        lista2.add(new Rutina("Perder peso",ejercicios2));
-
-        grupoRutinas.add( new GrupoRutina("Perder peso",lista1));
-        grupoRutinas.add( new GrupoRutina("Ganar masa",lista2));
-
-        setMainCategoryRecycler(gruposRutina);*/
 
     }
 

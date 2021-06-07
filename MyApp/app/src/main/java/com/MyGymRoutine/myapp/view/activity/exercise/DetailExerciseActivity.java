@@ -19,7 +19,7 @@ public class DetailExerciseActivity extends AppCompatActivity {
         binding = ActivityDetailExerciseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // Ejercicio temporal recuperado del adaptador EjercicioAdapter
+        // Ejercicio recuperado del adaptador EjercicioAdapter
         Ejercicio ejercicioTemp = (Ejercicio) getIntent().getExtras().getSerializable("ejercicioDetail");
 
         // Nombre del ejercicio
