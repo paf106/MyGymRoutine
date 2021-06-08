@@ -4,17 +4,36 @@ import android.annotation.SuppressLint;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.ImageView;
+
+import com.MyGymRoutine.myapp.R;
+
+import java.io.ByteArrayOutputStream;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 
 public class FileUtils {
+    public static byte[] bitmapToByteArray(Bitmap bitmap){
+        //Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ic_launcher);
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
+    }
+    public static Bitmap ByteArrayToBitmap(byte[] byteArray){
+        Bitmap bmp = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
+        return bmp;
+        //imageView.setImageBitmap(Bitmap.createScaledBitmap(bmp, imageView.getWidth(), imageView.getHeight(), false));
+
+    }
     public static String getRealPath(final Context context, final Uri uri) {
 
         if (uri.getScheme().equals("file")) {

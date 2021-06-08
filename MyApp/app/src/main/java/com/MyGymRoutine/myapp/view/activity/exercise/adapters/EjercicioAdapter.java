@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.view.activity.exercise.DetailExerciseActivity;
+import com.MyGymRoutine.myapp.view.components.utils.FileUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -40,6 +41,8 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.Recy
     public void onBindViewHolder(@NonNull @NotNull RecyclerHolder holder, int position) {
 
         holder.tvTituloEjercicio.setText(ejercicios.get(position).getNombre());
+
+        holder.ivExerciseCard.setImageBitmap(FileUtils.ByteArrayToBitmap(ejercicios.get(position).getImagen().getData()));
 
         holder.itemView.setOnClickListener(v ->{
             Intent intent = new Intent(context, DetailExerciseActivity.class);

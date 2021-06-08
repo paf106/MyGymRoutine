@@ -9,6 +9,8 @@ public class DiaRutina implements Serializable {
     private int series;
     private String descanso;
     private String descripcion;
+    private String musculo;
+    private Imagen imagen;
 
     public DiaRutina(){}
 
@@ -19,6 +21,22 @@ public class DiaRutina implements Serializable {
         this.series = series;
         this.descanso = descanso;
         this.descripcion = descripcion;
+    }
+
+    public Imagen getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
+    }
+
+    public String getMusculo() {
+        return musculo;
+    }
+
+    public void setMusculo(String musculo) {
+        this.musculo = musculo;
     }
 
     public int getDia() {

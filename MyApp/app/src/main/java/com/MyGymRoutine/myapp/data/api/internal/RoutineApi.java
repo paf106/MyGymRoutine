@@ -27,4 +27,9 @@ public interface RoutineApi {
     Call<List<DiaRutina>> getDiasYejercicios(
             @Path("idRutina") int idRutina
     );
+
+    @GET("/rutina/{idCliente}")
+    Call<List<Rutina>> getRutinasCliente(
+            @Path("idCliente") int idCliente
+    );
 }

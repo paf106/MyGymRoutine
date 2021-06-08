@@ -84,7 +84,7 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Novedad>> call, Throwable t) {
-                Snackbar.make(requireView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(getView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
             }
         });
 

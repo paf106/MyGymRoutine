@@ -9,7 +9,6 @@ public class Rutina implements Serializable {
     private String nombre;
     private String descripcion;
     private String tipoRutina;
-    private int idPersonal;
     private List<Ejercicio> ejercicios;
 
     public Rutina(){}
@@ -49,14 +48,6 @@ public class Rutina implements Serializable {
 
     public void setTipoRutina(String tipoRutina) {
         this.tipoRutina = tipoRutina;
-    }
-
-    public int getIdPersonal() {
-        return idPersonal;
-    }
-
-    public void setIdPersonal(int idPersonal) {
-        this.idPersonal = idPersonal;
     }
 
     public List<Ejercicio> getEjercicios() {

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.model.DiaRutina;
 import com.MyGymRoutine.myapp.view.activity.exercise.DetailExerciseActivity;
-import com.MyGymRoutine.myapp.view.activity.routine.DetailDiaRutinaActivity;
+import com.MyGymRoutine.myapp.view.components.utils.FileUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -30,7 +30,6 @@ public class DiaRutinaAdapter extends RecyclerView.Adapter<DiaRutinaAdapter.Recy
         this.diaRutinasList = diaRutinasList;
     }
 
-    @NonNull
     @NotNull
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
@@ -42,8 +41,10 @@ public class DiaRutinaAdapter extends RecyclerView.Adapter<DiaRutinaAdapter.Recy
 
         holder.tvTituloEjercicio.setText(diaRutinasList.get(position).getNombre());
 
+        holder.ivExerciseCard.setImageBitmap(FileUtils.ByteArrayToBitmap(diaRutinasList.get(position).getImagen().getData()));
+
         holder.itemView.setOnClickListener(v ->{
-            Intent intent = new Intent(context, DetailDiaRutinaActivity.class);
+            Intent intent = new Intent(context, DetailExerciseActivity.class);
             intent.putExtra("diaRutinaDetail",diaRutinasList.get(position));
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             holder.itemView.getContext().startActivity(intent);

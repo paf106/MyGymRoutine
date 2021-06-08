@@ -9,37 +9,30 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.MyGymRoutine.myapp.R;
-import com.MyGymRoutine.myapp.data.model.DiaRutina;
 import com.MyGymRoutine.myapp.data.model.Rutina;
+
 import com.MyGymRoutine.myapp.view.activity.routine.RoutineDetailActivity;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.RecyclerHolder> {
+public class MisRutinasAdapter extends RecyclerView.Adapter<MisRutinasAdapter.RecyclerHolder> {
 
     private Context context;
     private List<Rutina> rutinas;
 
-    public RutinaAdapter(Context context, List<Rutina> rutinas) {
-        this.context = context;
-        this.rutinas = rutinas;
-    }
-
     @NonNull
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new RecyclerHolder(LayoutInflater.from(context).inflate(R.layout.exercise_element,parent,false));
+        return new MisRutinasAdapter.RecyclerHolder(LayoutInflater.from(context).inflate(R.layout.exercise_element,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerHolder holder, int position) {
-
         holder.tvTituloEjercicio.setText(rutinas.get(position).getNombre());
 
         holder.itemView.setOnClickListener(v ->{

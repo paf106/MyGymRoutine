@@ -38,13 +38,8 @@ public class GrupoMuscularAdapter extends RecyclerView.Adapter<GrupoMuscularAdap
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerHolder holder, int position) {
 
-       // GrupoMuscular grupoMuscular = gruposMusculares.get(position);
-      //  holder.tvNombreEjercicio.setText(grupoMuscular.getEjercicios().get(position).getNombre());
-       // holder.tvHomeDescription.setText(novedad.getDescripcion());
-
         holder.tvTituloGrupoMuscular.setText(gruposMusculares.get(position).getNombre());
         setEjercicioItemRecycler(holder.itemRecycler,gruposMusculares.get(position).getEjercicios());
-        // poner el recycler view aqui
 
     }
 

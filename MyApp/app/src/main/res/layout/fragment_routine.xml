@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:textSize="25sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         android:textColor="@color/blue"
         android:text="Mis rutinas"
@@ -22,16 +22,16 @@
     <LinearLayout
         android:id="@+id/llMisRutinas"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvMisRutinas"
-        android:orientation="horizontal">
+        android:background="@drawable/background_mis_rutinas"
+        app:layout_constraintTop_toBottomOf="@+id/tvMisRutinas">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvMisRutinas"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

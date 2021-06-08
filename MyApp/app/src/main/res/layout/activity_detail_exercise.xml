@@ -23,7 +23,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="700dp">
 
             <ImageView
                 android:id="@+id/ivFotoEjercicio"
@@ -52,29 +52,41 @@
                 app:layout_constraintTop_toBottomOf="@+id/ivFotoEjercicio" />
 
             <TextView
-                android:id="@+id/tvDescanso"
+                android:id="@+id/tvMusculo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="Descanso: 10s por serie"
+                android:text="Deltoides"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="@+id/tvRepeticionesSeries"
                 app:layout_constraintStart_toStartOf="@+id/tvRepeticionesSeries"
                 app:layout_constraintTop_toBottomOf="@+id/tvRepeticionesSeries" />
 
             <TextView
+                android:id="@+id/tvDescanso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Descanso: 10s por serie"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/tvMusculo"
+                app:layout_constraintStart_toStartOf="@+id/tvMusculo"
+                app:layout_constraintTop_toBottomOf="@+id/tvMusculo" />
+
+            <TextView
                 android:id="@+id/tvDescripcionEjercicio"
                 android:layout_width="0dp"
-                android:textColor="#292929"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
                 android:text="Consiste en hacer noseque a la vez que flexionas los brazons"
+                android:textColor="#292929"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescanso" />
 
