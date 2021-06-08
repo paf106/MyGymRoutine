@@ -1,4 +1,4 @@
-package com.MyGymRoutine.myapp.view.activity.exercise.adapters;
+package com.MyGymRoutine.myapp.view.activity.routine.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,12 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.MyGymRoutine.myapp.R;
-import com.MyGymRoutine.myapp.data.model.Ejercicio;
+import com.MyGymRoutine.myapp.data.model.DiaRutina;
 import com.MyGymRoutine.myapp.view.activity.exercise.DetailExerciseActivity;
 import com.MyGymRoutine.myapp.view.components.utils.FileUtils;
 
@@ -21,39 +20,40 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.RecyclerHolder> {
+public class DiaRutinaAdapter extends RecyclerView.Adapter<DiaRutinaAdapter.RecyclerHolder> {
 
     private Context context;
-    private List<Ejercicio> ejercicios;
+    private List<DiaRutina> diaRutinasList;
 
-    public EjercicioAdapter(Context context, List<Ejercicio> ejercicios) {
+    public DiaRutinaAdapter(Context context, List<DiaRutina> diaRutinasList) {
         this.context = context;
-        this.ejercicios = ejercicios;
+        this.diaRutinasList = diaRutinasList;
     }
 
-    @NonNull
+    @NotNull
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new RecyclerHolder(LayoutInflater.from(context).inflate(R.layout.exercise_element,parent,false));
+        return new DiaRutinaAdapter.RecyclerHolder(LayoutInflater.from(context).inflate(R.layout.exercise_element,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerHolder holder, int position) {
 
-        holder.tvTituloEjercicio.setText(ejercicios.get(position).getNombre());
+        holder.tvTituloEjercicio.setText(diaRutinasList.get(position).getNombre());
 
-        holder.ivExerciseCard.setImageBitmap(FileUtils.ByteArrayToBitmap(ejercicios.get(position).getImagen().getData()));
+        holder.ivExerciseCard.setImageBitmap(FileUtils.ByteArrayToBitmap(diaRutinasList.get(position).getImagen().getData()));
 
         holder.itemView.setOnClickListener(v ->{
             Intent intent = new Intent(context, DetailExerciseActivity.class);
-            intent.putExtra("ejercicioDetail",ejercicios.get(position));
+            intent.putExtra("diaRutinaDetail",diaRutinasList.get(position));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             holder.itemView.getContext().startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return ejercicios.size();
+        return diaRutinasList.size();
     }
 
     public static class RecyclerHolder extends RecyclerView.ViewHolder {

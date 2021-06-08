@@ -80,7 +80,6 @@ public class RegisterActivity extends AppCompatActivity {
             binding.etBirthday.setText(simpleFormat.format(date));
         });
 
-        // PROVISIONAL go to main app
         binding.btnRegistrar.setOnClickListener(v -> {
 
             Call<Void> registro = service.doRegister(
@@ -101,7 +100,6 @@ public class RegisterActivity extends AppCompatActivity {
             checkUser.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    Toast.makeText(RegisterActivity.this, response.body(), Toast.LENGTH_SHORT).show();
                     if (response.body()!=null){
                         Snackbar.make(v, "Usuario en uso", Snackbar.LENGTH_LONG).show();
                         binding.ilUsername.setError("Elija otro nombre de usuario");
@@ -125,7 +123,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-
+                    Snackbar.make(v, "Comprueba la conexión", Snackbar.LENGTH_SHORT).show();
                 }
             });
 

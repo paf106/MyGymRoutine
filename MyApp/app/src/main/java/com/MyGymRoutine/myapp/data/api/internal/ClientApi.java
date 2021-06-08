@@ -68,6 +68,13 @@ public interface ClientApi {
             @Field("usuario") String usuario
     );
 
+    @FormUrlEncoded
+    @POST("/update/imagen")
+    Call<String> updateImagen(
+            @Field("idCliente") String usuario,
+            @Field("imagenRuta") String imagenRuta
+    );
+
 
 
 

@@ -5,8 +5,10 @@ package com.MyGymRoutine.myapp.data.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 
-public class Ejercicio {
+
+public class Ejercicio implements Serializable {
 
     @SerializedName("nombre")
     @Expose
@@ -36,33 +38,19 @@ public class Ejercicio {
     @Expose
     private String musculo;
 
-    @SerializedName("musculo")
+    @SerializedName("imagen")
     @Expose
-    private String imagenRuta;
+    private Imagen imagen;
 
     public Ejercicio() {
     }
 
-    public Ejercicio(String nombre) {
-        this.nombre = nombre;
-    }
-    public Ejercicio(String nombre, String repeticiones, int series, String grupoMuscular, String descripcion, String descanso, String musculo, String imagenRuta) {
-        this.nombre = nombre;
-        this.repeticiones = repeticiones;
-        this.series = series;
-        this.grupoMuscular = grupoMuscular;
-        this.descripcion = descripcion;
-        this.descanso = descanso;
-        this.musculo = musculo;
-        this.imagenRuta = imagenRuta;
+    public Imagen getImagen() {
+        return imagen;
     }
 
-    public String getImagenRuta() {
-        return imagenRuta;
-    }
-
-    public void setImagenRuta(String imagenRuta) {
-        this.imagenRuta = imagenRuta;
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
     }
 
     public String getNombre() {

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
+
 
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
@@ -71,7 +71,7 @@ public class ProfileDataActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
-                    Snackbar.make(v, "Ha ocurrido un error", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(v, "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
                 }
             });
         });

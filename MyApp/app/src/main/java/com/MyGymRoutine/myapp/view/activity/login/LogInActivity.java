@@ -60,10 +60,9 @@ public class LogInActivity extends AppCompatActivity{
         client.enqueue(new Callback<Client>() {
             @Override
             public void onResponse(Call<Client> call, Response<Client> response) {
-                if(response.code() == HttpURLConnection.HTTP_OK){
+                if(response.isSuccessful()){
                     if (binding.etUser.getText().toString().equals("") || binding.etPassword.getText().toString().equals("")){
                         binding.ilPassword.setError("Debes rellenar los 2 campos");
-                        binding.ilUser.setError("");
                     }else{
                         Client sharedClient = response.body();
                         // Credenciales correctas
@@ -81,7 +80,7 @@ public class LogInActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<Client> call, Throwable t) {
-                Snackbar.make(v, "Ha ocurrido un error", Snackbar.LENGTH_LONG).show();
+                Snackbar.make(v, "Combrueba la conexión", Snackbar.LENGTH_LONG).show();
             }
         });
     }

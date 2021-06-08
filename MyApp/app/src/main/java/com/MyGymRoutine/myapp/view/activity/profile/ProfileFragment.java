@@ -2,42 +2,60 @@ package com.MyGymRoutine.myapp.view.activity.profile;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import android.provider.MediaStore;
-import android.provider.OpenableColumns;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import com.MyGymRoutine.myapp.R;
+import com.MyGymRoutine.myapp.data.api.internal.FileApi;
 import com.MyGymRoutine.myapp.data.model.Client;
 import com.MyGymRoutine.myapp.databinding.FragmentProfileBinding;
 import com.MyGymRoutine.myapp.view.activity.login.LogInActivity;
+import com.MyGymRoutine.myapp.view.components.utils.Constantes;
+import com.MyGymRoutine.myapp.view.components.utils.FileUtils;
 import com.MyGymRoutine.myapp.view.components.utils.Preferences;
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.jetbrains.annotations.NotNull;
 
-import static com.MyGymRoutine.myapp.view.components.utils.FileInformation.getName;
-import static com.MyGymRoutine.myapp.view.components.utils.FileInformation.getPath;
+import java.io.File;
+import java.net.URISyntaxException;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
     private Preferences preferences;
-    private Client sharedCLient;
+    private Client sharedClient;
     private String photoName;
     private String photoPath;
 
@@ -67,14 +85,22 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         preferences = new Preferences(getContext());
-        sharedCLient = preferences.getClient();
-        preferences.refreshCurrentUser(sharedCLient.getIdCliente());
+        sharedClient = preferences.getClient();
+        preferences.refreshCurrentUser(sharedClient.getIdCliente());
 
-        binding.tvFullnameProfile.setText(sharedCLient.getNombre());
-        binding.tvEmailProfile.setText(sharedCLient.getCorreoElectronico());
+        binding.tvFullnameProfile.setText(sharedClient.getNombre());
+        binding.tvEmailProfile.setText(sharedClient.getCorreoElectronico());
 
-        binding.personalButton.setOnClickListener(v -> startActivity(new Intent(getContext(),ProfileDataActivity.class)));
-        binding.passwordButton.setOnClickListener(v -> startActivity(new Intent(getContext(),ModifyPasswordActivity.class)));
+        // Poner imagen de perfil
+        Glide.with(this)
+                .load(sharedClient.getImagenRuta())
+                .placeholder(R.drawable.ic_baseline_account_circle_24)
+                .error(R.drawable.ic_baseline_account_circle_24)
+                .circleCrop()
+                .into(binding.ivPhotoProfile);
+
+        binding.personalButton.setOnClickListener(v -> startActivity(new Intent(getContext(), ProfileDataActivity.class)));
+        binding.passwordButton.setOnClickListener(v -> startActivity(new Intent(getContext(), ModifyPasswordActivity.class)));
         binding.logoutButton.setOnClickListener(v -> {
             preferences.forgetCredentials();
             getActivity().finish();
@@ -82,13 +108,13 @@ public class ProfileFragment extends Fragment {
         });
         binding.ivPhotoProfile.setOnClickListener(v -> {
             //Check permission
-            if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.M){
-                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                     openGallery();
-                }else{
-                    ActivityCompat.requestPermissions(getActivity(),new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_PERMISSION_CODE);
+                } else {
+                    ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
                 }
-            }else{
+            } else {
                 openGallery();
             }
         });
@@ -97,10 +123,10 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull @NotNull String[] permissions, @NonNull @NotNull int[] grantResults) {
 
-        if (requestCode == REQUEST_PERMISSION_CODE){
-            if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        if (requestCode == REQUEST_PERMISSION_CODE) {
+            if (permissions.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openGallery();
-            }else{
+            } else {
                 Snackbar.make(getView(), "Tienes que habilitar los permisos", Snackbar.LENGTH_LONG).show();
             }
         }
@@ -108,37 +134,136 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
-        if(requestCode == REQUEST_IMAGE_GALLERY){
-            if (resultCode == Activity.RESULT_OK && data != null){
-               // Snackbar.make(getView(), data.getDataString(), Snackbar.LENGTH_LONG).show();
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == REQUEST_IMAGE_GALLERY) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+
                 Uri photo = data.getData();
-                photoName = getName(getContext(),photo);
+
+                String path = photo.getPath().substring(0, photo.getPath().lastIndexOf("/")) + "/" + photo.getPath().split(":")[1];
+                //Snackbar.make(getView(), photo.getPath(), Snackbar.LENGTH_LONG).show();
+                // Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                //String path = FileUtils.getPath(getContext(),photo);
+                //String pathReal = path.substring(0,path.lastIndexOf("/"))+ path.substring(path.lastIndexOf(":")+1);
+
+                Log.i(TAG, "Path: " + path);
+
+
+                //Uri filePathFromActivity = (Uri) photo.get(Intent.EXTRA_STREAM);
+                //filePathFromActivity = Uri.parse(getRealPathFromURI( filePathFromActivity));
+                //File imageFile = new File(bitmap.get);
+                //Log.i(TAG, getRealPathFromURI(photo));
+                //uploadImage(photo);
+                //String nombreArchivo = getName(photo);
+                //String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
+                // Log.i(TAG, "extension: " + extension);
+
+                //    Toast.makeText(getContext(), FileUtils.getPath(getContext(), photo), Toast.LENGTH_SHORT).show();
+
+                //photoName = getName(getContext(),photo);
                 //photoPath = getPath(getContext(),photo);
                 //Snackbar.make(getView(), photoPath, Snackbar.LENGTH_LONG).show();
+                uploadImage(photo, path);
 
                 binding.ivPhotoProfile.setImageURI(photo);
+
+
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void openGallery(){
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContext().getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
+    }
+
+    private void openGallery() {
         Intent i = new Intent(Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         i.setType("image/*");
-        startActivityForResult(i,REQUEST_IMAGE_GALLERY);
+        startActivityForResult(i, REQUEST_IMAGE_GALLERY);
     }
-    private void uploadImage(){
 
+    public String getName(Uri uri) {
+        String displayName = "";
+
+        // https://developer.android.com/training/data-storage/shared/documents-files?hl=es-419
+
+        Cursor cursor = getActivity().getContentResolver()
+                .query(uri, null, null, null, null, null);
+
+        try {
+            if (cursor != null && cursor.moveToFirst()) {
+                displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                Log.i(TAG, "Display Name: " + displayName);
+
+            }
+        } finally {
+            cursor.close();
+        }
+        return displayName;
+    }
+
+    private void uploadImage(Uri uri, String rutaFichero) {
+        String nombreArchivo = getName(uri);
+        String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constantes.BASE_API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        FileApi service = retrofit.create(FileApi.class);
+        //String path = FileUtils.getPath(getContext(),uri);
+        // String pathReal = path.substring(0,path.lastIndexOf("/"))+ path.substring(path.lastIndexOf(":")+1);
+        File file = new File(rutaFichero);
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("image", sharedClient.getIdCliente() + extension, requestBody);
+
+        Call call = service.uploadImage(body);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Log.i(TAG,"Funciona");
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Log.i(TAG,"failll");
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        preferences.refreshCurrentUser(sharedCLient.getIdCliente());
-        sharedCLient = preferences.getClient();
+        refreshUser();
+    }
 
-        binding.tvFullnameProfile.setText(sharedCLient.getNombre());
-        binding.tvEmailProfile.setText(sharedCLient.getCorreoElectronico());
+    private void refreshUser() {
+        preferences.refreshCurrentUser(sharedClient.getIdCliente());
+        sharedClient = preferences.getClient();
+
+        binding.tvFullnameProfile.setText(sharedClient.getNombre());
+        binding.tvEmailProfile.setText(sharedClient.getCorreoElectronico());
+
+        Glide.with(this)
+                .load(sharedClient.getImagenRuta())
+                .placeholder(R.drawable.ic_baseline_account_circle_24)
+                .error(R.drawable.ic_baseline_account_circle_24)
+                .circleCrop()
+                .into(binding.ivPhotoProfile);
     }
 }

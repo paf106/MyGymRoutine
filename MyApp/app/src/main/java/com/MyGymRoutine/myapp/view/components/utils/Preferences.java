@@ -1,10 +1,8 @@
 package com.MyGymRoutine.myapp.view.components.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.widget.Toast;
 
 import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
 import com.MyGymRoutine.myapp.data.model.Client;
@@ -16,7 +14,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static android.content.Context.MODE_PRIVATE;
 
 public class Preferences {
     private static final String CLIENT_KEY = "CLIENT_KEY";
