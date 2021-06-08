@@ -101,6 +101,8 @@ public class ProfileFragment extends Fragment {
 
         binding.personalButton.setOnClickListener(v -> startActivity(new Intent(getContext(), ProfileDataActivity.class)));
         binding.passwordButton.setOnClickListener(v -> startActivity(new Intent(getContext(), ModifyPasswordActivity.class)));
+        binding.aboutButton.setOnClickListener(v -> startActivity(new Intent(getContext(), AboutActivity.class)));
+
         binding.logoutButton.setOnClickListener(v -> {
             preferences.forgetCredentials();
             getActivity().finish();
