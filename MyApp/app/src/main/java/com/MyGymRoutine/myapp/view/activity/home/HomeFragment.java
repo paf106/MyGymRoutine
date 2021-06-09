@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.MyGymRoutine.myapp.data.api.internal.NovedadApi;
 import com.MyGymRoutine.myapp.data.model.Client;
@@ -84,7 +85,8 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Novedad>> call, Throwable t) {
-                Snackbar.make(getView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
+                //Snackbar.make(getView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Comprueba la conexión", Toast.LENGTH_LONG).show();
             }
         });
 
