@@ -23,20 +23,31 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="700dp">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/ivFotoEjercicio"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvFotoEjercicio"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-                android:layout_marginStart="130dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="131dp"
+                android:layout_marginTop="24dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="7dp"
+                app:cardUseCompatPadding="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_pesa" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/ivFotoEjercicio"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_pesa" />
+            </androidx.cardview.widget.CardView>
+
 
             <TextView
                 android:id="@+id/tvRepeticionesSeries"
@@ -49,7 +60,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ivFotoEjercicio" />
+                app:layout_constraintTop_toBottomOf="@+id/cvFotoEjercicio" />
 
             <TextView
                 android:id="@+id/tvMusculo"
@@ -58,9 +69,9 @@
                 android:layout_marginTop="24dp"
                 android:text="Deltoides"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/tvRepeticionesSeries"
-                app:layout_constraintStart_toStartOf="@+id/tvRepeticionesSeries"
-                app:layout_constraintTop_toBottomOf="@+id/tvRepeticionesSeries" />
+                app:layout_constraintEnd_toEndOf="@+id/tvDescanso"
+                app:layout_constraintStart_toStartOf="@+id/tvDescanso"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescanso" />
 
             <TextView
                 android:id="@+id/tvDescanso"
@@ -69,9 +80,9 @@
                 android:layout_marginTop="24dp"
                 android:text="Descanso: 10s por serie"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/tvMusculo"
-                app:layout_constraintStart_toStartOf="@+id/tvMusculo"
-                app:layout_constraintTop_toBottomOf="@+id/tvMusculo" />
+                app:layout_constraintEnd_toEndOf="@+id/tvRepeticionesSeries"
+                app:layout_constraintStart_toStartOf="@+id/tvRepeticionesSeries"
+                app:layout_constraintTop_toBottomOf="@+id/tvRepeticionesSeries" />
 
             <TextView
                 android:id="@+id/tvDescripcionEjercicio"
@@ -88,7 +99,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvDescanso" />
+                app:layout_constraintTop_toBottomOf="@+id/tvMusculo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

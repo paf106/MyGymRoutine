@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,9 +21,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.res.TypedArrayUtils;
 import androidx.fragment.app.Fragment;
 
 import com.MyGymRoutine.myapp.R;
+import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
 import com.MyGymRoutine.myapp.data.api.internal.FileApi;
 import com.MyGymRoutine.myapp.data.model.Client;
 import com.MyGymRoutine.myapp.databinding.FragmentProfileBinding;
@@ -36,6 +39,7 @@ import com.google.android.material.snackbar.Snackbar;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 
 import okhttp3.MediaType;
@@ -56,8 +60,6 @@ public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
     private Preferences preferences;
     private Client sharedClient;
-    private String photoName;
-    private String photoPath;
 
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALLERY = 101;
@@ -92,12 +94,17 @@ public class ProfileFragment extends Fragment {
         binding.tvEmailProfile.setText(sharedClient.getCorreoElectronico());
 
         // Poner imagen de perfil
-        Glide.with(this)
-                .load(sharedClient.getImagenRuta())
-                .placeholder(R.drawable.ic_baseline_account_circle_24)
-                .error(R.drawable.ic_baseline_account_circle_24)
-                .circleCrop()
-                .into(binding.ivPhotoProfile);
+        /*if (sharedClient.getImagen().getData() != null){}*/
+            Glide.with(this)
+                    .load((sharedClient.getImagen().getData()))
+                    .placeholder(R.drawable.ic_baseline_account_circle_24)
+                    .error(R.drawable.ic_baseline_account_circle_24)
+                    .circleCrop()
+                    .into(binding.ivPhotoProfile);
+            //binding.ivPhotoProfile.setImageBitmap(FileUtils.ByteArrayToBitmap(sharedClient.getImagen().getData()));
+
+
+
 
         binding.personalButton.setOnClickListener(v -> startActivity(new Intent(getContext(), ProfileDataActivity.class)));
         binding.passwordButton.setOnClickListener(v -> startActivity(new Intent(getContext(), ModifyPasswordActivity.class)));
@@ -113,6 +120,7 @@ public class ProfileFragment extends Fragment {
                     openGallery();
                 } else {
                     ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
+                    openGallery();
                 }
             } else {
                 openGallery();
@@ -139,14 +147,22 @@ public class ProfileFragment extends Fragment {
             if (resultCode == Activity.RESULT_OK && data != null) {
 
                 Uri photo = data.getData();
+                //binding.ivPhotoProfile.setImageURI(photo);
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), photo);
+                    //Bitmap imageScaled = Bitmap.createScaledBitmap(bitmap, 200, 200, false);
+                    binding.ivPhotoProfile.setImageBitmap(bitmap);
+                    uploadImage(FileUtils.bitmapToByteArray(bitmap));
 
-                String path = photo.getPath().substring(0, photo.getPath().lastIndexOf("/")) + "/" + photo.getPath().split(":")[1];
+                //Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                //String path = photo.getPath().substring(0, photo.getPath().lastIndexOf("/")) + "/" + photo.getPath().split(":")[1];
                 //Snackbar.make(getView(), photo.getPath(), Snackbar.LENGTH_LONG).show();
-                // Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                //byte[] byteArray = data.getByteArrayExtra("overlay");
+
                 //String path = FileUtils.getPath(getContext(),photo);
                 //String pathReal = path.substring(0,path.lastIndexOf("/"))+ path.substring(path.lastIndexOf(":")+1);
 
-                Log.i(TAG, "Path: " + path);
+                //Log.i(TAG, "Path: " + path);
 
 
                 //Uri filePathFromActivity = (Uri) photo.get(Intent.EXTRA_STREAM);
@@ -163,9 +179,12 @@ public class ProfileFragment extends Fragment {
                 //photoName = getName(getContext(),photo);
                 //photoPath = getPath(getContext(),photo);
                 //Snackbar.make(getView(), photoPath, Snackbar.LENGTH_LONG).show();
-                uploadImage(photo, path);
 
-                binding.ivPhotoProfile.setImageURI(photo);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
 
 
             }
@@ -213,35 +232,35 @@ public class ProfileFragment extends Fragment {
         return displayName;
     }
 
-    private void uploadImage(Uri uri, String rutaFichero) {
-        String nombreArchivo = getName(uri);
-        String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
+    private void uploadImage(byte[] arrayBytes) {
+       // String nombreArchivo = getName(uri);
+        //String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constantes.BASE_API)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        FileApi service = retrofit.create(FileApi.class);
+        ClientApi service = retrofit.create(ClientApi.class);
         //String path = FileUtils.getPath(getContext(),uri);
         // String pathReal = path.substring(0,path.lastIndexOf("/"))+ path.substring(path.lastIndexOf(":")+1);
-        File file = new File(rutaFichero);
+        //File file = new File(rutaFichero);
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse("image/*"), file);
+        //RequestBody requestBody = RequestBody.create(MediaType.parse("application/octet-stream"), arrayBytes);
 
         // MultipartBody.Part is used to send also the actual file name
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", sharedClient.getIdCliente() + extension, requestBody);
+        //MultipartBody.Part body = MultipartBody.Part.createFormData("image", sharedClient.getIdCliente()+"14", requestBody);
 
-        Call call = service.uploadImage(body);
-        call.enqueue(new Callback() {
+        //RequestBody idCliente = RequestBody.create(MediaType.parse("text/plain"),String.valueOf(sharedClient.getIdCliente()));
+
+        service.updateImagen(arrayBytes,sharedClient.getIdCliente()).enqueue(new Callback<String>() {
             @Override
-            public void onResponse(Call call, Response response) {
-                Log.i(TAG,"Funciona");
+            public void onResponse(Call<String> call, Response<String> response) {
+                Toast.makeText(getContext(), "Guardado", Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
-                Log.i(TAG,"failll");
+            public void onFailure(Call<String> call, Throwable t) {
+
             }
         });
     }
@@ -259,11 +278,14 @@ public class ProfileFragment extends Fragment {
         binding.tvFullnameProfile.setText(sharedClient.getNombre());
         binding.tvEmailProfile.setText(sharedClient.getCorreoElectronico());
 
-        Glide.with(this)
-                .load(sharedClient.getImagenRuta())
-                .placeholder(R.drawable.ic_baseline_account_circle_24)
-                .error(R.drawable.ic_baseline_account_circle_24)
-                .circleCrop()
-                .into(binding.ivPhotoProfile);
+        /*if (sharedClient.getImagen().getData() != null){}*/
+            Glide.with(this)
+                    .load(sharedClient.getImagen().getData())
+                    .placeholder(R.drawable.ic_baseline_account_circle_24)
+                    .error(R.drawable.ic_baseline_account_circle_24)
+                    .circleCrop()
+                    .into(binding.ivPhotoProfile);
+            //binding.ivPhotoProfile.setImageBitmap(FileUtils.ByteArrayToBitmap(sharedClient.getImagen().getData()));
+
     }
 }

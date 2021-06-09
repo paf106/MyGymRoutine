@@ -19,7 +19,7 @@ public class Client {
     private double peso; // Kg
     private String frecuenciaDeporte;
     private String patologias;
-    private String imagenRuta; // Path of the image
+    private Imagen imagen; // Path of the image
 
     public Client() {
     }
@@ -128,11 +128,11 @@ public class Client {
         this.patologias = patologias;
     }
 
-    public String getImagenRuta() {
-        return imagenRuta;
+    public Imagen getImagen() {
+        return imagen;
     }
 
-    public void setImagenRuta(String imagenRuta) {
-        this.imagenRuta = imagenRuta;
+    public void setImagen(Imagen imagen) {
+        this.imagen = imagen;
     }
 }
