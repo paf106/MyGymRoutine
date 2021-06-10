@@ -2,6 +2,7 @@ package com.MyGymRoutine.myapp.data.api.internal;
 
 import com.MyGymRoutine.myapp.data.model.DiaRutina;
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
+import com.MyGymRoutine.myapp.data.model.Imagen;
 import com.MyGymRoutine.myapp.data.model.Rutina;
 
 import java.util.List;
@@ -31,5 +32,10 @@ public interface RoutineApi {
     @GET("/rutina/{idCliente}")
     Call<List<Rutina>> getRutinasCliente(
             @Path("idCliente") int idCliente
+    );
+
+    @GET("/rutina/imagenes/{idRutina}")
+    Call<List<Imagen>> getImagenesRutina(
+            @Path("idRutina") int idRutina
     );
 }

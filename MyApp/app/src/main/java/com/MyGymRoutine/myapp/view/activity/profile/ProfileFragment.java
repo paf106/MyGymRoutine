@@ -27,7 +27,9 @@ import androidx.fragment.app.Fragment;
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
 import com.MyGymRoutine.myapp.data.api.internal.FileApi;
+import com.MyGymRoutine.myapp.data.api.internal.RoutineApi;
 import com.MyGymRoutine.myapp.data.model.Client;
+import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.databinding.FragmentProfileBinding;
 import com.MyGymRoutine.myapp.view.activity.login.LogInActivity;
 import com.MyGymRoutine.myapp.view.components.utils.Constantes;
@@ -41,6 +43,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -95,15 +98,13 @@ public class ProfileFragment extends Fragment {
 
         // Poner imagen de perfil
         /*if (sharedClient.getImagen().getData() != null){}*/
-            Glide.with(this)
-                    .load((sharedClient.getImagen().getData()))
-                    .placeholder(R.drawable.ic_baseline_account_circle_24)
-                    .error(R.drawable.ic_baseline_account_circle_24)
-                    .circleCrop()
-                    .into(binding.ivPhotoProfile);
-            //binding.ivPhotoProfile.setImageBitmap(FileUtils.ByteArrayToBitmap(sharedClient.getImagen().getData()));
-
-
+        Glide.with(this)
+                .load((sharedClient.getImagen().getData()))
+                .placeholder(R.drawable.ic_baseline_account_circle_24)
+                .error(R.drawable.ic_baseline_account_circle_24)
+                .circleCrop()
+                .into(binding.ivPhotoProfile);
+        //binding.ivPhotoProfile.setImageBitmap(FileUtils.ByteArrayToBitmap(sharedClient.getImagen().getData()));
 
 
         binding.personalButton.setOnClickListener(v -> startActivity(new Intent(getContext(), ProfileDataActivity.class)));
@@ -156,37 +157,35 @@ public class ProfileFragment extends Fragment {
                     binding.ivPhotoProfile.setImageBitmap(bitmap);
                     uploadImage(FileUtils.bitmapToByteArray(bitmap));
 
-                //Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                //String path = photo.getPath().substring(0, photo.getPath().lastIndexOf("/")) + "/" + photo.getPath().split(":")[1];
-                //Snackbar.make(getView(), photo.getPath(), Snackbar.LENGTH_LONG).show();
-                //byte[] byteArray = data.getByteArrayExtra("overlay");
+                    //Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                    //String path = photo.getPath().substring(0, photo.getPath().lastIndexOf("/")) + "/" + photo.getPath().split(":")[1];
+                    //Snackbar.make(getView(), photo.getPath(), Snackbar.LENGTH_LONG).show();
+                    //byte[] byteArray = data.getByteArrayExtra("overlay");
 
-                //String path = FileUtils.getPath(getContext(),photo);
-                //String pathReal = path.substring(0,path.lastIndexOf("/"))+ path.substring(path.lastIndexOf(":")+1);
+                    //String path = FileUtils.getPath(getContext(),photo);
+                    //String pathReal = path.substring(0,path.lastIndexOf("/"))+ path.substring(path.lastIndexOf(":")+1);
 
-                //Log.i(TAG, "Path: " + path);
+                    //Log.i(TAG, "Path: " + path);
 
 
-                //Uri filePathFromActivity = (Uri) photo.get(Intent.EXTRA_STREAM);
-                //filePathFromActivity = Uri.parse(getRealPathFromURI( filePathFromActivity));
-                //File imageFile = new File(bitmap.get);
-                //Log.i(TAG, getRealPathFromURI(photo));
-                //uploadImage(photo);
-                //String nombreArchivo = getName(photo);
-                //String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
-                // Log.i(TAG, "extension: " + extension);
+                    //Uri filePathFromActivity = (Uri) photo.get(Intent.EXTRA_STREAM);
+                    //filePathFromActivity = Uri.parse(getRealPathFromURI( filePathFromActivity));
+                    //File imageFile = new File(bitmap.get);
+                    //Log.i(TAG, getRealPathFromURI(photo));
+                    //uploadImage(photo);
+                    //String nombreArchivo = getName(photo);
+                    //String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
+                    // Log.i(TAG, "extension: " + extension);
 
-                //    Toast.makeText(getContext(), FileUtils.getPath(getContext(), photo), Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(getContext(), FileUtils.getPath(getContext(), photo), Toast.LENGTH_SHORT).show();
 
-                //photoName = getName(getContext(),photo);
-                //photoPath = getPath(getContext(),photo);
-                //Snackbar.make(getView(), photoPath, Snackbar.LENGTH_LONG).show();
+                    //photoName = getName(getContext(),photo);
+                    //photoPath = getPath(getContext(),photo);
+                    //Snackbar.make(getView(), photoPath, Snackbar.LENGTH_LONG).show();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
 
 
             }
@@ -235,7 +234,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void uploadImage(byte[] arrayBytes) {
-       // String nombreArchivo = getName(uri);
+        // String nombreArchivo = getName(uri);
         //String extension = nombreArchivo.substring(nombreArchivo.lastIndexOf("."));
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constantes.BASE_API)
@@ -254,7 +253,7 @@ public class ProfileFragment extends Fragment {
 
         //RequestBody idCliente = RequestBody.create(MediaType.parse("text/plain"),String.valueOf(sharedClient.getIdCliente()));
 
-        service.updateImagen(arrayBytes,sharedClient.getIdCliente()).enqueue(new Callback<String>() {
+        service.updateImagen(arrayBytes, sharedClient.getIdCliente()).enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 Toast.makeText(getContext(), "Guardado", Toast.LENGTH_SHORT).show();
@@ -281,13 +280,13 @@ public class ProfileFragment extends Fragment {
         binding.tvEmailProfile.setText(sharedClient.getCorreoElectronico());
 
         /*if (sharedClient.getImagen().getData() != null){}*/
-            Glide.with(this)
-                    .load(sharedClient.getImagen().getData())
-                    .placeholder(R.drawable.ic_baseline_account_circle_24)
-                    .error(R.drawable.ic_baseline_account_circle_24)
-                    .circleCrop()
-                    .into(binding.ivPhotoProfile);
-            //binding.ivPhotoProfile.setImageBitmap(FileUtils.ByteArrayToBitmap(sharedClient.getImagen().getData()));
+        Glide.with(this)
+                .load(sharedClient.getImagen().getData())
+                .placeholder(R.drawable.ic_baseline_account_circle_24)
+                .error(R.drawable.ic_baseline_account_circle_24)
+                .circleCrop()
+                .into(binding.ivPhotoProfile);
+        //binding.ivPhotoProfile.setImageBitmap(FileUtils.ByteArrayToBitmap(sharedClient.getImagen().getData()));
 
     }
 }

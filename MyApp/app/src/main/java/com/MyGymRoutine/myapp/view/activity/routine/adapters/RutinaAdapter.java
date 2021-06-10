@@ -13,13 +13,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.MyGymRoutine.myapp.R;
+import com.MyGymRoutine.myapp.data.api.internal.RoutineApi;
 import com.MyGymRoutine.myapp.data.model.DiaRutina;
+import com.MyGymRoutine.myapp.data.model.Ejercicio;
+import com.MyGymRoutine.myapp.data.model.Imagen;
 import com.MyGymRoutine.myapp.data.model.Rutina;
 import com.MyGymRoutine.myapp.view.activity.routine.RoutineDetailActivity;
+import com.MyGymRoutine.myapp.view.components.utils.Constantes;
+import com.MyGymRoutine.myapp.view.components.utils.FileUtils;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.RecyclerHolder> {
 
@@ -34,7 +45,7 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.RecyclerHo
     @NonNull
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new RecyclerHolder(LayoutInflater.from(context).inflate(R.layout.exercise_element,parent,false));
+        return new RecyclerHolder(LayoutInflater.from(context).inflate(R.layout.rutina_imagenes_element, parent, false));
     }
 
     @Override
@@ -42,11 +53,33 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.RecyclerHo
 
         holder.tvTituloEjercicio.setText(rutinas.get(position).getNombre());
 
-        holder.itemView.setOnClickListener(v ->{
+        holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, RoutineDetailActivity.class);
-            intent.putExtra("rutinaDetail",rutinas.get(position));
+            intent.putExtra("rutinaDetail", rutinas.get(position));
             holder.itemView.getContext().startActivity(intent);
         });
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Constantes.BASE_API)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RoutineApi service = retrofit.create(RoutineApi.class);
+        service.getImagenesRutina(rutinas.get(position).getIdRutina()).enqueue(new Callback<List<Imagen>>() {
+            @Override
+            public void onResponse(Call<List<Imagen>> call, Response<List<Imagen>> response) {
+                holder.ivExerciseCard1.setImageBitmap(FileUtils.ByteArrayToBitmap(response.body().get(0).getData()));
+                holder.ivExerciseCard2.setImageBitmap(FileUtils.ByteArrayToBitmap(response.body().get(1).getData()));
+                holder.ivExerciseCard3.setImageBitmap(FileUtils.ByteArrayToBitmap(response.body().get(2).getData()));
+                holder.ivExerciseCard4.setImageBitmap(FileUtils.ByteArrayToBitmap(response.body().get(3).getData()));
+            }
+
+            @Override
+            public void onFailure(Call<List<Imagen>> call, Throwable t) {
+
+            }
+        });
+        //holder.ivExerciseCard2.setImageResource(R.drawable.ic_new);
     }
 
     @Override
@@ -57,13 +90,16 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.RecyclerHo
     public static class RecyclerHolder extends RecyclerView.ViewHolder {
 
         TextView tvTituloEjercicio;
-        ImageView ivExerciseCard;
+        ImageView ivExerciseCard1, ivExerciseCard2, ivExerciseCard3, ivExerciseCard4;
 
         public RecyclerHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTituloEjercicio = itemView.findViewById(R.id.tvTituloEjercicio);
-            ivExerciseCard = itemView.findViewById(R.id.ivExerciseCard);
+            ivExerciseCard1 = itemView.findViewById(R.id.ivExerciseCard1);
+            ivExerciseCard2 = itemView.findViewById(R.id.ivExerciseCard2);
+            ivExerciseCard3 = itemView.findViewById(R.id.ivExerciseCard3);
+            ivExerciseCard4 = itemView.findViewById(R.id.ivExerciseCard4);
         }
     }
 }

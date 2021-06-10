@@ -43,6 +43,7 @@
                     android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
+                    android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_pesa" />
@@ -57,6 +58,7 @@
                 android:text="12 x 3"
                 android:textSize="37sp"
                 android:textStyle="bold"
+                android:textColor="#454545"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +71,7 @@
                 android:layout_marginTop="24dp"
                 android:text="Deltoides"
                 android:textSize="20sp"
+                android:textColor="#454545"
                 app:layout_constraintEnd_toEndOf="@+id/tvDescanso"
                 app:layout_constraintStart_toStartOf="@+id/tvDescanso"
                 app:layout_constraintTop_toBottomOf="@+id/tvDescanso" />
@@ -80,6 +83,7 @@
                 android:layout_marginTop="24dp"
                 android:text="Descanso: 10s por serie"
                 android:textSize="20sp"
+                android:textColor="#454545"
                 app:layout_constraintEnd_toEndOf="@+id/tvRepeticionesSeries"
                 app:layout_constraintStart_toStartOf="@+id/tvRepeticionesSeries"
                 app:layout_constraintTop_toBottomOf="@+id/tvRepeticionesSeries" />
@@ -93,7 +97,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
                 android:text="Consiste en hacer noseque a la vez que flexionas los brazons"
-                android:textColor="#292929"
+                android:textColor="#5A5A5A"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 public class Ejercicio implements Serializable {
 
+    private int idEjercicio;
     @SerializedName("nombre")
     @Expose
     private String nombre;
@@ -43,6 +44,14 @@ public class Ejercicio implements Serializable {
     private Imagen imagen;
 
     public Ejercicio() {
+    }
+
+    public int getIdEjercicio() {
+        return idEjercicio;
+    }
+
+    public void setIdEjercicio(int idEjercicio) {
+        this.idEjercicio = idEjercicio;
     }
 
     public Imagen getImagen() {

@@ -41,8 +41,9 @@ public class ModifyPasswordActivity extends AppCompatActivity {
             //Comprobar que la contraseña actual realmente es la misma que la que ha escrito
             if (currentPassword.equals(sharedClient.getContrasena())){
                 if (!newPassword.equals("") || !repeatNewPassword.equals("")){
+                    binding.ilCurrentPassword.setErrorEnabled(false);
                     if (newPassword.equals(repeatNewPassword)){
-                        //binding.ilCurrentPassword.setErrorEnabled(false);
+
                         binding.ilNewPassword.setErrorEnabled(false);
                         binding.ilRepeatNewPassword.setErrorEnabled(false);
 
