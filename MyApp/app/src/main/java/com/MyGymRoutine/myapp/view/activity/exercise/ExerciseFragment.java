@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.MyGymRoutine.myapp.data.api.internal.EjercicioApi;
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.data.model.GrupoMuscular;
+import com.MyGymRoutine.myapp.data.repository.Api;
 import com.MyGymRoutine.myapp.databinding.FragmentExerciseBinding;
 import com.MyGymRoutine.myapp.view.activity.exercise.adapters.GrupoMuscularAdapter;
 import com.MyGymRoutine.myapp.view.components.utils.Constantes;
@@ -43,7 +44,9 @@ public class ExerciseFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); }
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,12 +61,7 @@ public class ExerciseFragment extends Fragment {
         gruposMuscularesString = new ArrayList<>();
         ejercicios = new ArrayList<>();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constantes.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        EjercicioApi service = retrofit.create(EjercicioApi.class);
+        EjercicioApi service = Api.getClient().create(EjercicioApi.class);
 
         Call<List<String>> listado = service.getGruposMusculares();
         listado.enqueue(new Callback<List<String>>() {
@@ -80,19 +78,22 @@ public class ExerciseFragment extends Fragment {
                         sortArrays();
                         setMainCategoryRecycler(gruposMusculares);
                     }
+
                     @Override
                     public void onFailure(Call<List<Ejercicio>> call, Throwable t) {
                         Snackbar.make(getView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
                     }
                 });
             }
+
             @Override
             public void onFailure(Call<List<String>> call, Throwable t) {
                 Snackbar.make(getView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
             }
         });
     }
-    private void setMainCategoryRecycler(List<GrupoMuscular> list){
+
+    private void setMainCategoryRecycler(List<GrupoMuscular> list) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.rvEjercicios.setLayoutManager(layoutManager);
         GrupoMuscularAdapter grupoMuscularAdapter = new GrupoMuscularAdapter(getContext(), list);
@@ -100,14 +101,14 @@ public class ExerciseFragment extends Fragment {
     }
 
     private void sortArrays() {
-        if (gruposMusculares != null && gruposMuscularesString != null){
-            for (String s: gruposMuscularesString) {
+        if (gruposMusculares != null && gruposMuscularesString != null) {
+            for (String s : gruposMuscularesString) {
                 List<Ejercicio> ejerciciosTemp = new ArrayList<>();
                 GrupoMuscular grupoMuscularTemp = new GrupoMuscular();
                 grupoMuscularTemp.setNombre(s);
 
-                for (Ejercicio e:ejercicios) {
-                    if (e.getGrupoMuscular().equals(s)){
+                for (Ejercicio e : ejercicios) {
+                    if (e.getGrupoMuscular().equals(s)) {
                         ejerciciosTemp.add(e);
                     }
                 }

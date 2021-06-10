@@ -6,17 +6,17 @@ import android.preference.PreferenceManager;
 
 import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
 import com.MyGymRoutine.myapp.data.model.Client;
+import com.MyGymRoutine.myapp.data.repository.Api;
 import com.google.gson.Gson;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class Preferences {
     private static final String CLIENT_KEY = "CLIENT_KEY";
+    private static final String CLIENT_PHOTO = "CLIENT_PHOTO";
     private final Context context;
 
     public Preferences(Context context) {
@@ -26,16 +26,13 @@ public class Preferences {
     public void saveCredentials(Client client) {
         SharedPreferences.Editor edit = getSharedPreferences().edit();
         String json = new Gson().toJson(client);
-        edit.putString(CLIENT_KEY,json);
+        edit.putString(CLIENT_KEY, json);
         edit.apply();
     }
-    public void refreshCurrentUser(int clientId){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constantes.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        ClientApi service = retrofit.create(ClientApi.class);
+    public void refreshCurrentUser(int clientId) {
+
+        ClientApi service = Api.getClient().create(ClientApi.class);
 
         Call<Client> client = service.fetchClient(clientId);
 
@@ -53,26 +50,28 @@ public class Preferences {
     }
 
     public Client getClient() {
-        String json = getSharedPreferences().getString(CLIENT_KEY,null);
-        if(json == null){
+        String json = getSharedPreferences().getString(CLIENT_KEY, null);
+        if (json == null) {
             return null;
         }
         Client client = new Gson().fromJson(json, Client.class);
         return client;
     }
-    public boolean hasCredentials(){
-        String json = getSharedPreferences().getString(CLIENT_KEY,null);
-        if(json == null){
+
+    public boolean hasCredentials() {
+        String json = getSharedPreferences().getString(CLIENT_KEY, null);
+        if (json == null) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 
-    private SharedPreferences getSharedPreferences(){
+    private SharedPreferences getSharedPreferences() {
         return PreferenceManager.getDefaultSharedPreferences(context);
     }
-    public void forgetCredentials(){
+
+    public void forgetCredentials() {
         SharedPreferences.Editor editor = getSharedPreferences().edit();
         editor.clear().apply();
 

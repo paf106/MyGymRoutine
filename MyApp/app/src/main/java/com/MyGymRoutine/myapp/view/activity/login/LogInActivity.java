@@ -2,29 +2,25 @@ package com.MyGymRoutine.myapp.view.activity.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
 import com.MyGymRoutine.myapp.data.model.Client;
+import com.MyGymRoutine.myapp.data.repository.Api;
 import com.MyGymRoutine.myapp.databinding.LogInActivityBinding;
 import com.MyGymRoutine.myapp.view.activity.NavigationActivity;
 import com.MyGymRoutine.myapp.view.activity.register.RegisterActivity;
-import com.MyGymRoutine.myapp.view.components.utils.Constantes;
 import com.MyGymRoutine.myapp.view.components.utils.Preferences;
 import com.google.android.material.snackbar.Snackbar;
-
-import java.net.HttpURLConnection;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LogInActivity extends AppCompatActivity{
+
+public class LogInActivity extends AppCompatActivity {
 
     private LogInActivityBinding binding;
     private Preferences preferences;
@@ -36,7 +32,7 @@ public class LogInActivity extends AppCompatActivity{
         setContentView(binding.getRoot());
         preferences = new Preferences(getApplicationContext());
 
-        if (preferences.hasCredentials()){
+        if (preferences.hasCredentials()) {
             startActivity(new Intent(getApplicationContext(), NavigationActivity.class));
         }
 
@@ -49,29 +45,24 @@ public class LogInActivity extends AppCompatActivity{
         String user = binding.etUser.getText().toString();
         String password = binding.etPassword.getText().toString();
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constantes.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        ClientApi service = Api.getClient().create(ClientApi.class);
 
-        ClientApi service = retrofit.create(ClientApi.class);
-
-        Call<Client> client = service.doLogin(user,password);
+        Call<Client> client = service.doLogin(user, password);
         client.enqueue(new Callback<Client>() {
             @Override
             public void onResponse(Call<Client> call, Response<Client> response) {
-                if(response.isSuccessful()){
-                    if (binding.etUser.getText().toString().equals("") || binding.etPassword.getText().toString().equals("")){
+                if (response.isSuccessful()) {
+                    if (binding.etUser.getText().toString().equals("") || binding.etPassword.getText().toString().equals("")) {
                         binding.ilPassword.setError("Debes rellenar los 2 campos");
-                    }else{
+                    } else {
                         Client sharedClient = response.body();
                         // Credenciales correctas
-                        if (sharedClient != null){
+                        if (sharedClient != null) {
                             // Credenciales correctas, guardamos al usuario y redirigimos a pantalla principal
                             preferences.saveCredentials(sharedClient);
                             startActivity(new Intent(getApplicationContext(), NavigationActivity.class));
                             finish();
-                        }else{
+                        } else {
                             binding.ilPassword.setError("Usuario o contraseña inválida");
                         }
                     }

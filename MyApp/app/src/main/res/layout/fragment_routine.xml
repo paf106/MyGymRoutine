@@ -14,7 +14,7 @@
         android:layout_marginTop="24dp"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="@color/blue"
+        android:textColor="#9814F6"
         android:text="Mis rutinas"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

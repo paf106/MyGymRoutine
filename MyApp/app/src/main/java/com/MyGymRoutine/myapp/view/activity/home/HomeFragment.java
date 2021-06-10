@@ -10,30 +10,29 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+
 
 import com.MyGymRoutine.myapp.data.api.internal.NovedadApi;
 import com.MyGymRoutine.myapp.data.model.Client;
 import com.MyGymRoutine.myapp.data.model.Novedad;
+import com.MyGymRoutine.myapp.data.repository.Api;
 import com.MyGymRoutine.myapp.databinding.FragmentHomeBinding;
-import com.MyGymRoutine.myapp.view.components.common.NovedadesAdapter;
-import com.MyGymRoutine.myapp.view.components.utils.Constantes;
+import com.MyGymRoutine.myapp.view.activity.home.adapters.NovedadesAdapter;
+
 import com.MyGymRoutine.myapp.view.components.utils.Preferences;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
-    private List<Novedad> novedades;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -56,37 +55,29 @@ public class HomeFragment extends Fragment {
 
         Preferences preferences = new Preferences(getContext());
         Client sharedCLient = preferences.getClient();
-        binding.tvWelcomeUser.setText("¡Hola "+ sharedCLient.getNombre() + "!");
+        binding.tvWelcomeUser.setText("¡Hola " + sharedCLient.getNombre() + "!");
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         binding.rvNovedades.setLayoutManager(manager);
         binding.rvNovedades.setHasFixedSize(true);
-        novedades = new ArrayList<>();
 
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constantes.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        NovedadApi service = retrofit.create(NovedadApi.class);
+        NovedadApi service = Api.getClient().create(NovedadApi.class);
 
         Call<List<Novedad>> listado = service.getNovedades();
 
         listado.enqueue(new Callback<List<Novedad>>() {
             @Override
             public void onResponse(Call<List<Novedad>> call, Response<List<Novedad>> response) {
-                if (response.isSuccessful()){
-                    novedades = response.body();
-                    NovedadesAdapter adapter = new NovedadesAdapter(novedades);
+                if (response.isSuccessful()) {
+                    // Se asigna el array que devuelve la consulta al adaptador
+                    NovedadesAdapter adapter = new NovedadesAdapter(response.body());
                     binding.rvNovedades.setAdapter(adapter);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Novedad>> call, Throwable t) {
-                //Snackbar.make(getView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
-                Toast.makeText(getContext(), "Comprueba la conexión", Toast.LENGTH_LONG).show();
+                Snackbar.make(getView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
             }
         });
 

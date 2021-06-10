@@ -3,17 +3,10 @@ package com.MyGymRoutine.myapp.data.api.internal;
 
 import com.MyGymRoutine.myapp.data.model.Client;
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
-import retrofit2.http.Query;
 
 public interface ClientApi {
 
@@ -32,6 +25,7 @@ public interface ClientApi {
             @Field("frecuenciaDeporte") String frecuenciaDeporte,
             @Field("patologias") String patologias
     );
+
     @FormUrlEncoded
     @POST("/fetch/cliente")
     Call<Client> fetchClient(
@@ -72,12 +66,6 @@ public interface ClientApi {
             @Field("usuario") String usuario
     );
 
-    /*@Multipart
-    @POST("/update/imagen")
-    Call<String> updateImagen(
-            @Part MultipartBody.Part bytes,
-            @Part("idCliente") RequestBody requestBody
-    );*/
     @FormUrlEncoded
     @POST("/update/imagen")
     Call<String> updateImagen(
@@ -85,10 +73,6 @@ public interface ClientApi {
             @Field("idCliente") int idCliente
 
     );
-
-
-
-
 
 
 }

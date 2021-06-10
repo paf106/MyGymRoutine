@@ -19,7 +19,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class GrupoRutinaAdapter extends RecyclerView.Adapter<GrupoRutinaAdapter.RecyclerHolder>{
+public class GrupoRutinaAdapter extends RecyclerView.Adapter<GrupoRutinaAdapter.RecyclerHolder> {
 
     Context context;
     List<GrupoRutina> gruposRutinas;
@@ -39,7 +39,7 @@ public class GrupoRutinaAdapter extends RecyclerView.Adapter<GrupoRutinaAdapter.
     public void onBindViewHolder(@NonNull @NotNull RecyclerHolder holder, int position) {
 
         holder.tvTituloGrupoMuscular.setText(gruposRutinas.get(position).getNombre());
-        setRutinaItemRecycler(holder.itemRecycler,gruposRutinas.get(position).getRutinas());
+        setRutinaItemRecycler(holder.itemRecycler, gruposRutinas.get(position).getRutinas());
     }
 
     @Override
@@ -57,9 +57,10 @@ public class GrupoRutinaAdapter extends RecyclerView.Adapter<GrupoRutinaAdapter.
             itemRecycler = itemView.findViewById(R.id.rvGrupoMuscularEjercicios);
         }
     }
-    private void setRutinaItemRecycler(RecyclerView recycler, List<Rutina> list){
-        RutinaAdapter ejercicioAdapter = new RutinaAdapter(context,list);
-        recycler.setLayoutManager(new LinearLayoutManager(context,RecyclerView.HORIZONTAL,false));
+
+    private void setRutinaItemRecycler(RecyclerView recycler, List<Rutina> list) {
+        RutinaAdapter ejercicioAdapter = new RutinaAdapter(context, list);
+        recycler.setLayoutManager(new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false));
         recycler.setAdapter(ejercicioAdapter);
     }
 

@@ -1,4 +1,4 @@
-package com.MyGymRoutine.myapp.view.components.common;
+package com.MyGymRoutine.myapp.view.activity.home.adapters;
 
 
 import android.view.LayoutInflater;
@@ -42,7 +42,7 @@ public class NovedadesAdapter extends RecyclerView.Adapter<NovedadesAdapter.Recy
         holder.tvHomeTitle.setText(novedad.getTitulo());
         holder.tvHomeDescription.setText(novedad.getDescripcion());
 
-        switch(novedad.getTipo()){
+        switch (novedad.getTipo()) {
             case Novedad.INFO:
                 holder.ivStatus.setImageResource(R.drawable.ic_info);
                 holder.llNovedadElement.setBackgroundResource(R.color.home_novedad_info_background);
@@ -77,6 +77,6 @@ public class NovedadesAdapter extends RecyclerView.Adapter<NovedadesAdapter.Recy
             llNovedadElement = itemView.findViewById(R.id.llNovedadElement);
         }
     }
-    }
+}
 
 

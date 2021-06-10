@@ -1,7 +1,7 @@
 package com.MyGymRoutine.myapp.data.api.internal;
 
 import com.MyGymRoutine.myapp.data.model.DiaRutina;
-import com.MyGymRoutine.myapp.data.model.Ejercicio;
+
 import com.MyGymRoutine.myapp.data.model.Imagen;
 import com.MyGymRoutine.myapp.data.model.Rutina;
 

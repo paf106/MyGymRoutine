@@ -9,14 +9,6 @@ public class GrupoMuscular {
 
     public GrupoMuscular(){}
 
-    public GrupoMuscular(String nombre, List<Ejercicio> ejercicios) {
-        this.nombre = nombre;
-        this.ejercicios = ejercicios;
-    }
-    public GrupoMuscular(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getNombre() {
         return nombre;
     }

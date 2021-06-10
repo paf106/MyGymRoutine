@@ -1,9 +1,5 @@
 package com.MyGymRoutine.myapp.data.model;
 
-import com.MyGymRoutine.myapp.view.components.utils.Constantes;
-
-import java.util.Date;
-
 public class Client {
 
     private int idCliente;
@@ -15,7 +11,7 @@ public class Client {
     private String fechaNacimiento; // 00/00/0000
     private String telefono; // 000000000
     private int idPersonal;
-    private double altura; // cm or m
+    private double altura; // m
     private double peso; // Kg
     private String frecuenciaDeporte;
     private String patologias;

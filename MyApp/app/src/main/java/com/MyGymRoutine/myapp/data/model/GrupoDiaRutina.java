@@ -8,11 +8,6 @@ public class GrupoDiaRutina {
 
     public GrupoDiaRutina(){}
 
-    public GrupoDiaRutina(String nombre, List<DiaRutina> diaRutinas) {
-        this.nombre = nombre;
-        this.diaRutinas = diaRutinas;
-    }
-
     public String getNombre() {
         return nombre;
     }

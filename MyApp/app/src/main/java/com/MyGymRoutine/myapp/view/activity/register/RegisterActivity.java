@@ -1,37 +1,34 @@
 package com.MyGymRoutine.myapp.view.activity.register;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.MyGymRoutine.myapp.R;
 import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
-import com.MyGymRoutine.myapp.data.api.internal.NovedadApi;
-import com.MyGymRoutine.myapp.data.model.Client;
-import com.MyGymRoutine.myapp.data.model.Novedad;
+
+import com.MyGymRoutine.myapp.data.repository.Api;
 import com.MyGymRoutine.myapp.databinding.ActivityRegisterBinding;
-import com.MyGymRoutine.myapp.view.activity.NavigationActivity;
-import com.MyGymRoutine.myapp.view.components.utils.Constantes;
+
 import com.MyGymRoutine.myapp.view.components.utils.ValidateInput;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+
 import java.util.Locale;
 import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
@@ -43,14 +40,9 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.commonHeader.commonHeaderTitleText.setText("Crear cuenta");
-        binding.commonHeader.commonHeaderBackButton.setOnClickListener( v -> onBackPressed());
+        binding.commonHeader.commonHeaderBackButton.setOnClickListener(v -> onBackPressed());
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constantes.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ClientApi service = retrofit.create(ClientApi.class);
+        ClientApi service = Api.getClient().create(ClientApi.class);
 
         //Dropdown menu
         String[] options = getResources().getStringArray(R.array.frecuenciasDeportes);
@@ -65,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
                         .build();
 
         //When you click on the Birthday input
-        binding.etBirthday.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(),"tag"));
+        binding.etBirthday.setOnClickListener(v -> datePicker.show(getSupportFragmentManager(), "tag"));
 
         // When the user clicks OK in the dialog
         datePicker.addOnPositiveButtonClickListener(selection -> {
@@ -100,11 +92,11 @@ public class RegisterActivity extends AppCompatActivity {
             checkUser.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.body()!=null){
+                    if (response.body() != null) {
                         Snackbar.make(v, "Usuario en uso", Snackbar.LENGTH_LONG).show();
                         binding.ilUsername.setError("Elija otro nombre de usuario");
 
-                    }else {
+                    } else {
                         registro.enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -126,31 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Snackbar.make(v, "Comprueba la conexión", Snackbar.LENGTH_SHORT).show();
                 }
             });
-
-
-
         });
-
-        /*binding.etUsername.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-                if (binding.etUsername.getText().toString().equals("")){
-
-                }
-            }
-        });*/
-
 
         binding.etPhone.addTextChangedListener(new TextWatcher() {
             @Override

@@ -8,9 +8,6 @@
     <string name="bottom_navigation_item_exercise">Ejercicios</string>
     <string name="bottom_navigation_item_profile">Perfil</string>
 
-    <string name="register_title_create_account">Crear cuenta</string>
-    <string name="home_welcome_user">¡Hola Andrés!</string>
-
     <string-array name="frecuenciasDeportes">
         <item>Menos de 2 días</item>
         <item>Entre 2 y 5 días</item>
@@ -22,9 +19,6 @@
     <string name="profile_my_profile">Mi perfil</string>
     <string name="profile_logout">Cerrar sesión</string>
     <string name="profile_about">Acerca de</string>
-    <string name="profile_data">Mi perfil</string>
     <string name="profile_save_myProfile">Guardar</string>
-    <string name="profile_modify_password">Modificar contraseña</string>
-    <string name="preferences_client">client_saved</string>
 
 </resources>

@@ -18,6 +18,7 @@ import com.MyGymRoutine.myapp.data.api.internal.RoutineApi;
 import com.MyGymRoutine.myapp.data.model.GrupoRutina;
 import com.MyGymRoutine.myapp.data.model.Rutina;
 
+import com.MyGymRoutine.myapp.data.repository.Api;
 import com.MyGymRoutine.myapp.databinding.FragmentRoutineBinding;
 import com.MyGymRoutine.myapp.view.activity.routine.adapters.GrupoRutinaAdapter;
 import com.MyGymRoutine.myapp.view.activity.routine.adapters.RutinaAdapter;
@@ -69,22 +70,15 @@ public class RoutineFragment extends Fragment {
         gruposRutina = new ArrayList<>();
         preferences = new Preferences(getContext());
 
-
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constantes.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RoutineApi service = retrofit.create(RoutineApi.class);
+        RoutineApi service = Api.getClient().create(RoutineApi.class);
 
         service.getRutinasCliente(preferences.getClient().getIdCliente()).enqueue(new Callback<List<Rutina>>() {
             @Override
             public void onResponse(Call<List<Rutina>> call, Response<List<Rutina>> response) {
-                if (response.body() != null){
+                if (response.body() != null) {
                     binding.llMisRutinas.setBackgroundResource(R.drawable.background_mis_rutinas);
                     setRutinaRecycler(response.body());
-                }else{
+                } else {
                     // Informar de que no tiene rutinas todavía
                 }
             }
@@ -126,15 +120,6 @@ public class RoutineFragment extends Fragment {
 
     }
 
-    private void checkStatusTrainer() {
-
-        /*Client clientTemp = preferences.getClient();
-        if (clientTemp.getIdPersonal() == null){
-            binding.llMisRutinas.setBackgroundResource(R.drawable.ic_sin_entrenador);
-        }*/
-
-    }
-
     private void setMainCategoryRecycler(List<GrupoRutina> list) {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -143,8 +128,9 @@ public class RoutineFragment extends Fragment {
         binding.rvRutinasPredeterminadas.setAdapter(grupoRutinaAdapter);
 
     }
+
     private void setRutinaRecycler(List<Rutina> list) {
-        binding.rvMisRutinas.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+        binding.rvMisRutinas.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         RutinaAdapter rutinaAdapter = new RutinaAdapter(getContext(), list);
         binding.rvMisRutinas.setAdapter(rutinaAdapter);
 
@@ -152,19 +138,18 @@ public class RoutineFragment extends Fragment {
 
     private void sortArray() {
 
-            for (String s : gruposRutinaString) {
-                List<Rutina> rutinasTemp = new ArrayList<>();
-                GrupoRutina grupoRutinaTemp = new GrupoRutina();
-                grupoRutinaTemp.setNombre(s);
+        for (String s : gruposRutinaString) {
+            List<Rutina> rutinasTemp = new ArrayList<>();
+            GrupoRutina grupoRutinaTemp = new GrupoRutina();
+            grupoRutinaTemp.setNombre(s);
 
-                for (Rutina r : rutinas) {
-                    if (r.getTipoRutina().equals(s)) {
-                        rutinasTemp.add(r);
-                    }
+            for (Rutina r : rutinas) {
+                if (r.getTipoRutina().equals(s)) {
+                    rutinasTemp.add(r);
                 }
-                grupoRutinaTemp.setRutinas(rutinasTemp);
-                gruposRutina.add(grupoRutinaTemp);
             }
-
+            grupoRutinaTemp.setRutinas(rutinasTemp);
+            gruposRutina.add(grupoRutinaTemp);
+        }
     }
 }

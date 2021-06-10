@@ -9,11 +9,6 @@ public class GrupoRutina {
 
     public GrupoRutina(){}
 
-    public GrupoRutina(String nombre, List<Rutina> rutinas) {
-        this.nombre = nombre;
-        this.rutinas = rutinas;
-    }
-
     public String getNombre() {
         return nombre;
     }

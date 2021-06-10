@@ -18,6 +18,7 @@ import com.MyGymRoutine.myapp.data.model.DiaRutina;
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.data.model.Imagen;
 import com.MyGymRoutine.myapp.data.model.Rutina;
+import com.MyGymRoutine.myapp.data.repository.Api;
 import com.MyGymRoutine.myapp.view.activity.routine.RoutineDetailActivity;
 import com.MyGymRoutine.myapp.view.components.utils.Constantes;
 import com.MyGymRoutine.myapp.view.components.utils.FileUtils;
@@ -59,12 +60,7 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.RecyclerHo
             holder.itemView.getContext().startActivity(intent);
         });
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constantes.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RoutineApi service = retrofit.create(RoutineApi.class);
+        RoutineApi service = Api.getClient().create(RoutineApi.class);
         service.getImagenesRutina(rutinas.get(position).getIdRutina()).enqueue(new Callback<List<Imagen>>() {
             @Override
             public void onResponse(Call<List<Imagen>> call, Response<List<Imagen>> response) {
@@ -79,7 +75,6 @@ public class RutinaAdapter extends RecyclerView.Adapter<RutinaAdapter.RecyclerHo
 
             }
         });
-        //holder.ivExerciseCard2.setImageResource(R.drawable.ic_new);
     }
 
     @Override

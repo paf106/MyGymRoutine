@@ -14,14 +14,6 @@ public class DiaRutina implements Serializable {
 
     public DiaRutina(){}
 
-    public DiaRutina(int dia, String nombre, String repeticiones, int series, String descanso, String descripcion) {
-        this.dia = dia;
-        this.nombre = nombre;
-        this.repeticiones = repeticiones;
-        this.series = series;
-        this.descanso = descanso;
-        this.descripcion = descripcion;
-    }
 
     public Imagen getImagen() {
         return imagen;

@@ -17,6 +17,7 @@ import com.MyGymRoutine.myapp.data.api.internal.EjercicioApi;
 import com.MyGymRoutine.myapp.data.api.internal.RoutineApi;
 import com.MyGymRoutine.myapp.data.model.Ejercicio;
 import com.MyGymRoutine.myapp.data.model.Imagen;
+import com.MyGymRoutine.myapp.data.repository.Api;
 import com.MyGymRoutine.myapp.view.activity.exercise.DetailExerciseActivity;
 import com.MyGymRoutine.myapp.view.components.utils.Constantes;
 import com.MyGymRoutine.myapp.view.components.utils.FileUtils;
@@ -44,7 +45,7 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.Recy
     @NonNull
     @Override
     public RecyclerHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        return new RecyclerHolder(LayoutInflater.from(context).inflate(R.layout.exercise_element,parent,false));
+        return new RecyclerHolder(LayoutInflater.from(context).inflate(R.layout.exercise_element, parent, false));
     }
 
     @Override
@@ -52,17 +53,13 @@ public class EjercicioAdapter extends RecyclerView.Adapter<EjercicioAdapter.Recy
 
         holder.tvTituloEjercicio.setText(ejercicios.get(position).getNombre());
 
-        holder.itemView.setOnClickListener(v ->{
+        holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailExerciseActivity.class);
-            intent.putExtra("ejercicioDetail",ejercicios.get(position));
+            intent.putExtra("ejercicioDetail", ejercicios.get(position));
             holder.itemView.getContext().startActivity(intent);
         });
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constantes.BASE_API)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        EjercicioApi service = retrofit.create(EjercicioApi.class);
+        EjercicioApi service = Api.getClient().create(EjercicioApi.class);
         service.getImagenEjercicio(ejercicios.get(position).getIdEjercicio()).enqueue(new Callback<Imagen>() {
             @Override
             public void onResponse(Call<Imagen> call, Response<Imagen> response) {
