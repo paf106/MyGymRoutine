@@ -22,7 +22,7 @@
     <LinearLayout
         android:id="@+id/llMisRutinas"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="@drawable/background_mis_rutinas"

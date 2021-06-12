@@ -80,6 +80,7 @@ public class RoutineFragment extends Fragment {
                     setRutinaRecycler(response.body());
                 } else {
                     // Informar de que no tiene rutinas todavía
+                    binding.llMisRutinas.setBackgroundResource(R.drawable.background_sin_rutinas);
                 }
             }
 
