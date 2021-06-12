@@ -46,7 +46,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-
 public class ProfileFragment extends Fragment {
 
     private FragmentProfileBinding binding;
@@ -56,7 +55,8 @@ public class ProfileFragment extends Fragment {
     private static final int REQUEST_PERMISSION_CODE = 100;
     private static final int REQUEST_IMAGE_GALLERY = 101;
 
-    public ProfileFragment() { }
+    public ProfileFragment() {
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,13 +81,14 @@ public class ProfileFragment extends Fragment {
         binding.tvEmailProfile.setText(sharedClient.getCorreoElectronico());
 
         // Poner imagen de perfil
-        Glide.with(this)
-                .load(FileUtils.ByteArrayToBitmap(sharedClient.getImagen().getData()))
-                .placeholder(R.drawable.ic_user_default_profile)
-                .error(R.drawable.ic_user_default_profile)
-                .circleCrop()
-                .into(binding.ivPhotoProfile);
-
+        if (preferences.getPhoto() != null) {
+            Glide.with(this)
+                    .load(preferences.getPhoto())
+                    .placeholder(R.drawable.ic_user_default_profile)
+                    .error(R.drawable.ic_user_default_profile)
+                    .circleCrop()
+                    .into(binding.ivPhotoProfile);
+        }
 
         binding.personalButton.setOnClickListener(v -> startActivity(new Intent(getContext(), ProfileDataActivity.class)));
         binding.passwordButton.setOnClickListener(v -> startActivity(new Intent(getContext(), ModifyPasswordActivity.class)));
@@ -134,8 +135,14 @@ public class ProfileFragment extends Fragment {
 
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), photo);
-                    binding.ivPhotoProfile.setImageBitmap(bitmap);
-                    uploadImage(FileUtils.bitmapToByteArray(bitmap));
+                    Glide.with(this)
+                            .load(preferences.getPhoto())
+                            .placeholder(R.drawable.ic_user_default_profile)
+                            .error(R.drawable.ic_user_default_profile)
+                            .circleCrop()
+                            .into(binding.ivPhotoProfile);
+                    preferences.savePhoto(bitmap);
+                    //uploadImage(FileUtils.bitmapToByteArray(bitmap));
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -182,11 +189,13 @@ public class ProfileFragment extends Fragment {
         binding.tvFullnameProfile.setText(sharedClient.getNombre());
         binding.tvEmailProfile.setText(sharedClient.getCorreoElectronico());
 
-        Glide.with(this)
-                .load(FileUtils.ByteArrayToBitmap(sharedClient.getImagen().getData()))
-                .placeholder(R.drawable.ic_user_default_profile)
-                .error(R.drawable.ic_user_default_profile)
-                .circleCrop()
-                .into(binding.ivPhotoProfile);
+        if (preferences.getPhoto() != null) {
+            Glide.with(this)
+                    .load(preferences.getPhoto())
+                    .placeholder(R.drawable.ic_user_default_profile)
+                    .error(R.drawable.ic_user_default_profile)
+                    .circleCrop()
+                    .into(binding.ivPhotoProfile);
+        }
     }
 }
