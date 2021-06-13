@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,9 +62,24 @@ public class ExerciseFragment extends Fragment {
         gruposMuscularesString = new ArrayList<>();
         ejercicios = new ArrayList<>();
 
+        pedirEjercicios();
+
+        binding.srlEjercicios.setOnRefreshListener(() -> {
+            pedirEjercicios();
+        });
+    }
+
+    private void setMainCategoryRecycler(List<GrupoMuscular> list) {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        binding.rvEjercicios.setLayoutManager(layoutManager);
+        GrupoMuscularAdapter grupoMuscularAdapter = new GrupoMuscularAdapter(getContext(), list);
+        binding.rvEjercicios.setAdapter(grupoMuscularAdapter);
+    }
+    private void pedirEjercicios(){
         EjercicioApi service = Api.getClient().create(EjercicioApi.class);
 
         Call<List<String>> listado = service.getGruposMusculares();
+
         listado.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
@@ -91,13 +107,7 @@ public class ExerciseFragment extends Fragment {
                 Snackbar.make(getView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
             }
         });
-    }
-
-    private void setMainCategoryRecycler(List<GrupoMuscular> list) {
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-        binding.rvEjercicios.setLayoutManager(layoutManager);
-        GrupoMuscularAdapter grupoMuscularAdapter = new GrupoMuscularAdapter(getContext(), list);
-        binding.rvEjercicios.setAdapter(grupoMuscularAdapter);
+        binding.srlEjercicios.setRefreshing(false);
     }
 
     private void sortArrays() {
