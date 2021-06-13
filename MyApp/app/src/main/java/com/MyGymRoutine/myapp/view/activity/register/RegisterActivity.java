@@ -1,6 +1,7 @@
 package com.MyGymRoutine.myapp.view.activity.register;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,9 @@ import com.MyGymRoutine.myapp.data.api.internal.ClientApi;
 import com.MyGymRoutine.myapp.data.repository.Api;
 import com.MyGymRoutine.myapp.databinding.ActivityRegisterBinding;
 
+import com.MyGymRoutine.myapp.view.activity.NavigationActivity;
+import com.MyGymRoutine.myapp.view.activity.login.LogInActivity;
+import com.MyGymRoutine.myapp.view.components.utils.Preferences;
 import com.MyGymRoutine.myapp.view.components.utils.ValidateInput;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.snackbar.Snackbar;
@@ -25,6 +29,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.security.auth.login.LoginException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,12 +38,14 @@ import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
+    private Preferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityRegisterBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        preferences = new Preferences(getBaseContext());
 
         binding.commonHeader.commonHeaderTitleText.setText("Crear cuenta");
         binding.commonHeader.commonHeaderBackButton.setOnClickListener(v -> onBackPressed());
@@ -100,9 +108,7 @@ public class RegisterActivity extends AppCompatActivity {
                         registro.enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
-                                binding.ilUsername.setErrorEnabled(false);
-                                //clearInputs();
-                                Snackbar.make(v, "¡Ya estás registrado!", Snackbar.LENGTH_SHORT).show();
+                                finish();
                             }
 
                             @Override
@@ -118,6 +124,7 @@ public class RegisterActivity extends AppCompatActivity {
                     Snackbar.make(v, "Comprueba la conexión", Snackbar.LENGTH_SHORT).show();
                 }
             });
+
         });
 
         binding.etPhone.addTextChangedListener(new TextWatcher() {
