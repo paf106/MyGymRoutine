@@ -75,6 +75,13 @@ public class ExerciseFragment extends Fragment {
     }
 
     private void pedirEjercicios() {
+        List<Ejercicio> falsoEjercicio = new ArrayList<>();
+        List<String> falsoString = new ArrayList<>();
+        List<GrupoMuscular> falsoGrupo = new ArrayList<>();
+        gruposMuscularesString = falsoString;
+        ejercicios = falsoEjercicio;
+        gruposMusculares = falsoGrupo;
+
         EjercicioApi service = Api.getClient().create(EjercicioApi.class);
 
         Call<List<String>> listado = service.getGruposMusculares();

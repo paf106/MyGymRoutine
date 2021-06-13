@@ -78,6 +78,10 @@ public class RoutineFragment extends Fragment {
     }
 
     private void pedirRutinas() {
+        List<GrupoRutina> falso = new ArrayList<>();
+        List<String> falsostring = new ArrayList<>();
+        gruposRutina = falso;
+        gruposRutinaString = falsostring;
         RoutineApi service = Api.getClient().create(RoutineApi.class);
 
         service.getRutinasCliente(preferences.getClient().getIdCliente()).enqueue(new Callback<List<Rutina>>() {
@@ -104,6 +108,7 @@ public class RoutineFragment extends Fragment {
         tipoRutinas.enqueue(new Callback<List<String>>() {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                gruposRutinaString = null;
                 gruposRutinaString = response.body();
 
                 Call<List<Rutina>> rutinasArray = service.getRutinas();
@@ -111,6 +116,7 @@ public class RoutineFragment extends Fragment {
                 rutinasArray.enqueue(new Callback<List<Rutina>>() {
                     @Override
                     public void onResponse(Call<List<Rutina>> call, Response<List<Rutina>> response) {
+                        rutinas = null;
                         rutinas = response.body();
                         sortArray();
                         setMainCategoryRecycler(gruposRutina);
@@ -132,19 +138,16 @@ public class RoutineFragment extends Fragment {
     }
 
     private void setMainCategoryRecycler(List<GrupoRutina> list) {
-
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.rvRutinasPredeterminadas.setLayoutManager(layoutManager);
         GrupoRutinaAdapter grupoRutinaAdapter = new GrupoRutinaAdapter(getContext(), list);
         binding.rvRutinasPredeterminadas.setAdapter(grupoRutinaAdapter);
-
     }
 
     private void setRutinaRecycler(List<Rutina> list) {
         binding.rvMisRutinas.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         RutinaAdapter rutinaAdapter = new RutinaAdapter(getContext(), list);
         binding.rvMisRutinas.setAdapter(rutinaAdapter);
-
     }
 
     private void sortArray() {
