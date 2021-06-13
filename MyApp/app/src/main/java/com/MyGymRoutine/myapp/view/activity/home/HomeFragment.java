@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +62,12 @@ public class HomeFragment extends Fragment {
         binding.rvNovedades.setLayoutManager(manager);
         binding.rvNovedades.setHasFixedSize(true);
 
+        pedirNovedades();
+
+        binding.srlNovedades.setOnRefreshListener(this::pedirNovedades);
+    }
+
+    private void pedirNovedades(){
         NovedadApi service = Api.getClient().create(NovedadApi.class);
 
         Call<List<Novedad>> listado = service.getNovedades();
@@ -80,6 +87,6 @@ public class HomeFragment extends Fragment {
                 Snackbar.make(getView(), "Comprueba la conexión", Snackbar.LENGTH_LONG).show();
             }
         });
-
+        binding.srlNovedades.setRefreshing(false);
     }
 }

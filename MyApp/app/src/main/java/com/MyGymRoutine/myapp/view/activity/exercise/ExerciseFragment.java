@@ -64,9 +64,7 @@ public class ExerciseFragment extends Fragment {
 
         pedirEjercicios();
 
-        binding.srlEjercicios.setOnRefreshListener(() -> {
-            pedirEjercicios();
-        });
+        binding.srlEjercicios.setOnRefreshListener(this::pedirEjercicios);
     }
 
     private void setMainCategoryRecycler(List<GrupoMuscular> list) {
