@@ -73,7 +73,8 @@ public class ExerciseFragment extends Fragment {
         GrupoMuscularAdapter grupoMuscularAdapter = new GrupoMuscularAdapter(getContext(), list);
         binding.rvEjercicios.setAdapter(grupoMuscularAdapter);
     }
-    private void pedirEjercicios(){
+
+    private void pedirEjercicios() {
         EjercicioApi service = Api.getClient().create(EjercicioApi.class);
 
         Call<List<String>> listado = service.getGruposMusculares();

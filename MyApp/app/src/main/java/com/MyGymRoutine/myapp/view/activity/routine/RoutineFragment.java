@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,6 +71,13 @@ public class RoutineFragment extends Fragment {
         gruposRutina = new ArrayList<>();
         preferences = new Preferences(getContext());
 
+        pedirRutinas();
+
+        binding.srlRutinas.setOnRefreshListener(this::pedirRutinas);
+
+    }
+
+    private void pedirRutinas() {
         RoutineApi service = Api.getClient().create(RoutineApi.class);
 
         service.getRutinasCliente(preferences.getClient().getIdCliente()).enqueue(new Callback<List<Rutina>>() {
@@ -81,6 +89,8 @@ public class RoutineFragment extends Fragment {
                 } else {
                     // Informar de que no tiene rutinas todavía
                     binding.llMisRutinas.setBackgroundResource(R.drawable.background_sin_rutinas);
+                    List<Rutina> arrayFalso = new ArrayList<>();
+                    setRutinaRecycler(arrayFalso);
                 }
             }
 
@@ -118,7 +128,7 @@ public class RoutineFragment extends Fragment {
 
             }
         });
-
+        binding.srlRutinas.setRefreshing(false);
     }
 
     private void setMainCategoryRecycler(List<GrupoRutina> list) {
